@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingStart="@dimen/small_margin"
+    android:paddingTop="@dimen/medium_margin"
+    android:paddingEnd="@dimen/normal_margin"
+    android:paddingBottom="@dimen/medium_margin">
+
+    <ImageView
+        android:id="@+id/social_link_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:contentDescription="@null"
+        tools:src="@drawable/ic_instagram" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:layout_toStartOf="@+id/social_link_open"
+        android:layout_toEndOf="@+id/social_link_icon"
+        android:orientation="vertical">
+
+        <org.fossify.commons.views.MyTextView
+            android:id="@+id/social_link_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/bigger_text_size"
+            tools:text="@username" />
+
+        <org.fossify.commons.views.MyTextView
+            android:id="@+id/social_link_platform"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/normal_text_size"
+            tools:text="Instagram" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/social_link_open"
+        android:layout_width="@dimen/contact_icons_size"
+        android:layout_height="@dimen/contact_icons_size"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/open_in_app"
+        android:padding="@dimen/small_margin"
+        android:src="@drawable/ic_chevron_right_vector" />
+
+</RelativeLayout>

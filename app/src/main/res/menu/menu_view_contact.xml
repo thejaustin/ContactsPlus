@@ -24,6 +24,11 @@
         android:title="@string/open_with"
         app:showAsAction="never" />
     <item
+        android:id="@+id/manage_social_links"
+        android:showAsAction="never"
+        android:title="@string/social_links"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/manage_visible_fields"
         android:showAsAction="never"
         android:title="@string/manage_shown_contact_fields"
