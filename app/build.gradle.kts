@@ -32,7 +32,7 @@ android {
         targetSdk = project.libs.versions.app.build.targetSDK.get().toInt()
         versionName = project.property("VERSION_NAME").toString()
         versionCode = project.property("VERSION_CODE").toString().toInt()
-        setProperty("archivesBaseName", "contacts-$versionCode")
+        setProperty("archivesBaseName", "contacts-plus-$versionCode")
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
@@ -139,6 +139,7 @@ detekt {
 dependencies {
     implementation(libs.fossify.commons)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.dynamicanimation)
     implementation(libs.autofittextview)
     implementation(libs.ezvcard)
     implementation(libs.indicatorfastscroll)
