@@ -24,13 +24,26 @@
         android:required="false" />
 
     <queries>
-        <package android:name="org.fossify.contacts.debug" />
-        <package android:name="org.fossify.contacts" />
+        <package android:name="com.contactsplus.app.debug" />
+        <package android:name="com.contactsplus.app" />
 
         <!-- Required for loading contact accounts -->
         <intent>
             <action android:name="android.accounts.AccountAuthenticator" />
         </intent>
+
+        <!-- Social media apps for deeplink support -->
+        <package android:name="com.instagram.android" />
+        <package android:name="com.snapchat.android" />
+        <package android:name="com.whatsapp" />
+        <package android:name="org.telegram.messenger" />
+        <package android:name="com.discord" />
+        <package android:name="com.ss.android.ugc.tiktok" />
+        <package android:name="com.twitter.android" />
+        <package android:name="com.linkedin.android" />
+        <package android:name="org.thoughtcrime.securesms" />
+        <package android:name="com.facebook.orca" />
+        <package android:name="com.instagram.barcelona" />
     </queries>
 
     <application
@@ -249,7 +262,7 @@
 
         <provider
             android:name=".contentproviders.MyContactsContentProvider"
-            android:authorities="org.fossify.commons.contactsprovider"
+            android:authorities="com.contactsplus.contactsprovider"
             android:exported="true" />
 
         <activity-alias
