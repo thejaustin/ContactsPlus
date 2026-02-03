@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">Contacts</string>
+    <string name="app_launcher_name">Contacts+</string>
     <string name="address">Address</string>
     <string name="street">Street</string>
     <string name="neighborhood">Appartment or suite number</string>
@@ -106,6 +106,23 @@
     <!-- FAQ -->
     <string name="faq_1_title">I want to change what fields are visible at contacts. Can I do it?</string>
     <string name="faq_1_text">Yes, all you have to do is go in Settings -> Manage shown contact fields. There you can select what fields should be visible. Some of them are even disabled by default, so you might find some new ones there.</string>
+
+    <!-- Social Links -->
+    <string name="social_links">Social Links</string>
+    <string name="add_social_link">Add social link</string>
+    <string name="edit_social_link">Edit social link</string>
+    <string name="select_platform">Select platform</string>
+    <string name="username_or_handle">Username or handle</string>
+    <string name="custom_label">Custom label (optional)</string>
+    <string name="no_social_links">No social links added</string>
+    <string name="no_app_found">No app found to handle this link</string>
+    <string name="no_browser_found">No browser found</string>
+    <string name="social_link_added">Social link added</string>
+    <string name="social_link_removed">Social link removed</string>
+    <string name="enter_username">Enter username</string>
+    <string name="enter_url">Enter URL</string>
+    <string name="open_in_app">Open in app</string>
+    <string name="open_in_browser">Open in browser</string>
     <!--
         Haven't found some strings? There's more at
         https://github.com/FossifyOrg/Commons/tree/master/commons/src/main/res
