@@ -241,14 +241,8 @@
 
     <!-- ==================== Settings Styles ==================== -->
 
-    <!-- Base Widget Style -->
-    <style name="Widget.ContactsPlus" />
-
-    <!-- Base Settings Style -->
-    <style name="Widget.ContactsPlus.Settings" />
-
     <!-- Settings Section Header -->
-    <style name="Widget.ContactsPlus.Settings.SectionHeader">
+    <style name="ContactsPlus_Settings_SectionHeader">
         <item name="android:paddingStart">@dimen/padding_screen_horizontal</item>
         <item name="android:paddingEnd">@dimen/padding_screen_horizontal</item>
         <item name="android:paddingTop">@dimen/spacing_lg</item>
@@ -258,7 +252,7 @@
     </style>
 
     <!-- Settings Item Container (clickable row) -->
-    <style name="Widget.ContactsPlus.Settings.ItemHolder">
+    <style name="ContactsPlus_Settings_ItemHolder">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">@dimen/list_item_height_two_line</item>
@@ -271,30 +265,30 @@
     </style>
 
     <!-- Settings Item Container (single line) -->
-    <style name="Widget.ContactsPlus.Settings.ItemHolder.SingleLine" parent="Widget.ContactsPlus.Settings.ItemHolder">
+    <style name="ContactsPlus_Settings_ItemHolder_SingleLine" parent="ContactsPlus_Settings_ItemHolder">
         <item name="android:minHeight">@dimen/list_item_height_one_line</item>
     </style>
 
     <!-- Settings Item Container with Switch -->
-    <style name="Widget.ContactsPlus.Settings.ItemHolder.Switch" parent="Widget.ContactsPlus.Settings.ItemHolder">
+    <style name="ContactsPlus_Settings_ItemHolder_Switch" parent="ContactsPlus_Settings_ItemHolder">
         <item name="android:minHeight">@dimen/list_item_height_one_line</item>
     </style>
 
     <!-- Settings Item Title -->
-    <style name="Widget.ContactsPlus.Settings.ItemTitle">
+    <style name="ContactsPlus_Settings_ItemTitle">
         <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.BodyLarge</item>
         <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <!-- Settings Item Value/Subtitle -->
-    <style name="Widget.ContactsPlus.Settings.ItemValue">
+    <style name="ContactsPlus_Settings_ItemValue">
         <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.BodyMedium</item>
         <item name="android:textColor">@color/md_theme_onSurfaceVariant</item>
         <item name="android:layout_marginTop">@dimen/spacing_xs</item>
     </style>
 
     <!-- Settings Toolbar -->
-    <style name="Widget.ContactsPlus.Settings.Toolbar" parent="Widget.Material3.Toolbar">
+    <style name="ContactsPlus_Settings_Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:background">@color/md_theme_surface</item>
         <item name="titleTextColor">@color/md_theme_onSurface</item>
         <item name="navigationIconTint">@color/md_theme_onSurface</item>
@@ -302,7 +296,7 @@
     </style>
 
     <!-- Settings Divider -->
-    <style name="Widget.ContactsPlus.Settings.Divider">
+    <style name="ContactsPlus_Settings_Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/divider_thickness</item>
         <item name="android:layout_marginStart">@dimen/padding_screen_horizontal</item>
