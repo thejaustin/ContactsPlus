@@ -265,12 +265,12 @@
     </style>
 
     <!-- Settings Item Container (single line) -->
-    <style name="Widget.ContactsPlus.Settings.ItemHolder.SingleLine">
+    <style name="Widget.ContactsPlus.Settings.ItemHolder.SingleLine" parent="Widget.ContactsPlus.Settings.ItemHolder">
         <item name="android:minHeight">@dimen/list_item_height_one_line</item>
     </style>
 
     <!-- Settings Item Container with Switch -->
-    <style name="Widget.ContactsPlus.Settings.ItemHolder.Switch">
+    <style name="Widget.ContactsPlus.Settings.ItemHolder.Switch" parent="Widget.ContactsPlus.Settings.ItemHolder">
         <item name="android:minHeight">@dimen/list_item_height_one_line</item>
     </style>
 
