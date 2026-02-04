@@ -241,6 +241,9 @@
 
     <!-- ==================== Settings Styles ==================== -->
 
+    <!-- Base Settings Style -->
+    <style name="Widget.ContactsPlus.Settings" />
+
     <!-- Settings Section Header -->
     <style name="Widget.ContactsPlus.Settings.SectionHeader">
         <item name="android:paddingStart">@dimen/padding_screen_horizontal</item>
