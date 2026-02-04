@@ -149,6 +149,7 @@ class SettingsActivity : SimpleActivity() {
         }
     }
 
+    @androidx.annotation.RequiresApi(33)
     private fun setupLanguage() {
         binding.settingsLanguage.text = Locale.getDefault().displayLanguage
         binding.settingsLanguageHolder.beVisibleIf(isTiramisuPlus())

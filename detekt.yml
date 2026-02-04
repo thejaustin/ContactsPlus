@@ -52,7 +52,7 @@ naming:
     ignoreAnnotated: ["Composable", "Preview"]
     functionPattern: "[a-z][A-Za-z0-9]*"
 
-Compose: # io.nlopez.compose.rules
+compose: # io.nlopez.compose.rules
   ComposableParametersOrdering:
     active: true
   ModifierDefaultValue:
