@@ -117,6 +117,7 @@
     <string name="no_social_links">No social links added</string>
     <string name="no_app_found">No app found to handle this link</string>
     <string name="no_browser_found">No browser found</string>
+    <string name="unknown_error_occurred">An unknown error occurred</string>
     <string name="social_link_added">Social link added</string>
     <string name="social_link_removed">Social link removed</string>
     <string name="enter_username">Enter username</string>

@@ -622,12 +622,12 @@ class ViewContactActivity : ContactActivity() {
     private fun setupSocialLinks() {
         binding.contactSocialLinksHolder.removeAllViews()
 
-        val lookupKey = contact?.lookupKey ?: return
+        val contactId = contact?.id?.toString() ?: return
 
         CoroutineScope(Dispatchers.IO).launch {
             val socialLinks = SocialLinksDatabase.getInstance(this@ViewContactActivity)
                 .socialLinkDao()
-                .getLinksForContact(lookupKey)
+                .getLinksForContact(contactId)
 
             withContext(Dispatchers.Main) {
                 if (socialLinks.isNotEmpty()) {
@@ -667,8 +667,8 @@ class ViewContactActivity : ContactActivity() {
     }
 
     private fun showManageSocialLinksDialog() {
-        val lookupKey = contact?.lookupKey ?: return
-        ManageSocialLinksDialog(this, lookupKey) {
+        val contactId = contact?.id?.toString() ?: return
+        ManageSocialLinksDialog(this, contactId) {
             setupSocialLinks()
         }
     }
