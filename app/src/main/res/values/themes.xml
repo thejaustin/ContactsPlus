@@ -241,6 +241,9 @@
 
     <!-- ==================== Settings Styles ==================== -->
 
+    <!-- Base Widget Style -->
+    <style name="Widget.ContactsPlus" />
+
     <!-- Base Settings Style -->
     <style name="Widget.ContactsPlus.Settings" />
 
