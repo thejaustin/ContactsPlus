@@ -124,6 +124,15 @@
     <string name="enter_url">Enter URL</string>
     <string name="open_in_app">Open in app</string>
     <string name="open_in_browser">Open in browser</string>
+    <string name="detect_social_links">Detect social links</string>
+    <string name="detect_social_links_description">Scan contact notes, websites, and messaging apps to find social media links automatically.</string>
+    <string name="no_social_links_detected">No social links were detected in this contact\'s data.</string>
+    <string name="import_selected">Import selected</string>
+    <string name="social_links_imported">%d social links imported</string>
+    <string name="detecting_links">Detecting social links…</string>
+    <string name="from_notes">From notes</string>
+    <string name="from_websites">From websites</string>
+    <string name="from_messaging">From messaging apps</string>
     <!--
         Haven't found some strings? There's more at
         https://github.com/FossifyOrg/Commons/tree/master/commons/src/main/res

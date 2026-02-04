@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_dialog">
+
+    <TextView
+        android:id="@+id/detect_social_links_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_md"
+        android:text="@string/detect_social_links_description"
+        android:textAppearance="@style/TextAppearance.ContactsPlus.BodyMedium"
+        android:textColor="@color/md_theme_onSurfaceVariant" />
+
+    <ProgressBar
+        android:id="@+id/detect_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="@dimen/spacing_lg"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/no_links_found"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/spacing_lg"
+        android:gravity="center"
+        android:text="@string/no_social_links_detected"
+        android:textAppearance="@style/TextAppearance.ContactsPlus.BodyLarge"
+        android:textColor="@color/md_theme_onSurfaceVariant"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/detected_links_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="400dp"
+        android:nestedScrollingEnabled="true"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_detected_social_link" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/import_selected_button"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/touch_target_min"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:text="@string/import_selected"
+        android:visibility="gone"
+        app:cornerRadius="@dimen/corner_radius_xl"
+        app:icon="@drawable/ic_check_vector"
+        app:iconGravity="textStart" />
+
+</LinearLayout>

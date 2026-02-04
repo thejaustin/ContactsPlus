@@ -4,55 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/spacing_sm"
-    android:layout_marginTop="@dimen/spacing_xs"
-    android:layout_marginEnd="@dimen/spacing_md"
-    android:layout_marginBottom="@dimen/spacing_xs"
+    android:layout_marginVertical="@dimen/spacing_xs"
+    android:checkable="true"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@color/md_theme_surfaceContainerHigh"
     app:cardCornerRadius="@dimen/corner_radius_md"
     app:cardElevation="0dp"
+    app:checkedIcon="@drawable/ic_check_circle_vector"
+    app:checkedIconTint="@color/md_theme_primary"
     app:rippleColor="@color/md_theme_primary"
     app:strokeWidth="0dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/list_item_height_two_line"
-        android:padding="@dimen/spacing_sm">
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/list_item_height_three_line"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_md">
 
         <ImageView
-            android:id="@+id/social_link_icon"
-            android:layout_width="@dimen/icon_size_lg"
-            android:layout_height="@dimen/icon_size_lg"
-            android:layout_centerVertical="true"
+            android:id="@+id/detected_link_icon"
+            android:layout_width="@dimen/icon_size_xl"
+            android:layout_height="@dimen/icon_size_xl"
             android:contentDescription="@null"
-            android:padding="@dimen/spacing_xs"
+            android:padding="@dimen/spacing_sm"
             tools:src="@drawable/ic_instagram" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/spacing_sm"
-            android:layout_marginEnd="@dimen/spacing_sm"
-            android:layout_toStartOf="@+id/social_link_open"
-            android:layout_toEndOf="@+id/social_link_icon"
+            android:layout_marginHorizontal="@dimen/spacing_md"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-            <org.fossify.commons.views.MyTextView
-                android:id="@+id/social_link_username"
+            <TextView
+                android:id="@+id/detected_link_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.ContactsPlus.TitleMedium"
                 android:textColor="@color/md_theme_onSurface"
-                tools:text="@username" />
+                tools:text="@johndoe" />
 
-            <org.fossify.commons.views.MyTextView
-                android:id="@+id/social_link_platform"
+            <TextView
+                android:id="@+id/detected_link_platform"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xs"
@@ -62,20 +60,26 @@
                 android:textColor="@color/md_theme_onSurfaceVariant"
                 tools:text="Instagram" />
 
+            <TextView
+                android:id="@+id/detected_link_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.ContactsPlus.LabelMedium"
+                android:textColor="@color/md_theme_primary"
+                tools:text="From notes" />
+
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/social_link_open"
-            android:layout_width="@dimen/touch_target_min"
-            android:layout_height="@dimen/touch_target_min"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/open_in_app"
-            android:padding="@dimen/spacing_sm"
-            android:src="@drawable/ic_chevron_right_vector"
-            app:tint="@color/md_theme_primary" />
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/detected_link_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:buttonTint="@color/md_theme_primary" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

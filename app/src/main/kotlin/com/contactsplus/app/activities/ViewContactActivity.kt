@@ -668,7 +668,7 @@ class ViewContactActivity : ContactActivity() {
 
     private fun showManageSocialLinksDialog() {
         val contactId = contact?.id?.toString() ?: return
-        ManageSocialLinksDialog(this, contactId) {
+        ManageSocialLinksDialog(this, contactId, fullContact ?: contact) {
             setupSocialLinks()
         }
     }

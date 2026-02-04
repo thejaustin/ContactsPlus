@@ -14,13 +14,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.fossify.commons.extensions.beGone
+import org.fossify.commons.extensions.beVisible
 import org.fossify.commons.extensions.getAlertDialogBuilder
 import org.fossify.commons.extensions.setupDialogStuff
 import org.fossify.commons.extensions.toast
+import org.fossify.commons.models.contacts.Contact
 
 class ManageSocialLinksDialog(
     private val activity: Activity,
     private val contactLookupKey: String,
+    private val contact: Contact? = null,
     private val onLinksChanged: () -> Unit
 ) {
     private var dialog: AlertDialog? = null
@@ -35,6 +39,15 @@ class ManageSocialLinksDialog(
 
         binding.addSocialLinkButton.setOnClickListener {
             showAddDialog()
+        }
+
+        binding.detectSocialLinksButton.setOnClickListener {
+            showDetectDialog()
+        }
+
+        // Hide detect button if no contact is available
+        if (contact == null) {
+            binding.detectSocialLinksButton.beGone()
         }
 
         activity.getAlertDialogBuilder()
@@ -77,17 +90,26 @@ class ManageSocialLinksDialog(
 
     private fun updateEmptyState() {
         if (socialLinks.isEmpty()) {
-            binding.emptyStateText.visibility = android.view.View.VISIBLE
-            binding.socialLinksRecyclerView.visibility = android.view.View.GONE
+            binding.emptyStateText.beVisible()
+            binding.socialLinksRecyclerView.beGone()
         } else {
-            binding.emptyStateText.visibility = android.view.View.GONE
-            binding.socialLinksRecyclerView.visibility = android.view.View.VISIBLE
+            binding.emptyStateText.beGone()
+            binding.socialLinksRecyclerView.beVisible()
         }
     }
 
     private fun showAddDialog() {
         AddSocialLinkDialog(activity, contactLookupKey) { socialLink ->
             saveSocialLink(socialLink)
+        }
+    }
+
+    private fun showDetectDialog() {
+        contact?.let { c ->
+            DetectSocialLinksDialog(activity, c, contactLookupKey) {
+                loadSocialLinks()
+                onLinksChanged()
+            }
         }
     }
 

@@ -1,5 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Material 3 Expressive Design System Dimensions -->
+
+    <!-- Spacing scale (based on 4dp grid) -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_2xl">48dp</dimen>
+
+    <!-- Padding for containers -->
+    <dimen name="padding_screen_horizontal">16dp</dimen>
+    <dimen name="padding_screen_vertical">16dp</dimen>
+    <dimen name="padding_card">16dp</dimen>
+    <dimen name="padding_dialog">24dp</dimen>
+    <dimen name="padding_list_item_horizontal">16dp</dimen>
+    <dimen name="padding_list_item_vertical">12dp</dimen>
+
+    <!-- Touch targets (minimum 48dp per Material guidelines) -->
+    <dimen name="touch_target_min">48dp</dimen>
+    <dimen name="touch_target_comfortable">56dp</dimen>
+
+    <!-- Icons -->
+    <dimen name="icon_size_xs">16dp</dimen>
+    <dimen name="icon_size_sm">20dp</dimen>
+    <dimen name="icon_size_md">24dp</dimen>
+    <dimen name="icon_size_lg">32dp</dimen>
+    <dimen name="icon_size_xl">40dp</dimen>
+
+    <!-- Avatar sizes -->
+    <dimen name="avatar_size_sm">32dp</dimen>
+    <dimen name="avatar_size_md">40dp</dimen>
+    <dimen name="avatar_size_lg">56dp</dimen>
+    <dimen name="avatar_size_xl">88dp</dimen>
+    <dimen name="avatar_size_hero">120dp</dimen>
+
+    <!-- Corner radii -->
+    <dimen name="corner_radius_xs">4dp</dimen>
+    <dimen name="corner_radius_sm">8dp</dimen>
+    <dimen name="corner_radius_md">12dp</dimen>
+    <dimen name="corner_radius_lg">16dp</dimen>
+    <dimen name="corner_radius_xl">24dp</dimen>
+    <dimen name="corner_radius_2xl">28dp</dimen>
+    <dimen name="corner_radius_full">50%</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_none">0dp</dimen>
+    <dimen name="elevation_sm">1dp</dimen>
+    <dimen name="elevation_md">3dp</dimen>
+    <dimen name="elevation_lg">6dp</dimen>
+    <dimen name="elevation_xl">8dp</dimen>
+
+    <!-- Buttons -->
+    <dimen name="button_height_sm">36dp</dimen>
+    <dimen name="button_height_md">40dp</dimen>
+    <dimen name="button_height_lg">56dp</dimen>
+    <dimen name="button_corner_radius">20dp</dimen>
+
+    <!-- FAB -->
+    <dimen name="fab_size_sm">40dp</dimen>
+    <dimen name="fab_size_md">56dp</dimen>
+    <dimen name="fab_size_lg">96dp</dimen>
+
+    <!-- Cards -->
+    <dimen name="card_corner_radius">24dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+    <!-- List items -->
+    <dimen name="list_item_height_one_line">56dp</dimen>
+    <dimen name="list_item_height_two_line">72dp</dimen>
+    <dimen name="list_item_height_three_line">88dp</dimen>
+    <dimen name="list_item_leading_icon_size">24dp</dimen>
+    <dimen name="list_item_avatar_size">40dp</dimen>
+    <dimen name="list_item_thumbnail_size">56dp</dimen>
+
+    <!-- Dividers -->
+    <dimen name="divider_thickness">1dp</dimen>
+    <dimen name="divider_inset">16dp</dimen>
+
+    <!-- App bar -->
+    <dimen name="app_bar_height">64dp</dimen>
+    <dimen name="app_bar_expanded_height">152dp</dimen>
+
+    <!-- Bottom navigation -->
+    <dimen name="bottom_nav_height">80dp</dimen>
+    <dimen name="bottom_nav_icon_size">24dp</dimen>
+
+    <!-- Chips -->
+    <dimen name="chip_height">32dp</dimen>
+    <dimen name="chip_corner_radius">8dp</dimen>
+    <dimen name="chip_icon_size">18dp</dimen>
+
+    <!-- Text input -->
+    <dimen name="text_input_corner_radius">16dp</dimen>
+    <dimen name="text_input_height">56dp</dimen>
+
+    <!-- Legacy dimensions (for compatibility) -->
     <dimen name="contact_photo_size">88dp</dimen>
     <dimen name="contact_actions_size">48dp</dimen>
     <dimen name="contact_icons_size">40dp</dimen>

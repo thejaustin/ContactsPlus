@@ -238,4 +238,81 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
+
+    <!-- ==================== Settings Styles ==================== -->
+
+    <!-- Settings Section Header -->
+    <style name="Widget.ContactsPlus.Settings.SectionHeader">
+        <item name="android:paddingStart">@dimen/padding_screen_horizontal</item>
+        <item name="android:paddingEnd">@dimen/padding_screen_horizontal</item>
+        <item name="android:paddingTop">@dimen/spacing_lg</item>
+        <item name="android:paddingBottom">@dimen/spacing_sm</item>
+        <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.LabelMedium</item>
+        <item name="android:textColor">@color/md_theme_primary</item>
+    </style>
+
+    <!-- Settings Item Container (clickable row) -->
+    <style name="Widget.ContactsPlus.Settings.ItemHolder">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/list_item_height_two_line</item>
+        <item name="android:paddingStart">@dimen/padding_screen_horizontal</item>
+        <item name="android:paddingEnd">@dimen/padding_screen_horizontal</item>
+        <item name="android:paddingTop">@dimen/spacing_md</item>
+        <item name="android:paddingBottom">@dimen/spacing_md</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- Settings Item Container (single line) -->
+    <style name="Widget.ContactsPlus.Settings.ItemHolder.SingleLine">
+        <item name="android:minHeight">@dimen/list_item_height_one_line</item>
+    </style>
+
+    <!-- Settings Item Container with Switch -->
+    <style name="Widget.ContactsPlus.Settings.ItemHolder.Switch">
+        <item name="android:minHeight">@dimen/list_item_height_one_line</item>
+    </style>
+
+    <!-- Settings Item Title -->
+    <style name="Widget.ContactsPlus.Settings.ItemTitle">
+        <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.BodyLarge</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <!-- Settings Item Value/Subtitle -->
+    <style name="Widget.ContactsPlus.Settings.ItemValue">
+        <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.BodyMedium</item>
+        <item name="android:textColor">@color/md_theme_onSurfaceVariant</item>
+        <item name="android:layout_marginTop">@dimen/spacing_xs</item>
+    </style>
+
+    <!-- Settings Toolbar -->
+    <style name="Widget.ContactsPlus.Settings.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/md_theme_surface</item>
+        <item name="titleTextColor">@color/md_theme_onSurface</item>
+        <item name="navigationIconTint">@color/md_theme_onSurface</item>
+        <item name="titleTextAppearance">@style/TextAppearance.ContactsPlus.TitleLarge</item>
+    </style>
+
+    <!-- Settings Divider -->
+    <style name="Widget.ContactsPlus.Settings.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/divider_thickness</item>
+        <item name="android:layout_marginStart">@dimen/padding_screen_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/padding_screen_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sm</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_sm</item>
+        <item name="android:background">@color/md_theme_outlineVariant</item>
+    </style>
+
+    <!-- Dialog Styles -->
+    <style name="Widget.ContactsPlus.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearance">@style/ShapeAppearance.ContactsPlus.LargeComponent</item>
+    </style>
+
+    <style name="Widget.ContactsPlus.Dialog.Title">
+        <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.HeadlineMedium</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
 </resources>
