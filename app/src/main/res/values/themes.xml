@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material 3 Theme Overlay -->
+    <style name="Theme.ContactsPlus.Material3" parent="AppTheme.Base">
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
+
+        <!-- Tertiary colors -->
+        <item name="colorTertiary">@color/md_theme_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_onTertiaryContainer</item>
+
+        <!-- Error colors -->
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_onErrorContainer</item>
+
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+
+        <!-- Other colors -->
+        <item name="colorOutline">@color/md_theme_outline</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
+
+        <!-- Material 3 Component Styles -->
+        <item name="materialCardViewStyle">@style/Widget.ContactsPlus.CardView</item>
+        <item name="chipStyle">@style/Widget.ContactsPlus.Chip</item>
+        <item name="floatingActionButtonStyle">@style/Widget.ContactsPlus.FAB</item>
+        <item name="bottomNavigationStyle">@style/Widget.ContactsPlus.BottomNavigation</item>
+        <item name="textInputStyle">@style/Widget.ContactsPlus.TextInputLayout</item>
+    </style>
+
+    <!-- Material 3 Card Style -->
+    <style name="Widget.ContactsPlus.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">28dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="cardBackgroundColor">@color/md_theme_surfaceContainerLow</item>
+    </style>
+
+    <!-- Material 3 Filled Card Style -->
+    <style name="Widget.ContactsPlus.CardView.Filled" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">28dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <!-- Material 3 Outlined Card Style -->
+    <style name="Widget.ContactsPlus.CardView.Outlined" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="strokeColor">@color/md_theme_outlineVariant</item>
+    </style>
+
+    <!-- Material 3 Chip Style -->
+    <style name="Widget.ContactsPlus.Chip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipCornerRadius">8dp</item>
+        <item name="chipBackgroundColor">@color/md_theme_surfaceContainerHigh</item>
+    </style>
+
+    <!-- Material 3 Action Chip Style -->
+    <style name="Widget.ContactsPlus.Chip.Action" parent="Widget.Material3.Chip.Assist">
+        <item name="chipCornerRadius">20dp</item>
+        <item name="chipMinHeight">40dp</item>
+        <item name="chipIconSize">18dp</item>
+    </style>
+
+    <!-- Material 3 FAB Style -->
+    <style name="Widget.ContactsPlus.FAB" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="fabCustomSize">56dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.ContactsPlus.FAB</item>
+    </style>
+
+    <!-- Material 3 Large FAB Style -->
+    <style name="Widget.ContactsPlus.FAB.Large" parent="Widget.Material3.FloatingActionButton.Large.Primary">
+        <item name="fabCustomSize">96dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.ContactsPlus.FAB.Large</item>
+    </style>
+
+    <!-- Material 3 Extended FAB Style -->
+    <style name="Widget.ContactsPlus.ExtendedFAB" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
+        <item name="shapeAppearance">@style/ShapeAppearance.ContactsPlus.FAB</item>
+    </style>
+
+    <!-- Material 3 Bottom Navigation Style -->
+    <style name="Widget.ContactsPlus.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="backgroundTint">@color/md_theme_surfaceContainer</item>
+        <item name="itemIconTint">@color/bottom_nav_item_color</item>
+        <item name="itemTextColor">@color/bottom_nav_item_color</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.ContactsPlus.BottomNavigation.ActiveIndicator</item>
+    </style>
+
+    <style name="Widget.ContactsPlus.BottomNavigation.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/md_theme_secondaryContainer</item>
+    </style>
+
+    <!-- Material 3 Text Input Style -->
+    <style name="Widget.ContactsPlus.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+    </style>
+
+    <!-- Material 3 Filled Text Input Style -->
+    <style name="Widget.ContactsPlus.TextInputLayout.Filled" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+    </style>
+
+    <!-- Shape Appearances -->
+    <style name="ShapeAppearance.ContactsPlus.FAB" parent="ShapeAppearance.Material3.Corner.Full">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ContactsPlus.FAB.Large" parent="ShapeAppearance.Material3.Corner.Full">
+        <item name="cornerSize">28dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ContactsPlus.SmallComponent" parent="ShapeAppearance.Material3.Corner.Small">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ContactsPlus.MediumComponent" parent="ShapeAppearance.Material3.Corner.Medium">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ContactsPlus.LargeComponent" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerSize">28dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ContactsPlus.ExtraLargeComponent" parent="ShapeAppearance.Material3.Corner.ExtraLarge">
+        <item name="cornerSize">32dp</item>
+    </style>
+
+    <!-- Contact Avatar Shape -->
+    <style name="ShapeAppearance.ContactsPlus.Avatar" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Typography Styles -->
+    <style name="TextAppearance.ContactsPlus.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/md_theme_onSurfaceVariant</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextAppearance.ContactsPlus.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textColor">@color/md_theme_onSurfaceVariant</item>
+    </style>
+
+    <!-- Action Button Styles -->
+    <style name="Widget.ContactsPlus.ActionButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.ContactsPlus.MediumComponent</item>
+    </style>
+
+    <style name="Widget.ContactsPlus.ActionButton.Call">
+        <item name="backgroundTint">@color/action_call</item>
+        <item name="iconTint">@android:color/white</item>
+    </style>
+
+    <style name="Widget.ContactsPlus.ActionButton.Message">
+        <item name="backgroundTint">@color/action_message</item>
+        <item name="iconTint">@android:color/white</item>
+    </style>
+
+    <style name="Widget.ContactsPlus.ActionButton.Video">
+        <item name="backgroundTint">@color/action_video</item>
+        <item name="iconTint">@android:color/white</item>
+    </style>
+
+    <style name="Widget.ContactsPlus.ActionButton.Email">
+        <item name="backgroundTint">@color/action_email</item>
+        <item name="iconTint">@android:color/white</item>
+    </style>
+
+    <!-- Search Bar Style -->
+    <style name="Widget.ContactsPlus.SearchBar" parent="Widget.Material3.SearchBar">
+        <item name="shapeAppearance">@style/ShapeAppearance.ContactsPlus.ExtraLargeComponent</item>
+    </style>
+
+    <!-- List Item Styles -->
+    <style name="Widget.ContactsPlus.ListItem" parent="">
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+</resources>

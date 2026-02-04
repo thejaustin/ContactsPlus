@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_coordinator"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_surface">
 
     <org.fossify.commons.views.MySearchMenu
         android:id="@+id/main_menu"
@@ -24,28 +25,41 @@
             app:layout_constraintBottom_toTopOf="@+id/main_tabs_holder"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <!-- Material 3 FAB for dialpad -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/main_dialpad_button"
-            android:layout_width="@dimen/dialpad_button_size"
-            android:layout_height="@dimen/dialpad_button_size"
-            android:layout_marginBottom="@dimen/activity_margin"
-            android:background="@drawable/circle_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:contentDescription="@string/dialpad"
-            android:elevation="@dimen/medium_margin"
-            android:padding="@dimen/activity_margin"
             android:src="@drawable/ic_dialpad_vector"
+            app:backgroundTint="@color/md_theme_primaryContainer"
+            app:tint="@color/md_theme_onPrimaryContainer"
+            app:fabCustomSize="56dp"
+            app:shapeAppearance="@style/ShapeAppearance.ContactsPlus.FAB"
             app:layout_constraintBottom_toTopOf="@+id/main_tabs_holder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <!-- Material 3 styled TabLayout (keeping for compatibility) -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/md_theme_surfaceContainer"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:tabIndicator="@null"
-            app:tabMinWidth="150dp"
-            app:tabRippleColor="@null" />
+            app:tabIndicator="@drawable/tab_indicator_m3"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorGravity="center"
+            app:tabIndicatorHeight="3dp"
+            app:tabMinWidth="90dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="@color/md_theme_primary"
+            app:tabTextColor="@color/md_theme_onSurfaceVariant"
+            app:tabIconTint="@color/bottom_nav_item_color"
+            app:tabRippleColor="@color/md_theme_primary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

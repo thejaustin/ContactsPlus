@@ -1,10 +1,45 @@
 <resources>
 
-    <style name="AppTheme" parent="AppTheme.Base" />
+    <!-- Main App Theme with Material 3 overlay -->
+    <style name="AppTheme" parent="Theme.ContactsPlus.Material3" />
 
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Contact list item styles -->
+    <style name="ContactListItem">
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- Large avatar style -->
+    <style name="LargeAvatarStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Contact detail section header -->
+    <style name="ContactSectionHeader">
+        <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.LabelMedium</item>
+        <item name="android:textColor">@color/md_theme_primary</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <!-- Social link chip style -->
+    <style name="SocialLinkChip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipCornerRadius">20dp</item>
+        <item name="chipMinHeight">36dp</item>
+        <item name="chipStartPadding">8dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="chipIconSize">20dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.LabelLarge</item>
     </style>
 
 </resources>

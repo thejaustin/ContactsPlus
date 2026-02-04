@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contact_wrapper"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_surface">
 
     <ScrollView
         android:id="@+id/contact_scrollview"
@@ -16,13 +17,14 @@
         <RelativeLayout
             android:id="@+id/contact_holder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
 
+            <!-- Hero Image Section -->
             <ImageView
                 android:id="@+id/contact_photo"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/top_contact_image_height"
-                android:layout_marginBottom="@dimen/normal_margin"
                 android:contentDescription="@string/change_photo"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_person_vector" />
@@ -48,6 +50,7 @@
                 android:src="@drawable/ic_star_outline_vector"
                 android:visibility="gone" />
 
+            <!-- Action Buttons (Material 3 Tonal Buttons) -->
             <LinearLayout
                 android:id="@+id/contact_actions_holder"
                 android:layout_width="wrap_content"
@@ -58,74 +61,106 @@
                 android:paddingEnd="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin">
 
-                <ImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/contact_send_email"
-                    android:layout_width="@dimen/contact_actions_size"
-                    android:layout_height="@dimen/contact_actions_size"
-                    android:adjustViewBounds="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    style="@style/Widget.Material3.Button.TonalButton.Icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
                     android:contentDescription="@string/send_email"
-                    android:paddingStart="@dimen/small_margin"
-                    android:paddingEnd="@dimen/small_margin"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_mail_vector" />
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/action_email"
+                    app:icon="@drawable/ic_mail_vector"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:iconTint="@android:color/white"
+                    app:shapeAppearance="@style/ShapeAppearance.ContactsPlus.MediumComponent" />
 
-                <ImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/contact_start_call"
-                    android:layout_width="@dimen/contact_actions_size"
-                    android:layout_height="@dimen/contact_actions_size"
-                    android:layout_marginStart="@dimen/normal_margin"
-                    android:adjustViewBounds="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    style="@style/Widget.Material3.Button.TonalButton.Icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
                     android:contentDescription="@string/call_contact"
-                    android:paddingStart="@dimen/small_margin"
-                    android:paddingEnd="@dimen/small_margin"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_phone_vector" />
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/action_call"
+                    app:icon="@drawable/ic_phone_vector"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:iconTint="@android:color/white"
+                    app:shapeAppearance="@style/ShapeAppearance.ContactsPlus.MediumComponent" />
 
-                <ImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/contact_send_sms"
-                    android:layout_width="@dimen/contact_actions_size"
-                    android:layout_height="@dimen/contact_actions_size"
-                    android:layout_marginStart="@dimen/normal_margin"
-                    android:adjustViewBounds="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    style="@style/Widget.Material3.Button.TonalButton.Icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:contentDescription="@string/send_sms"
-                    android:paddingStart="@dimen/small_margin"
-                    android:paddingEnd="@dimen/small_margin"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_sms_vector" />
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/action_message"
+                    app:icon="@drawable/ic_sms_vector"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:iconTint="@android:color/white"
+                    app:shapeAppearance="@style/ShapeAppearance.ContactsPlus.MediumComponent" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/contact_name_image"
-                android:layout_width="@dimen/contact_icons_size"
-                android:layout_height="@dimen/contact_icons_size"
-                android:layout_below="@+id/contact_photo"
-                android:layout_marginStart="@dimen/normal_margin"
-                android:contentDescription="@null"
-                android:paddingTop="@dimen/medium_margin"
-                android:paddingEnd="@dimen/small_margin"
-                android:paddingBottom="@dimen/small_margin"
-                android:src="@drawable/ic_person_vector" />
-
-            <org.fossify.commons.views.MyTextView
-                android:id="@+id/contact_name"
+            <!-- Contact Name Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/contact_name_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_photo"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/contact_name_image"
-                android:background="?attr/selectableItemBackground"
-                android:maxLines="2"
-                android:paddingStart="@dimen/small_margin"
-                android:paddingTop="@dimen/normal_margin"
-                android:paddingEnd="@dimen/normal_margin"
-                android:paddingBottom="@dimen/normal_margin"
-                android:textSize="@dimen/bigger_text_size"
-                android:tooltipText="John Doe" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="-24dp"
+                android:layout_marginEnd="16dp"
+                app:cardBackgroundColor="@color/md_theme_surfaceContainerLow"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/contact_name_image"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_person_vector"
+                        app:tint="@color/md_theme_primary" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/contact_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:maxLines="2"
+                        android:textAppearance="@style/TextAppearance.ContactsPlus.HeadlineMedium"
+                        android:textColor="@color/md_theme_onSurface"
+                        tools:text="John Doe" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Phone Numbers Section -->
             <ImageView
                 android:id="@+id/contact_numbers_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -137,8 +172,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_phone_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Email Section -->
             <ImageView
                 android:id="@+id/contact_emails_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -150,8 +187,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_mail_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Address Section -->
             <ImageView
                 android:id="@+id/contact_addresses_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -163,8 +202,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_place_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- IM Section -->
             <ImageView
                 android:id="@+id/contact_ims_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -176,8 +217,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_im"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Events Section -->
             <ImageView
                 android:id="@+id/contact_events_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -189,8 +232,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_cake_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Notes Section -->
             <ImageView
                 android:id="@+id/contact_notes_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -202,8 +247,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_label_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Ringtone Section -->
             <ImageView
                 android:id="@+id/contact_ringtone_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -215,8 +262,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_bell_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Organization Section -->
             <ImageView
                 android:id="@+id/contact_organization_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -228,8 +277,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_business_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Websites Section -->
             <ImageView
                 android:id="@+id/contact_websites_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -241,8 +292,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_link_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Groups Section -->
             <ImageView
                 android:id="@+id/contact_groups_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -254,8 +307,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_people_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Social Links Section -->
             <ImageView
                 android:id="@+id/contact_social_links_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -267,8 +322,10 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_social_link"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Contact Source Section -->
             <ImageView
                 android:id="@+id/contact_source_image"
                 android:layout_width="@dimen/contact_icons_size"
@@ -280,13 +337,16 @@
                 android:paddingEnd="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:src="@drawable/ic_account_box_vector"
+                app:tint="@color/md_theme_primary"
                 android:visibility="gone" />
 
+            <!-- Content Holders -->
             <LinearLayout
                 android:id="@+id/contact_numbers_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/contact_name"
+                android:layout_below="@+id/contact_name_card"
+                android:layout_marginTop="16dp"
                 android:layout_toEndOf="@+id/contact_numbers_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
@@ -375,7 +435,7 @@
                 android:paddingStart="@dimen/small_margin"
                 android:paddingTop="@dimen/normal_margin"
                 android:paddingBottom="@dimen/normal_margin"
-                android:textSize="@dimen/bigger_text_size"
+                android:textAppearance="@style/TextAppearance.ContactsPlus.BodyLarge"
                 android:visibility="gone" />
 
             <org.fossify.commons.views.MyTextView
@@ -390,7 +450,7 @@
                 android:paddingStart="@dimen/small_margin"
                 android:paddingTop="@dimen/normal_margin"
                 android:paddingBottom="@dimen/normal_margin"
-                android:textSize="@dimen/bigger_text_size"
+                android:textAppearance="@style/TextAppearance.ContactsPlus.BodyLarge"
                 android:visibility="gone" />
 
             <org.fossify.commons.views.MyTextView
@@ -405,7 +465,7 @@
                 android:paddingStart="@dimen/small_margin"
                 android:paddingTop="@dimen/normal_margin"
                 android:paddingBottom="@dimen/normal_margin"
-                android:textSize="@dimen/bigger_text_size"
+                android:textAppearance="@style/TextAppearance.ContactsPlus.BodyLarge"
                 android:visibility="gone" />
 
             <org.fossify.commons.views.MyTextView
@@ -420,7 +480,7 @@
                 android:paddingStart="@dimen/small_margin"
                 android:paddingTop="@dimen/normal_margin"
                 android:paddingBottom="@dimen/normal_margin"
-                android:textSize="@dimen/bigger_text_size"
+                android:textAppearance="@style/TextAppearance.ContactsPlus.BodyLarge"
                 android:visibility="gone" />
 
         </RelativeLayout>

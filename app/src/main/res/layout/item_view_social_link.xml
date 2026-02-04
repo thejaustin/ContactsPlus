@@ -1,63 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:layout_marginStart="@dimen/small_margin"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="@dimen/normal_margin"
+    android:layout_marginBottom="4dp"
     android:clickable="true"
     android:focusable="true"
-    android:paddingStart="@dimen/small_margin"
-    android:paddingTop="@dimen/medium_margin"
-    android:paddingEnd="@dimen/normal_margin"
-    android:paddingBottom="@dimen/medium_margin">
+    app:cardBackgroundColor="@color/md_theme_surfaceContainerHigh"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:rippleColor="@color/md_theme_primary"
+    app:strokeWidth="0dp">
 
-    <ImageView
-        android:id="@+id/social_link_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_centerVertical="true"
-        android:contentDescription="@null"
-        tools:src="@drawable/ic_instagram" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/normal_margin"
-        android:layout_marginEnd="@dimen/normal_margin"
-        android:layout_toStartOf="@+id/social_link_open"
-        android:layout_toEndOf="@+id/social_link_icon"
-        android:orientation="vertical">
+        android:padding="12dp">
 
-        <org.fossify.commons.views.MyTextView
-            android:id="@+id/social_link_username"
+        <ImageView
+            android:id="@+id/social_link_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:padding="4dp"
+            tools:src="@drawable/ic_instagram" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="@dimen/bigger_text_size"
-            tools:text="@username" />
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/social_link_open"
+            android:layout_toEndOf="@+id/social_link_icon"
+            android:orientation="vertical">
 
-        <org.fossify.commons.views.MyTextView
-            android:id="@+id/social_link_platform"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="@dimen/normal_text_size"
-            tools:text="Instagram" />
+            <org.fossify.commons.views.MyTextView
+                android:id="@+id/social_link_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.ContactsPlus.TitleMedium"
+                android:textColor="@color/md_theme_onSurface"
+                tools:text="@username" />
 
-    </LinearLayout>
+            <org.fossify.commons.views.MyTextView
+                android:id="@+id/social_link_platform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.ContactsPlus.BodyMedium"
+                android:textColor="@color/md_theme_onSurfaceVariant"
+                tools:text="Instagram" />
 
-    <ImageView
-        android:id="@+id/social_link_open"
-        android:layout_width="@dimen/contact_icons_size"
-        android:layout_height="@dimen/contact_icons_size"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/open_in_app"
-        android:padding="@dimen/small_margin"
-        android:src="@drawable/ic_chevron_right_vector" />
+        </LinearLayout>
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/social_link_open"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/open_in_app"
+            android:padding="8dp"
+            android:src="@drawable/ic_chevron_right_vector"
+            app:tint="@color/md_theme_primary" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -138,6 +138,7 @@ detekt {
 
 dependencies {
     implementation(libs.fossify.commons)
+    implementation(libs.google.material)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.dynamicanimation)
     implementation(libs.autofittextview)
