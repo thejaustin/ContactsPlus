@@ -101,5 +101,57 @@ enum class SocialPlatform(
         fun fromDisplayName(name: String): SocialPlatform? {
             return entries.find { it.displayName.equals(name, ignoreCase = true) }
         }
+
+        fun detect(text: String): Pair<SocialPlatform, String>? {
+            val url = text.trim()
+            return when {
+                url.contains("instagram.com/") -> {
+                    val username = url.substringAfter("instagram.com/").substringBefore("?").substringBefore("/")
+                    INSTAGRAM to username
+                }
+                url.contains("snapchat.com/add/") -> {
+                    val username = url.substringAfter("snapchat.com/add/").substringBefore("?").substringBefore("/")
+                    SNAPCHAT to username
+                }
+                url.contains("wa.me/") -> {
+                    val username = url.substringAfter("wa.me/").substringBefore("?").substringBefore("/")
+                    WHATSAPP to username
+                }
+                url.contains("t.me/") -> {
+                    val username = url.substringAfter("t.me/").substringBefore("?").substringBefore("/")
+                    TELEGRAM to username
+                }
+                url.contains("discord.com/users/") -> {
+                    val username = url.substringAfter("discord.com/users/").substringBefore("?").substringBefore("/")
+                    DISCORD to username
+                }
+                url.contains("tiktok.com/@") -> {
+                    val username = url.substringAfter("tiktok.com/@").substringBefore("?").substringBefore("/")
+                    TIKTOK to username
+                }
+                url.contains("x.com/") || url.contains("twitter.com/") -> {
+                    val temp = if (url.contains("x.com/")) url.substringAfter("x.com/") else url.substringAfter("twitter.com/")
+                    val username = temp.substringBefore("?").substringBefore("/")
+                    TWITTER to username
+                }
+                url.contains("linkedin.com/in/") -> {
+                    val username = url.substringAfter("linkedin.com/in/").substringBefore("?").substringBefore("/")
+                    LINKEDIN to username
+                }
+                url.contains("signal.me/#p/") -> {
+                    val username = url.substringAfter("signal.me/#p/").substringBefore("?").substringBefore("/")
+                    SIGNAL to username
+                }
+                url.contains("m.me/") -> {
+                    val username = url.substringAfter("m.me/").substringBefore("?").substringBefore("/")
+                    MESSENGER to username
+                }
+                url.contains("threads.net/@") -> {
+                    val username = url.substringAfter("threads.net/@").substringBefore("?").substringBefore("/")
+                    THREADS to username
+                }
+                else -> null
+            }
+        }
     }
 }

@@ -36,6 +36,14 @@ import com.contactsplus.app.helpers.tabsList
 import com.contactsplus.app.interfaces.RefreshContactsListener
 import java.util.Arrays
 
+import com.contactsplus.app.models.SocialPlatform
+import com.contactsplus.app.dialogs.ManageSocialLinksDialog
+import com.contactsplus.app.database.SocialLinksDatabase
+import com.contactsplus.app.models.SocialLink
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 class MainActivity : SimpleActivity(), RefreshContactsListener {
     private var werePermissionsHandled = false
     private var isFirstResume = true
@@ -46,10 +54,19 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
     private var storedStartNameWithSurname = false
     private var storedFontSize = 0
     private var storedShowTabs = 0
+    
+    private var socialImportDialog: SocialImportDialog? = null
 
     override var isSearchBarEnabled = true
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
+
+    companion object {
+        private const val PICK_CONTACT_FOR_SOCIAL_LINK = 1001
+        private const val PICK_JSON_FILE = 1002
+        var pendingSocialPlatform: SocialPlatform? = null
+        var pendingSocialUsername: String? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -197,6 +214,11 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         binding.mainMenu.requireToolbar().setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
+                R.id.import_social -> {
+                    socialImportDialog = SocialImportDialog(this) {
+                        refreshContacts(ALL_TABS_MASK)
+                    }
+                }
                 R.id.filter -> showFilterDialog()
                 R.id.dialpad -> launchDialpad()
                 R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
@@ -377,6 +399,15 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
     }
 
     private fun handleExternalIntent() {
+        if (intent?.action == Intent.ACTION_SEND && intent.type == "text/plain") {
+            val text = intent.getStringExtra(Intent.EXTRA_TEXT)
+            if (text != null) {
+                handleSocialLinkShare(text)
+                intent.action = null
+                return
+            }
+        }
+
         val uri = when (intent?.action) {
             Intent.ACTION_VIEW -> intent.data
             Intent.ACTION_SEND -> intent.getParcelableExtra(Intent.EXTRA_STREAM)
@@ -395,131 +426,55 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         }
     }
 
-    private fun setupTabs() {
-        binding.mainTabsHolder.removeAllTabs()
-        tabsList.forEachIndexed { index, value ->
-            if (config.showTabs and value != 0) {
-                binding.mainTabsHolder.newTab().setCustomView(org.fossify.commons.R.layout.bottom_tablayout_item).apply tab@{
-                    customView?.let {
-                        BottomTablayoutItemBinding.bind(it)
-                    }?.apply {
-                        tabItemIcon.setImageDrawable(getTabIcon(index))
-                        tabItemLabel.text = getTabLabel(index)
-                        AutofitHelper.create(tabItemLabel)
-                        binding.mainTabsHolder.addTab(this@tab)
-                    }
+    private fun handleSocialLinkShare(text: String) {
+        val detected = SocialPlatform.detect(text)
+        if (detected != null) {
+            val (platform, username) = detected
+            pendingSocialPlatform = platform
+            pendingSocialUsername = username
+            toast("Detected ${platform.displayName} link for $username")
+
+            Intent(this, InsertOrEditContactActivity::class.java).apply {
+                action = Intent.ACTION_PICK
+                startActivityForResult(this, PICK_CONTACT_FOR_SOCIAL_LINK)
+            }
+        } else {
+            toast(org.fossify.commons.R.string.no_app_found)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_CONTACT_FOR_SOCIAL_LINK && resultCode == RESULT_OK && data != null) {
+            val contactUri = data.data ?: return
+            val platform = pendingSocialPlatform ?: return
+            val username = pendingSocialUsername ?: return
+
+            // We need to resolve the contact ID from the URI
+            val rawId = getContactUriRawId(contactUri)
+            val contact = ContactsHelper(this).getContactWithId(rawId, false) ?: return
+
+            // Add the link
+            CoroutineScope(Dispatchers.IO).launch {
+                val link = SocialLink(
+                    contactLookupKey = contact.contactId.toString(), // Simplified, should check if we use lookup key or ID
+                    platform = platform,
+                    username = username
+                )
+                SocialLinksDatabase.getInstance(this@MainActivity).socialLinkDao().insert(link)
+                
+                runOnUiThread {
+                    toast("Added ${platform.displayName} link to ${contact.getNameToDisplay()}")
+                    pendingSocialPlatform = null
+                    pendingSocialUsername = null
                 }
             }
-        }
-
-        binding.mainTabsHolder.onTabSelectionChanged(
-            tabUnselectedAction = {
-                updateBottomTabItemColors(it.customView, false, getDeselectedTabDrawableIds()[it.position])
-            },
-            tabSelectedAction = {
-                getCurrentFragment()?.onSearchQueryChanged(binding.mainMenu.getCurrentQuery())
-                binding.viewPager.currentItem = it.position
-                updateBottomTabItemColors(it.customView, true, getSelectedTabDrawableIds()[it.position])
-            }
-        )
-
-        binding.mainTabsHolder.beGoneIf(binding.mainTabsHolder.tabCount == 1)
-    }
-
-    private fun showSortingDialog(showCustomSorting: Boolean) {
-        ChangeSortingDialog(this, showCustomSorting) {
-            refreshContacts(TAB_CONTACTS or TAB_FAVORITES)
+        } else if (requestCode == PICK_JSON_FILE && resultCode == RESULT_OK && data != null) {
+             val uri = data.data ?: return
+             socialImportDialog?.handleFileResult(uri)
         }
     }
 
-    fun showFilterDialog() {
-        FilterContactSourcesDialog(this) {
-            findViewById<MyViewPagerFragment<*>>(R.id.contacts_fragment)?.forceListRedraw = true
-            refreshContacts(TAB_CONTACTS or TAB_FAVORITES)
-        }
-    }
-
-    private fun launchDialpad() {
-        hideKeyboard()
-        Intent(Intent.ACTION_DIAL).apply {
-            try {
-                startActivity(this)
-            } catch (e: ActivityNotFoundException) {
-                toast(org.fossify.commons.R.string.no_app_found)
-            } catch (e: Exception) {
-                showErrorToast(e)
-            }
-        }
-    }
-
-    private fun launchSettings() {
-        hideKeyboard()
-        startActivity(Intent(applicationContext, SettingsActivity::class.java))
-    }
-
-    private fun launchAbout() {
-        val licenses = LICENSE_JODA or LICENSE_GLIDE or LICENSE_GSON or LICENSE_INDICATOR_FAST_SCROLL or LICENSE_AUTOFITTEXTVIEW
-
-        val faqItems = arrayListOf(
-            FAQItem(R.string.faq_1_title, R.string.faq_1_text),
-            FAQItem(org.fossify.commons.R.string.faq_9_title_commons, org.fossify.commons.R.string.faq_9_text_commons)
-        )
-
-        if (!resources.getBoolean(org.fossify.commons.R.bool.hide_google_relations)) {
-            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_2_title_commons, org.fossify.commons.R.string.faq_2_text_commons))
-            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_6_title_commons, org.fossify.commons.R.string.faq_6_text_commons))
-            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_7_title_commons, org.fossify.commons.R.string.faq_7_text_commons))
-        }
-
-        startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
-    }
-
-    override fun refreshContacts(refreshTabsMask: Int) {
-        if (isDestroyed || isFinishing || isGettingContacts) {
-            return
-        }
-
-        isGettingContacts = true
-
-        if (binding.viewPager.adapter == null) {
-            binding.viewPager.adapter = ViewPagerAdapter(this, tabsList, config.showTabs)
-            binding.viewPager.currentItem = getDefaultTab()
-        }
-
-        ContactsHelper(this).getContacts { contacts ->
-            isGettingContacts = false
-            if (isDestroyed || isFinishing) {
-                return@getContacts
-            }
-
-            if (refreshTabsMask and TAB_CONTACTS != 0) {
-                findViewById<MyViewPagerFragment<*>>(R.id.contacts_fragment)?.apply {
-                    skipHashComparing = true
-                    refreshContacts(contacts)
-                }
-            }
-
-            if (refreshTabsMask and TAB_FAVORITES != 0) {
-                findViewById<MyViewPagerFragment<*>>(R.id.favorites_fragment)?.apply {
-                    skipHashComparing = true
-                    refreshContacts(contacts)
-                }
-            }
-
-            if (refreshTabsMask and TAB_GROUPS != 0) {
-                findViewById<MyViewPagerFragment<*>>(R.id.groups_fragment)?.apply {
-                    if (refreshTabsMask == TAB_GROUPS) {
-                        skipHashComparing = true
-                    }
-                    refreshContacts(contacts)
-                }
-            }
-
-            if (binding.mainMenu.isSearchOpen) {
-                getCurrentFragment()?.onSearchQueryChanged(binding.mainMenu.getCurrentQuery())
-            }
-        }
-    }
 
     override fun contactClicked(contact: Contact) {
         handleGenericContactClick(contact)

@@ -47,7 +47,7 @@
     </queries>
 
     <application
-        android:name="org.fossify.commons.FossifyApp"
+        android:name=".App"
         android:allowBackup="true"
         android:appCategory="social"
         android:icon="@mipmap/ic_launcher"
@@ -82,6 +82,7 @@
                 <data android:mimeType="text/directory" />
                 <data android:mimeType="text/vcard" />
                 <data android:mimeType="text/x-vcard" />
+                <data android:mimeType="text/plain" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

@@ -8,6 +8,11 @@
         android:icon="@drawable/ic_sort_vector"
         android:title="@string/sort_by"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/import_social"
+        android:title="Import Social Links"
+        app:showAsAction="never" />
     <item
         android:id="@+id/filter"
         android:icon="@drawable/ic_filter_vector"
