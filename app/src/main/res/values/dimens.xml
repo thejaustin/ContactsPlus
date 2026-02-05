@@ -83,6 +83,8 @@
     <dimen name="app_bar_height">64dp</dimen>
     <dimen name="app_bar_expanded_height">152dp</dimen>
 
+    <dimen name="activity_margin">16dp</dimen>
+
     <!-- Bottom navigation -->
     <dimen name="bottom_nav_height">80dp</dimen>
     <dimen name="bottom_nav_icon_size">24dp</dimen>

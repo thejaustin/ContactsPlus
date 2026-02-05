@@ -5,7 +5,6 @@
     tools:ignore="AppCompatResource,AlwaysShowAction">
     <item
         android:id="@+id/sort"
-        android:icon="@drawable/ic_sort_vector"
         android:title="@string/sort_by"
         app:showAsAction="ifRoom" />
 
@@ -15,32 +14,26 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/filter"
-        android:icon="@drawable/ic_filter_vector"
         android:title="@string/filter"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/dialpad"
-        android:icon="@drawable/ic_dialpad_vector"
         android:title="@string/dialpad"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/change_view_type"
-        android:icon="@drawable/ic_change_view_vector"
         android:title="@string/change_view_type"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/column_count"
-        android:icon="@drawable/ic_column_count_vector"
         android:title="@string/column_count"
         app:showAsAction="never" />
     <item
         android:id="@+id/settings"
-        android:icon="@drawable/ic_settings_cog_vector"
         android:title="@string/settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/about"
-        android:icon="@drawable/ic_info_vector"
         android:title="@string/about"
         app:showAsAction="never" />
     <item
