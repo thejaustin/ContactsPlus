@@ -63,9 +63,11 @@ class InsertOrEditContactActivity : SimpleActivity(), RefreshContactsListener {
         binding.newContactHolder.beGoneIf(isSelectContactIntent)
         binding.selectContactLabel.beGoneIf(isSelectContactIntent)
 
+        /*
         if (checkAppSideloading()) {
             return
         }
+        */
 
         setupTabs()
 

@@ -74,15 +74,17 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // appLaunched(BuildConfig.APPLICATION_ID)
-        // setupOptionsMenu()
-        // refreshMenuItems()
-        // setupEdgeToEdge(
-        //    padBottomImeAndSystem = listOf(binding.mainTabsHolder),
-        // )
-        // storeStateVariables()
-        // setupTabs()
-        // checkContactPermissions()
-        // checkWhatsNewDialog()
+        setupOptionsMenu()
+        refreshMenuItems()
+        /*
+        setupEdgeToEdge(
+            padBottomImeAndSystem = listOf(binding.mainTabsHolder),
+        )
+        */
+        storeStateVariables()
+        setupTabs()
+        checkContactPermissions()
+        checkWhatsNewDialog()
     }
 
     private fun checkContactPermissions() {
