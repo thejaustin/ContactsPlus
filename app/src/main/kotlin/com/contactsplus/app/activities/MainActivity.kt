@@ -60,7 +60,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
     override var isSearchBarEnabled = true
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding by viewBinding(ActivityMainBinding::inflate)
 
     companion object {
         private const val PICK_CONTACT_FOR_SOCIAL_LINK = 1001
@@ -71,16 +71,13 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // appLaunched(BuildConfig.APPLICATION_ID)
+        appLaunched(BuildConfig.APPLICATION_ID)
         setupOptionsMenu()
         refreshMenuItems()
-        /*
         setupEdgeToEdge(
             padBottomImeAndSystem = listOf(binding.mainTabsHolder),
         )
-        */
         storeStateVariables()
         setupTabs()
         checkContactPermissions()
@@ -104,7 +101,6 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
     override fun onResume() {
         super.onResume()
-        /*
         if (storedShowPhoneNumbers != config.showPhoneNumbers) {
             System.exit(0)
             return
@@ -165,7 +161,6 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
         isFirstResume = false
         checkShortcuts()
-        */
     }
 
     override fun onPause() {

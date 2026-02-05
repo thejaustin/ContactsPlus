@@ -44,7 +44,8 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs_holder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:paddingBottom="16dp"
             android:background="@color/md_theme_surfaceContainer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:tabIndicator="@drawable/tab_indicator_m3"
@@ -58,7 +59,9 @@
             app:tabSelectedTextColor="@color/md_theme_primary"
             app:tabTextColor="@color/md_theme_onSurfaceVariant"
             app:tabIconTint="@color/bottom_nav_item_color"
-            app:tabRippleColor="@color/md_theme_primary" />
+            app:tabRippleColor="@color/md_theme_primary"
+            app:tabIconMinWidth="24dp"
+            app:tabIconMinHeight="24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

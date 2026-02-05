@@ -1,11 +1,16 @@
 <resources>
 
     <!-- Main App Theme with Material 3 overlay -->
-    <style name="AppTheme" parent="Theme.ContactsPlus.Material3" />
+    <style name="AppTheme" parent="Theme.ContactsPlus.Material3">
+        <item name="android:windowBackground">@color/md_theme_background</item>
+    </style>
 
     <style name="AppTheme.Base" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowBackground">@color/md_theme_background</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
     </style>
+
+    <style name="FossifyTheme" parent="AppTheme" />
 
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>

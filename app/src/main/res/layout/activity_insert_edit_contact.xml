@@ -72,11 +72,14 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/insert_edit_tabs_holder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:paddingBottom="16dp"
             android:layout_alignParentBottom="true"
             app:tabIndicator="@null"
             app:tabMinWidth="150dp"
-            app:tabRippleColor="@null" />
+            app:tabRippleColor="@null"
+            app:tabIconMinWidth="24dp"
+            app:tabIconMinHeight="24dp" />
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

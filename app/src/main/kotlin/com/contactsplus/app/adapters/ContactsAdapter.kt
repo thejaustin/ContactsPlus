@@ -400,8 +400,13 @@ class ContactsAdapter(
 
             findViewById<TextView>(org.fossify.commons.R.id.item_contact_name).apply {
                 setTextColor(textColor)
-                setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize)
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize * 1.15f)
             }
+
+            if (viewType != VIEW_TYPE_GRID) {
+                minimumHeight = resources.getDimensionPixelSize(R.dimen.list_item_height_two_line)
+            }
+            setBackgroundResource(org.fossify.commons.R.drawable.selector_clickable_background)
 
             if (findViewById<TextView>(org.fossify.commons.R.id.item_contact_number) != null) {
                 val phoneNumberToUse = if (textToHighlight.isEmpty()) {
