@@ -165,12 +165,6 @@ class EditContactActivity : ContactActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        /*
-        if (checkAppSideloading()) {
-            return
-        }
-        */
-
         setupEdgeToEdge(
             padBottomImeAndSystem = listOf(binding.contactScrollview)
         )

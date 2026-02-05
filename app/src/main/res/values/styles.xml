@@ -3,7 +3,9 @@
     <!-- Main App Theme with Material 3 overlay -->
     <style name="AppTheme" parent="Theme.ContactsPlus.Material3" />
 
-    <style name="AppTheme.Base" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="AppTheme.Base" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
 
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>

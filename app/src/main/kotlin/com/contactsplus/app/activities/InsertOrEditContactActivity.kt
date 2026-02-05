@@ -63,12 +63,6 @@ class InsertOrEditContactActivity : SimpleActivity(), RefreshContactsListener {
         binding.newContactHolder.beGoneIf(isSelectContactIntent)
         binding.selectContactLabel.beGoneIf(isSelectContactIntent)
 
-        /*
-        if (checkAppSideloading()) {
-            return
-        }
-        */
-
         setupTabs()
 
         // we do not really care about the permission request result. Even if it was denied, load private contacts
