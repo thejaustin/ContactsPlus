@@ -14,6 +14,8 @@ import com.contactsplus.app.helpers.LOCATION_CONTACTS_TAB
 import com.contactsplus.app.helpers.LOCATION_FAVORITES_TAB
 
 open class SimpleActivity : BaseSimpleActivity() {
+    fun checkAppSideloading() = false
+
     override fun getAppIconIDs() = arrayListOf(
         R.mipmap.ic_launcher_red,
         R.mipmap.ic_launcher_pink,

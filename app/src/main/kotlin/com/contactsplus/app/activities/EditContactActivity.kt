@@ -34,7 +34,6 @@ import org.fossify.commons.extensions.beGone
 import org.fossify.commons.extensions.beInvisible
 import org.fossify.commons.extensions.beVisible
 import org.fossify.commons.extensions.beVisibleIf
-import org.fossify.commons.extensions.checkAppSideloading
 import org.fossify.commons.extensions.getCachePhoto
 import org.fossify.commons.extensions.getContactPublicUri
 import org.fossify.commons.extensions.getContactUriRawId

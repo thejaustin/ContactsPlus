@@ -7,8 +7,5 @@ class App : FossifyApp() {
         super.onCreate()
     }
 
-    override fun checkAppSideloading(): Boolean {
-        // Always return false to disable the "fake version" popup
-        return false
-    }
+    fun checkAppSideloading() = false
 }
