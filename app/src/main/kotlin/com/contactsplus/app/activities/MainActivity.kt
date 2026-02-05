@@ -102,6 +102,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
     override fun onResume() {
         super.onResume()
+        /*
         if (storedShowPhoneNumbers != config.showPhoneNumbers) {
             System.exit(0)
             return
@@ -162,6 +163,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
         isFirstResume = false
         checkShortcuts()
+        */
     }
 
     override fun onPause() {
