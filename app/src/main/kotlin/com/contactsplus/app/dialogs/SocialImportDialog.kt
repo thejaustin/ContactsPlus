@@ -1,6 +1,5 @@
 package com.contactsplus.app.dialogs
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -32,23 +31,6 @@ class SocialImportDialog(val activity: SimpleActivity, val callback: () -> Unit)
     init {
         binding = DialogSocialImportBinding.inflate(LayoutInflater.from(activity))
         
-        // Note: SimpleActivity doesn't support startActivityForResult in this way directly from a Dialog class helper
-        // unless we pass the result back. 
-        // For simplicity, we assume the Activity exposes a way to handle results or we use an inline implementation.
-        // But since we can't easily modify the Activity to route onActivityResult here without complex code,
-        // we will ask the user to select file, and assume the Activity calls us back? 
-        // No, that's too complex. 
-        // We will just use the Activity to start it, and we need the Activity to handle onActivityResult and call a function on us?
-        // Actually, cleaner is to use ActivityResultLauncher if available (AndroidX), but this codebase uses onActivityResult style.
-        
-        // We will implement the file picking logic in the Activity or assume the user manually implements it.
-        // For now, I will just show the dialog and bind the button, but the button logic is tricky without Activity support.
-        
-        // ALTERNATIVE: Use a transparent Activity or the existing MainActivity's onActivityResult hook 
-        // if we add a "callback" registry.
-        
-        // I will add a method `pickJsonFile` to MainActivity and use that.
-        
         binding.importSocialSelectFile.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
@@ -58,12 +40,11 @@ class SocialImportDialog(val activity: SimpleActivity, val callback: () -> Unit)
         }
 
         dialog = AlertDialog.Builder(activity)
-            .setPositiveButton(R.string.ok, null)
-            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(org.fossify.commons.R.string.ok, null)
+            .setNegativeButton(org.fossify.commons.R.string.cancel, null)
             .create().apply {
                 activity.setupDialogStuff(binding.root, this)
                 getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                    // Import logic
                     importSelected()
                     dismiss()
                 }
@@ -78,9 +59,7 @@ class SocialImportDialog(val activity: SimpleActivity, val callback: () -> Unit)
             val importer = SocialMediaImporter(activity)
             val matches = importer.parseBackup(uri)
             
-            // Filter matches against existing contacts
-            // This requires fuzzy matching name -> contact
-            val contacts = ContactsHelper(activity).getContacts()
+            val contacts = ContactsHelper(activity).getContactsSync()
             val finalMatches = ArrayList<PotentialMatch>()
             
             matches.forEach { match ->
@@ -91,7 +70,7 @@ class SocialImportDialog(val activity: SimpleActivity, val callback: () -> Unit)
             }
             
             potentialMatches = finalMatches
-            selectedMatches.addAll(finalMatches) // Select all by default
+            selectedMatches.addAll(finalMatches)
 
             withContext(Dispatchers.Main) {
                 if (potentialMatches.isEmpty()) {
@@ -108,7 +87,7 @@ class SocialImportDialog(val activity: SimpleActivity, val callback: () -> Unit)
 
     private fun importSelected() {
         CoroutineScope(Dispatchers.IO).launch {
-            val contacts = ContactsHelper(activity).getContacts()
+            val contacts = ContactsHelper(activity).getContactsSync()
             var count = 0
             selectedMatches.forEach { match ->
                 val contact = contacts.find { it.getNameToDisplay().equals(match.name, ignoreCase = true) }

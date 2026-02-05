@@ -40,6 +40,7 @@ import com.contactsplus.app.models.SocialPlatform
 import com.contactsplus.app.dialogs.ManageSocialLinksDialog
 import com.contactsplus.app.database.SocialLinksDatabase
 import com.contactsplus.app.models.SocialLink
+import com.contactsplus.app.dialogs.SocialImportDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -475,6 +476,145 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         }
     }
 
+    private fun setupTabs() {
+        binding.mainTabsHolder.removeAllTabs()
+        tabsList.forEachIndexed { index, value ->
+            if (config.showTabs and value != 0) {
+                binding.mainTabsHolder.newTab().setCustomView(org.fossify.commons.R.layout.bottom_tablayout_item).apply tab@{
+                    customView?.let {
+                        BottomTablayoutItemBinding.bind(it)
+                    }?.apply {
+                        tabItemIcon.setImageDrawable(getTabIcon(index))
+                        tabItemLabel.text = getTabLabel(index)
+                        AutofitHelper.create(tabItemLabel)
+                        binding.mainTabsHolder.addTab(this@tab)
+                    }
+                }
+            }
+        }
+
+        binding.mainTabsHolder.onTabSelectionChanged(
+            tabUnselectedAction = {
+                updateBottomTabItemColors(it.customView, false, getDeselectedTabDrawableIds()[it.position])
+            },
+            tabSelectedAction = {
+                getCurrentFragment()?.onSearchQueryChanged(binding.mainMenu.getCurrentQuery())
+                binding.viewPager.currentItem = it.position
+                updateBottomTabItemColors(it.customView, true, getSelectedTabDrawableIds()[it.position])
+            }
+        )
+
+        binding.mainTabsHolder.beGoneIf(binding.mainTabsHolder.tabCount == 1)
+    }
+
+    private fun getTabIcon(index: Int): android.graphics.drawable.Drawable? {
+        val iconId = getSelectedTabDrawableIds()[index]
+        return resources.getColoredDrawableWithColor(iconId, getProperPrimaryColor())
+    }
+
+    private fun getTabLabel(index: Int): String {
+        val showTabs = config.showTabs
+        val labels = ArrayList<String>()
+        if (showTabs and TAB_CONTACTS != 0) labels.add(getString(org.fossify.commons.R.string.contacts))
+        if (showTabs and TAB_FAVORITES != 0) labels.add(getString(org.fossify.commons.R.string.favorites))
+        if (showTabs and TAB_GROUPS != 0) labels.add(getString(org.fossify.commons.R.string.groups))
+        return labels[index]
+    }
+
+    private fun showSortingDialog(showCustomSorting: Boolean) {
+        ChangeSortingDialog(this, showCustomSorting) {
+            refreshContacts(TAB_CONTACTS or TAB_FAVORITES)
+        }
+    }
+
+    fun showFilterDialog() {
+        FilterContactSourcesDialog(this) {
+            findViewById<MyViewPagerFragment<*>>(R.id.contacts_fragment)?.forceListRedraw = true
+            refreshContacts(TAB_CONTACTS or TAB_FAVORITES)
+        }
+    }
+
+    private fun launchDialpad() {
+        hideKeyboard()
+        Intent(Intent.ACTION_DIAL).apply {
+            try {
+                startActivity(this)
+            } catch (e: ActivityNotFoundException) {
+                toast(org.fossify.commons.R.string.no_app_found)
+            } catch (e: Exception) {
+                showErrorToast(e)
+            }
+        }
+    }
+
+    private fun launchSettings() {
+        hideKeyboard()
+        startActivity(Intent(applicationContext, SettingsActivity::class.java))
+    }
+
+    private fun launchAbout() {
+        val licenses = LICENSE_JODA or LICENSE_GLIDE or LICENSE_GSON or LICENSE_INDICATOR_FAST_SCROLL or LICENSE_AUTOFITTEXTVIEW
+
+        val faqItems = arrayListOf(
+            FAQItem(R.string.faq_1_title, R.string.faq_1_text),
+            FAQItem(org.fossify.commons.R.string.faq_9_title_commons, org.fossify.commons.R.string.faq_9_text_commons)
+        )
+
+        if (!resources.getBoolean(org.fossify.commons.R.bool.hide_google_relations)) {
+            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_2_title_commons, org.fossify.commons.R.string.faq_2_text_commons))
+            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_6_title_commons, org.fossify.commons.R.string.faq_6_text_commons))
+            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_7_title_commons, org.fossify.commons.R.string.faq_7_text_commons))
+        }
+
+        startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
+    }
+
+    override fun refreshContacts(refreshTabsMask: Int) {
+        if (isDestroyed || isFinishing || isGettingContacts) {
+            return
+        }
+
+        isGettingContacts = true
+
+        if (binding.viewPager.adapter == null) {
+            binding.viewPager.adapter = ViewPagerAdapter(this, tabsList, config.showTabs)
+            binding.viewPager.currentItem = getDefaultTab()
+        }
+
+        ContactsHelper(this).getContacts { contacts ->
+            isGettingContacts = false
+            if (isDestroyed || isFinishing) {
+                return@getContacts
+            }
+
+            if (refreshTabsMask and TAB_CONTACTS != 0) {
+                findViewById<MyViewPagerFragment<*>>(R.id.contacts_fragment)?.apply {
+                    skipHashComparing = true
+                    refreshContacts(contacts)
+                }
+            }
+
+            if (refreshTabsMask and TAB_FAVORITES != 0) {
+                findViewById<MyViewPagerFragment<*>>(R.id.favorites_fragment)?.apply {
+                    skipHashComparing = true
+                    refreshContacts(contacts)
+                }
+            }
+
+            if (refreshTabsMask and TAB_GROUPS != 0) {
+                findViewById<MyViewPagerFragment<*>>(R.id.groups_fragment)?.apply {
+                    if (refreshTabsMask == TAB_GROUPS) {
+                        skipHashComparing = true
+                    }
+                    refreshContacts(contacts)
+                }
+            }
+
+            if (binding.mainMenu.isSearchOpen) {
+                getCurrentFragment()?.onSearchQueryChanged(binding.mainMenu.getCurrentQuery())
+            }
+        }
+    }
 
     override fun contactClicked(contact: Contact) {
         handleGenericContactClick(contact)
