@@ -458,7 +458,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
             // Add the link
             CoroutineScope(Dispatchers.IO).launch {
                 val link = SocialLink(
-                    contactLookupKey = contact.contactId.toString(), // Simplified, should check if we use lookup key or ID
+                    contactLookupKey = contact.id.toString(), // Using .id as per SocialImportDialog fix
                     platform = platform,
                     username = username
                 )
@@ -507,12 +507,12 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         binding.mainTabsHolder.beGoneIf(binding.mainTabsHolder.tabCount == 1)
     }
 
-    private fun getTabIcon(index: Int): android.graphics.drawable.Drawable? {
+    override fun getTabIcon(index: Int): android.graphics.drawable.Drawable? {
         val iconId = getSelectedTabDrawableIds()[index]
         return resources.getColoredDrawableWithColor(iconId, getProperPrimaryColor())
     }
 
-    private fun getTabLabel(index: Int): String {
+    override fun getTabLabel(index: Int): String {
         val showTabs = config.showTabs
         val labels = ArrayList<String>()
         if (showTabs and TAB_CONTACTS != 0) labels.add(getString(org.fossify.commons.R.string.contacts))

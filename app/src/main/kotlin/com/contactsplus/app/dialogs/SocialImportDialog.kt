@@ -59,27 +59,28 @@ class SocialImportDialog(val activity: SimpleActivity, val callback: () -> Unit)
             val importer = SocialMediaImporter(activity)
             val matches = importer.parseBackup(uri)
             
-            val contacts = ContactsHelper(activity).getContactsSync()
-            val finalMatches = ArrayList<PotentialMatch>()
-            
-            matches.forEach { match ->
-                val contact = contacts.find { it.getNameToDisplay().equals(match.name, ignoreCase = true) }
-                if (contact != null) {
-                    finalMatches.add(match)
+            ContactsHelper(activity).getContacts { contacts ->
+                val finalMatches = ArrayList<PotentialMatch>()
+                
+                matches.forEach { match ->
+                    val contact = contacts.find { it.getNameToDisplay().equals(match.name, ignoreCase = true) }
+                    if (contact != null) {
+                        finalMatches.add(match)
+                    }
                 }
-            }
-            
-            potentialMatches = finalMatches
-            selectedMatches.addAll(finalMatches)
+                
+                potentialMatches = finalMatches
+                selectedMatches.addAll(finalMatches)
 
-            withContext(Dispatchers.Main) {
-                if (potentialMatches.isEmpty()) {
-                    activity.toast("No matching contacts found in backup.")
-                } else {
-                    binding.importSocialList.visibility = android.view.View.VISIBLE
-                    binding.importSocialList.layoutManager = LinearLayoutManager(activity)
-                    binding.importSocialList.adapter = MatchesAdapter()
-                    activity.toast("Found ${potentialMatches.size} matches.")
+                activity.runOnUiThread {
+                    if (potentialMatches.isEmpty()) {
+                        activity.toast("No matching contacts found in backup.")
+                    } else {
+                        binding.importSocialList.visibility = android.view.View.VISIBLE
+                        binding.importSocialList.layoutManager = LinearLayoutManager(activity)
+                        binding.importSocialList.adapter = MatchesAdapter()
+                        activity.toast("Found ${potentialMatches.size} matches.")
+                    }
                 }
             }
         }
@@ -87,23 +88,26 @@ class SocialImportDialog(val activity: SimpleActivity, val callback: () -> Unit)
 
     private fun importSelected() {
         CoroutineScope(Dispatchers.IO).launch {
-            val contacts = ContactsHelper(activity).getContactsSync()
-            var count = 0
-            selectedMatches.forEach { match ->
-                val contact = contacts.find { it.getNameToDisplay().equals(match.name, ignoreCase = true) }
-                if (contact != null) {
-                    val link = SocialLink(
-                        contactLookupKey = contact.contactId.toString(),
-                        platform = match.platform,
-                        username = match.username
-                    )
-                    SocialLinksDatabase.getInstance(activity).socialLinkDao().insert(link)
-                    count++
+            ContactsHelper(activity).getContacts { contacts ->
+                var count = 0
+                selectedMatches.forEach { match ->
+                    val contact = contacts.find { it.getNameToDisplay().equals(match.name, ignoreCase = true) }
+                    if (contact != null) {
+                        val link = SocialLink(
+                            contactLookupKey = contact.id.toString(),
+                            platform = match.platform,
+                            username = match.username
+                        )
+                        CoroutineScope(Dispatchers.IO).launch {
+                            SocialLinksDatabase.getInstance(activity).socialLinkDao().insert(link)
+                        }
+                        count++
+                    }
                 }
-            }
-            withContext(Dispatchers.Main) {
-                activity.toast("Imported $count links.")
-                callback()
+                activity.runOnUiThread {
+                    activity.toast("Imported $count links.")
+                    callback()
+                }
             }
         }
     }
