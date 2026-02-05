@@ -60,7 +60,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
     override var isSearchBarEnabled = true
 
-    private val binding by viewBinding(ActivityMainBinding::inflate)
+    private lateinit var binding: ActivityMainBinding
 
     companion object {
         private const val PICK_CONTACT_FOR_SOCIAL_LINK = 1001
@@ -71,6 +71,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // appLaunched(BuildConfig.APPLICATION_ID)
         // setupOptionsMenu()
