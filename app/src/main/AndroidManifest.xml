@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    package="com.contactsplus.app"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -47,7 +48,7 @@
     </queries>
 
     <application
-        android:name=".App"
+        android:name="android.app.Application"
         android:allowBackup="true"
         android:appCategory="social"
         android:icon="@mipmap/ic_launcher"
@@ -264,6 +265,7 @@
         <provider
             android:name=".contentproviders.MyContactsContentProvider"
             android:authorities="com.contactsplus.contactsprovider"
+            android:enabled="false"
             android:exported="true" />
 
         <activity-alias

@@ -3,6 +3,8 @@
     <!-- Main App Theme with Material 3 overlay -->
     <style name="AppTheme" parent="Theme.ContactsPlus.Material3" />
 
+    <style name="AppTheme.Base" parent="Theme.Material3.DayNight.NoActionBar" />
+
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
@@ -40,6 +42,15 @@
         <item name="chipEndPadding">12dp</item>
         <item name="chipIconSize">20dp</item>
         <item name="android:textAppearance">@style/TextAppearance.ContactsPlus.LabelLarge</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/md_theme_background</item>
+    </style>
+
+    <style name="TranslucentTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
 </resources>

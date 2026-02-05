@@ -72,16 +72,16 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        appLaunched(BuildConfig.APPLICATION_ID)
-        setupOptionsMenu()
-        refreshMenuItems()
-        setupEdgeToEdge(
-            padBottomImeAndSystem = listOf(binding.mainTabsHolder),
-        )
-        storeStateVariables()
-        setupTabs()
-        checkContactPermissions()
-        checkWhatsNewDialog()
+        // appLaunched(BuildConfig.APPLICATION_ID)
+        // setupOptionsMenu()
+        // refreshMenuItems()
+        // setupEdgeToEdge(
+        //    padBottomImeAndSystem = listOf(binding.mainTabsHolder),
+        // )
+        // storeStateVariables()
+        // setupTabs()
+        // checkContactPermissions()
+        // checkWhatsNewDialog()
     }
 
     private fun checkContactPermissions() {
