@@ -507,18 +507,24 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         binding.mainTabsHolder.beGoneIf(binding.mainTabsHolder.tabCount == 1)
     }
 
-    override fun getTabIcon(index: Int): android.graphics.drawable.Drawable? {
-        val iconId = getSelectedTabDrawableIds()[index]
-        return resources.getColoredDrawableWithColor(iconId, getProperPrimaryColor())
+    override fun getTabIcon(index: Int): android.graphics.drawable.Drawable {
+        val drawableId = when (tabsList[index]) {
+            TAB_CONTACTS -> org.fossify.commons.R.drawable.ic_person_vector
+            TAB_FAVORITES -> org.fossify.commons.R.drawable.ic_star_vector
+            else -> org.fossify.commons.R.drawable.ic_people_vector
+        }
+
+        return resources.getColoredDrawableWithColor(drawableId, getProperPrimaryColor())
     }
 
     override fun getTabLabel(index: Int): String {
-        val showTabs = config.showTabs
-        val labels = ArrayList<String>()
-        if (showTabs and TAB_CONTACTS != 0) labels.add(getString(org.fossify.commons.R.string.contacts))
-        if (showTabs and TAB_FAVORITES != 0) labels.add(getString(org.fossify.commons.R.string.favorites))
-        if (showTabs and TAB_GROUPS != 0) labels.add(getString(org.fossify.commons.R.string.groups))
-        return labels[index]
+        val stringId = when (tabsList[index]) {
+            TAB_CONTACTS -> org.fossify.commons.R.string.contacts_tab
+            TAB_FAVORITES -> org.fossify.commons.R.string.favorites_tab
+            else -> org.fossify.commons.R.string.groups_tab
+        }
+
+        return getString(stringId)
     }
 
     private fun showSortingDialog(showCustomSorting: Boolean) {

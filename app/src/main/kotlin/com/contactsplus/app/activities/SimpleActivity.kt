@@ -65,7 +65,7 @@ open class SimpleActivity : BaseSimpleActivity() {
         }
     }
 
-    protected fun getTabIcon(position: Int): Drawable {
+    open fun getTabIcon(position: Int): Drawable {
         val drawableId = when (position) {
             LOCATION_CONTACTS_TAB -> org.fossify.commons.R.drawable.ic_person_vector
             LOCATION_FAVORITES_TAB -> org.fossify.commons.R.drawable.ic_star_vector
@@ -75,7 +75,7 @@ open class SimpleActivity : BaseSimpleActivity() {
         return resources.getColoredDrawableWithColor(drawableId, getProperTextColor())
     }
 
-    protected fun getTabLabel(position: Int): String {
+    open fun getTabLabel(position: Int): String {
         val stringId = when (position) {
             LOCATION_CONTACTS_TAB -> org.fossify.commons.R.string.contacts_tab
             LOCATION_FAVORITES_TAB -> org.fossify.commons.R.string.favorites_tab
