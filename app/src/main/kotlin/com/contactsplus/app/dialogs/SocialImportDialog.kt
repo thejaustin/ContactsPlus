@@ -39,16 +39,17 @@ class SocialImportDialog(val activity: SimpleActivity, val callback: () -> Unit)
             activity.startActivityForResult(intent, PICK_JSON_FILE)
         }
 
-        dialog = AlertDialog.Builder(activity)
+        val builder = AlertDialog.Builder(activity)
             .setPositiveButton(org.fossify.commons.R.string.ok, null)
             .setNegativeButton(org.fossify.commons.R.string.cancel, null)
-            .create().apply {
-                activity.setupDialogStuff(binding.root, this)
-                getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                    importSelected()
-                    dismiss()
-                }
+
+        activity.setupDialogStuff(binding.root, builder) { alertDialog ->
+            dialog = alertDialog
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                importSelected()
+                alertDialog.dismiss()
             }
+        }
     }
 
     private var potentialMatches = ArrayList<PotentialMatch>()
