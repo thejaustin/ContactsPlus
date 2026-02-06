@@ -356,7 +356,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_numbers_holder"
-                android:layout_toEndOf="@+id/contact_name_image"
+                android:layout_toEndOf="@+id/contact_emails_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
 
@@ -365,7 +365,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_emails_holder"
-                android:layout_toEndOf="@+id/contact_name_image"
+                android:layout_toEndOf="@+id/contact_addresses_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
 
@@ -374,7 +374,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_addresses_holder"
-                android:layout_toEndOf="@+id/contact_name_image"
+                android:layout_toEndOf="@+id/contact_ims_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
 
@@ -383,7 +383,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_ims_holder"
-                android:layout_toEndOf="@+id/contact_name_image"
+                android:layout_toEndOf="@+id/contact_events_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
 
@@ -392,7 +392,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_organization_job_position"
-                android:layout_toEndOf="@+id/contact_name_image"
+                android:layout_toEndOf="@+id/contact_websites_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
 
@@ -401,7 +401,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_websites_holder"
-                android:layout_toEndOf="@+id/contact_name_image"
+                android:layout_toEndOf="@+id/contact_groups_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
 
@@ -410,7 +410,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_groups_holder"
-                android:layout_toEndOf="@+id/contact_name_image"
+                android:layout_toEndOf="@+id/contact_social_links_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
 
@@ -419,7 +419,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_social_links_holder"
-                android:layout_toEndOf="@+id/contact_name_image"
+                android:layout_toEndOf="@+id/contact_source_image"
                 android:orientation="vertical"
                 android:visibility="gone" />
 
