@@ -45,6 +45,7 @@
     <!-- Photo -->
     <string name="remove_photo">Remove photo</string>
     <string name="change_photo">Change photo</string>
+    <string name="manage_social_links">Manage social links</string>
 
     <!-- Settings -->
     <string name="show_phone_numbers">Show phone numbers</string>

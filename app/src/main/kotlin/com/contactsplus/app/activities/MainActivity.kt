@@ -101,7 +101,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
     override fun onResume() {
         super.onResume()
         if (storedShowPhoneNumbers != config.showPhoneNumbers) {
-            System.exit(0)
+            recreate()
             return
         }
 
@@ -592,26 +592,20 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
                 return@getContacts
             }
 
-            if (refreshTabsMask and TAB_CONTACTS != 0) {
-                findViewById<MyViewPagerFragment<*>>(R.id.contacts_fragment)?.apply {
-                    skipHashComparing = true
-                    refreshContacts(contacts)
-                }
-            }
+            val fragmentsToUpdate = listOf(
+                Triple(TAB_CONTACTS, R.id.contacts_fragment, true),
+                Triple(TAB_FAVORITES, R.id.favorites_fragment, true),
+                Triple(TAB_GROUPS, R.id.groups_fragment, refreshTabsMask == TAB_GROUPS)
+            )
 
-            if (refreshTabsMask and TAB_FAVORITES != 0) {
-                findViewById<MyViewPagerFragment<*>>(R.id.favorites_fragment)?.apply {
-                    skipHashComparing = true
-                    refreshContacts(contacts)
-                }
-            }
-
-            if (refreshTabsMask and TAB_GROUPS != 0) {
-                findViewById<MyViewPagerFragment<*>>(R.id.groups_fragment)?.apply {
-                    if (refreshTabsMask == TAB_GROUPS) {
-                        skipHashComparing = true
+            fragmentsToUpdate.forEach { (mask, fragmentId, shouldSkipHash) ->
+                if (refreshTabsMask and mask != 0) {
+                    findViewById<MyViewPagerFragment<*>>(fragmentId)?.apply {
+                        if (shouldSkipHash) {
+                            skipHashComparing = true
+                        }
+                        refreshContacts(contacts)
                     }
-                    refreshContacts(contacts)
                 }
             }
 

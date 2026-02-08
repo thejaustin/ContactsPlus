@@ -627,27 +627,54 @@ class ViewContactActivity : ContactActivity() {
 
             withContext(Dispatchers.Main) {
                 if (socialLinks.isNotEmpty()) {
+                    val count = socialLinks.size
+                    val isCompact = count >= 4
+
                     socialLinks.forEach { socialLink ->
-                        ItemViewSocialLinkBinding.inflate(layoutInflater, binding.contactSocialLinksHolder, false).apply {
-                            binding.contactSocialLinksHolder.addView(root)
-
-                            socialLinkIcon.setImageResource(socialLink.platform.iconRes)
-                            socialLinkUsername.text = socialLink.username
-                            socialLinkPlatform.text = socialLink.getDisplayLabel()
-
-                            root.setOnClickListener {
-                                DeeplinkLauncher.getInstance(this@ViewContactActivity).launch(socialLink)
-                            }
-
-                            socialLinkOpen.setOnClickListener {
-                                DeeplinkLauncher.getInstance(this@ViewContactActivity).launch(socialLink)
-                            }
-
-                            root.setOnLongClickListener {
-                                showManageSocialLinksDialog()
-                                true
-                            }
+                        val view = if (isCompact) {
+                            layoutInflater.inflate(R.layout.item_view_social_link_icon_only, binding.contactSocialLinksHolder, false)
+                        } else {
+                            layoutInflater.inflate(R.layout.item_view_social_link, binding.contactSocialLinksHolder, false)
                         }
+
+                        val layoutParams = view.layoutParams as com.google.android.flexbox.FlexboxLayout.LayoutParams
+                        
+                        val margin = resources.getDimensionPixelSize(R.dimen.spacing_xs)
+                        layoutParams.setMargins(0, 0, margin, margin)
+
+                        if (count == 2 || (count == 3 && !isCompact)) {
+                            layoutParams.flexGrow = 1f
+                            layoutParams.width = 0 // Let flexGrow handle width
+                        } else {
+                            layoutParams.flexGrow = 0f
+                            layoutParams.width = com.google.android.flexbox.FlexboxLayout.LayoutParams.WRAP_CONTENT
+                        }
+                        view.layoutParams = layoutParams
+
+                        if (isCompact) {
+                            val iconView = view.findViewById<ImageView>(R.id.social_link_icon)
+                            iconView.setImageResource(socialLink.platform.iconRes)
+                            view.contentDescription = "${socialLink.platform.displayName}: ${socialLink.username}"
+                        } else {
+                            val iconView = view.findViewById<ImageView>(R.id.social_link_icon)
+                            val usernameView = view.findViewById<org.fossify.commons.views.MyTextView>(R.id.social_link_username)
+                            val platformView = view.findViewById<org.fossify.commons.views.MyTextView>(R.id.social_link_platform)
+                            
+                            iconView.setImageResource(socialLink.platform.iconRes)
+                            usernameView.text = socialLink.username
+                            platformView.text = socialLink.getDisplayLabel()
+                        }
+
+                        view.setOnClickListener {
+                            DeeplinkLauncher.getInstance(this@ViewContactActivity).launch(socialLink)
+                        }
+
+                        view.setOnLongClickListener {
+                            showManageSocialLinksDialog()
+                            true
+                        }
+                        
+                        binding.contactSocialLinksHolder.addView(view)
                     }
                     binding.contactSocialLinksImage.beVisible()
                     binding.contactSocialLinksHolder.beVisible()

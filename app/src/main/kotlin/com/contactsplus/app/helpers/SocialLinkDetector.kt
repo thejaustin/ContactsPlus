@@ -59,10 +59,10 @@ object SocialLinkDetector {
 
     // IM type to social platform mapping
     private val IM_TYPE_MAPPING = mapOf(
-        "Telegram" to SocialPlatform.TELEGRAM,
-        "WhatsApp" to SocialPlatform.WHATSAPP,
-        "Skype" to SocialPlatform.DISCORD, // Closest match
-        "Signal" to SocialPlatform.SIGNAL
+        IM_TELEGRAM to SocialPlatform.TELEGRAM,
+        IM_WHATSAPP to SocialPlatform.WHATSAPP,
+        IM_SKYPE to SocialPlatform.DISCORD, // Closest match
+        IM_SIGNAL to SocialPlatform.SIGNAL
     )
 
     // Keywords that suggest a specific platform when found near a username
@@ -125,7 +125,7 @@ object SocialLinkDetector {
                         platform = platform,
                         username = username,
                         source = "website",
-                        confidence = 1.0f
+                        confidence = CONFIDENCE_EXACT
                     )
                 }
             }
@@ -150,7 +150,7 @@ object SocialLinkDetector {
                         platform = platform,
                         username = username,
                         source = "notes",
-                        confidence = 1.0f
+                        confidence = CONFIDENCE_EXACT
                     ))
                 }
             }
@@ -166,13 +166,13 @@ object SocialLinkDetector {
 
             // Try to determine platform from context
             var detectedPlatform: SocialPlatform? = null
-            var maxConfidence = 0.5f
+            var maxConfidence = CONFIDENCE_LOW
 
             for ((platform, keywords) in PLATFORM_KEYWORDS) {
                 for (keyword in keywords) {
                     if (context.contains(keyword)) {
                         detectedPlatform = platform
-                        maxConfidence = 0.8f
+                        maxConfidence = CONFIDENCE_MEDIUM
                         break
                     }
                 }
@@ -182,7 +182,7 @@ object SocialLinkDetector {
             // If no platform detected from context, suggest Instagram as most common
             if (detectedPlatform == null) {
                 detectedPlatform = SocialPlatform.INSTAGRAM
-                maxConfidence = 0.4f
+                maxConfidence = CONFIDENCE_WEAK
             }
 
             detectedLinks.add(DetectedLink(
@@ -209,7 +209,7 @@ object SocialLinkDetector {
                     platform = platform,
                     username = im.value,
                     source = "im",
-                    confidence = 0.9f
+                    confidence = CONFIDENCE_HIGH
                 )
             }
         }

@@ -27,11 +27,11 @@ android {
     compileSdk = project.libs.versions.app.build.compileSDKVersion.get().toInt()
 
     defaultConfig {
-        applicationId = project.property("APP_ID").toString()
-        minSdk = project.libs.versions.app.build.minimumSDK.get().toInt()
-        targetSdk = project.libs.versions.app.build.targetSDK.get().toInt()
-        versionName = project.property("VERSION_NAME").toString()
-        versionCode = project.property("VERSION_CODE").toString().toInt()
+        applicationId = libs.versions.app.build.id.get()
+        minSdk = libs.versions.app.build.minimumSDK.get().toInt()
+        targetSdk = libs.versions.app.build.targetSDK.get().toInt()
+        versionName = libs.versions.app.build.versionName.get()
+        versionCode = libs.versions.app.build.versionCode.get().toInt()
         setProperty("archivesBaseName", "contacts-plus-$versionCode")
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
@@ -112,7 +112,7 @@ android {
         )
     }
 
-    namespace = project.property("APP_ID").toString()
+    namespace = libs.versions.app.build.id.get()
 
     lint {
         checkReleaseBuilds = false
@@ -145,6 +145,11 @@ dependencies {
     implementation(libs.ezvcard)
     implementation(libs.indicatorfastscroll)
     implementation(libs.bundles.room)
+    implementation(libs.flexbox)
     ksp(libs.androidx.room.compiler)
-    detektPlugins(libs.compose.detekt)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.runner)
 }

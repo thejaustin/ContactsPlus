@@ -59,6 +59,18 @@ const val VIBER = "viber"
 const val TELEGRAM = "telegram"
 const val THREEMA = "threema"
 
+// IM Labels (Capitalized for display/matching)
+const val IM_TELEGRAM = "Telegram"
+const val IM_WHATSAPP = "WhatsApp"
+const val IM_SKYPE = "Skype"
+const val IM_SIGNAL = "Signal"
+
+// Social Link Detection Confidence
+const val CONFIDENCE_EXACT = 1.0f
+const val CONFIDENCE_HIGH = 0.9f
+const val CONFIDENCE_MEDIUM = 0.8f
+const val CONFIDENCE_LOW = 0.5f
+const val CONFIDENCE_WEAK = 0.4f
 
 // 6 am is the hardcoded automatic backup time, intervals shorter than 1 day are not yet supported.
 fun getNextAutoBackupTime(): DateTime {

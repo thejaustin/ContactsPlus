@@ -271,7 +271,7 @@
             android:name=".contentproviders.MyContactsContentProvider"
             android:authorities="com.contactsplus.contactsprovider"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity-alias
             android:name=".activities.SplashActivity.Red"

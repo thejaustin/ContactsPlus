@@ -306,7 +306,8 @@ class EditContactActivity : ContactActivity() {
             binding.contactOrganizationImage,
             binding.contactWebsitesImage,
             binding.contactGroupsImage,
-            binding.contactSourceImage
+            binding.contactSourceImage,
+            binding.contactSocialLinksImage
         ).forEach {
             it.applyColorFilter(textColor)
         }
@@ -342,6 +343,7 @@ class EditContactActivity : ContactActivity() {
         binding.contactWebsitesAddNew.setOnClickListener { addNewWebsiteField() }
         binding.contactGroupsAddNew.setOnClickListener { showSelectGroupsDialog() }
         binding.contactSource.setOnClickListener { showSelectContactSourceDialog() }
+        binding.contactManage_social_links.setOnClickListener { showManageSocialLinksDialog() }
 
         binding.contactChangePhoto.setOnLongClickListener { toast(R.string.change_photo); true; }
 
@@ -1158,6 +1160,13 @@ class EditContactActivity : ContactActivity() {
             getPublicContactSource(it) {
                 binding.contactSource.text = if (it == "") getString(R.string.phone_storage) else it
             }
+        }
+    }
+
+    private fun showManageSocialLinksDialog() {
+        val contactId = contact?.id?.toString() ?: return
+        com.contactsplus.app.dialogs.ManageSocialLinksDialog(this, contactId, contact) {
+            // No need to refresh anything here as links are in a separate DB
         }
     }
 

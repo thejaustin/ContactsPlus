@@ -206,10 +206,38 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/contact_social_links_image"
+                android:layout_width="@dimen/contact_icons_size"
+                android:layout_height="@dimen/contact_icons_size"
+                android:layout_below="@+id/contact_numbers_holder"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:contentDescription="@null"
+                android:paddingTop="@dimen/medium_margin"
+                android:paddingEnd="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:src="@drawable/ic_social_link"
+                app:tint="@color/md_theme_primary" />
+
+            <org.fossify.commons.views.MyTextView
+                android:id="@+id/contact_manage_social_links"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contact_numbers_holder"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/activity_margin"
+                android:layout_toEndOf="@+id/contact_social_links_image"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/contact_icons_size"
+                android:text="@string/manage_social_links"
+                android:textSize="@dimen/bigger_text_size" />
+
+            <ImageView
                 android:id="@+id/contact_numbers_add_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/contact_numbers_holder"
+                android:layout_below="@+id/contact_manage_social_links"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:background="@drawable/button_background"

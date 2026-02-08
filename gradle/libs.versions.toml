@@ -1,11 +1,10 @@
 [versions]
 #jetbrains
-kotlin = "2.3.0"
+kotlin = "2.1.0"
 #KSP
-ksp = "2.3.5"
+ksp = "2.1.0-1.0.29"
 #Detekt
 detekt = "1.23.8"
-detektCompose = "0.4.28"
 #Material
 material = "1.12.0"
 #AndroidX
@@ -18,12 +17,20 @@ ezvcard = "0.12.1"
 #IndicatorFastScroll
 indicatorfastscroll = "4524cd0b61"
 #Room
-room = "2.8.4"
+room = "2.6.1"
 #Fossify
 commons = "6.1.0"
 #Gradle
-gradlePlugins-agp = "8.11.1"
+gradlePlugins-agp = "8.7.3"
+#Tests
+junit = "4.13.2"
+ext-junit = "1.2.1"
+espresso-core = "3.6.1"
+runner = "1.6.1"
 #build
+app-build-id = "com.contactsplus.app"
+app-build-versionName = "1.1.0"
+app-build-versionCode = "2"
 app-build-compileSDKVersion = "36"
 app-build-targetSDK = "36"
 app-build-minimumSDK = "26"
@@ -43,12 +50,17 @@ indicatorfastscroll = { module = "org.fossify:IndicatorFastScroll", version.ref 
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-#Compose
-compose-detekt = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektCompose" }
 #Fossify
 fossify-commons = { module = "org.fossify:commons", version.ref = "commons" }
 #Material
 google-material = { module = "com.google.android.material:material", version.ref = "material" }
+#Tests
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "ext-junit" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
+#Flexbox
+flexbox = { module = "com.google.android.flexbox:flexbox", version = "3.0.0" }
 [bundles]
 room = [
     "androidx-room-ktx",
