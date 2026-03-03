@@ -50,7 +50,7 @@ jobs:
         run: ./gradlew assembleFossRelease --no-daemon
 
       - name: Upload Release APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: contacts-plus-release
           path: app/build/outputs/apk/foss/release/*.apk
