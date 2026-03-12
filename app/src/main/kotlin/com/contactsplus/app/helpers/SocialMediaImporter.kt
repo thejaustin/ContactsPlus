@@ -65,7 +65,7 @@ class SocialMediaImporter(private val context: Context) {
                         match.name.contains(it.getNameToDisplay(), ignoreCase = true) ||
                         (match.username.isNotEmpty() && it.getNameToDisplay().contains(match.username, ignoreCase = true)) ||
                         (match.email?.isNotEmpty() == true && it.emails.any { e -> e.value.equals(match.email, ignoreCase = true) }) ||
-                        (match.phoneNumber?.isNotEmpty() == true && it.phoneNumbers.any { p -> p.normalizedValue == match.phoneNumber || p.value == match.phoneNumber })
+                        (match.phoneNumber?.isNotEmpty() == true && it.phoneNumbers.any { p -> p.normalizedNumber == match.phoneNumber || p.value == match.phoneNumber })
                     }
                     if (contact != null) {
                         match.suggestedContactLookupKey = contact.id.toString()
@@ -128,7 +128,7 @@ class SocialMediaImporter(private val context: Context) {
 
             // Facebook: friends.json or your_address_book.json
             if (json.has("friends")) {
-                val friends = json.getJSONArray(friends)
+                val friends = json.getJSONArray("friends")
                 for (i in 0 until friends.length()) {
                     val friend = friends.getJSONObject(i)
                     if (friend.has("name")) {
