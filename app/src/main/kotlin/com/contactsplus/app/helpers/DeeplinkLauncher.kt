@@ -123,6 +123,7 @@ class DeeplinkLauncher(private val context: Context) {
     }
 
     companion object {
+        @android.annotation.SuppressLint("StaticFieldLeak")
         @Volatile
         private var instance: DeeplinkLauncher? = null
 
