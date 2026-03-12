@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/import_social"
-        android:title="Import Social Links"
+        android:title="@string/import_social_contacts"
         app:showAsAction="never" />
     <item
         android:id="@+id/filter"

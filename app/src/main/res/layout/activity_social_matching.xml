@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/android"
+    android:id="@+id/social_matching_holder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_background">
+
+    <org.fossify.commons.views.MyToolbar
+        android:id="@+id/social_matching_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/md_theme_surface" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/social_matching_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/social_matching_actions"
+        android:layout_below="@+id/social_matching_toolbar"
+        android:paddingStart="@dimen/spacing_lg"
+        android:paddingEnd="@dimen/spacing_lg"
+        android:clipToPadding="false"
+        android:clipChildren="false" />
+
+    <LinearLayout
+        android:id="@+id/social_matching_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_lg">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/social_matching_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_lg"
+            android:src="@org.fossify.commons.R.drawable.ic_cross_vector"
+            app:backgroundTint="@color/md_theme_error"
+            app:tint="@color/md_theme_onError"
+            app:fabSize="normal" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/social_matching_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@org.fossify.commons.R.drawable.ic_search_vector"
+            app:backgroundTint="@color/md_theme_secondary"
+            app:tint="@color/md_theme_onSecondary"
+            app:fabSize="mini" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/social_matching_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_lg"
+            android:src="@org.fossify.commons.R.drawable.ic_check_vector"
+            app:backgroundTint="@color/action_call"
+            app:tint="@color/md_theme_onPrimary"
+            app:fabSize="normal" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/social_matching_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/social_matching_toolbar"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0"
+        android:visibility="gone" />
+
+</RelativeLayout>

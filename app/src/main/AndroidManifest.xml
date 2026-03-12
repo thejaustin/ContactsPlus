@@ -114,6 +114,13 @@
             android:parentActivityName=".activities.MainActivity" />
 
         <activity
+            android:name=".activities.SocialMatchingActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:label="@string/social_matching"
+            android:parentActivityName=".activities.MainActivity" />
+
+        <activity
             android:name=".activities.ViewContactActivity"
             android:configChanges="orientation"
             android:exported="true"

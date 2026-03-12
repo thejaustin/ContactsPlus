@@ -64,7 +64,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
 
     companion object {
         private const val PICK_CONTACT_FOR_SOCIAL_LINK = 1001
-        private const val PICK_JSON_FILE = 1002
+        private const val PICK_SOCIAL_FILE = 1002
         var pendingSocialPlatform: SocialPlatform? = null
         var pendingSocialUsername: String? = null
     }
@@ -469,7 +469,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
                     pendingSocialUsername = null
                 }
             }
-        } else if (requestCode == PICK_JSON_FILE && resultCode == RESULT_OK && data != null) {
+        } else if (requestCode == PICK_SOCIAL_FILE && resultCode == RESULT_OK && data != null) {
              val uri = data.data ?: return
              socialImportDialog?.handleFileResult(uri)
         }

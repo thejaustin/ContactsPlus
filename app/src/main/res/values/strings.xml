@@ -134,6 +134,20 @@
     <string name="from_notes">From notes</string>
     <string name="from_websites">From websites</string>
     <string name="from_messaging">From messaging apps</string>
+
+    <!-- Social Matching -->
+    <string name="social_matching">Social Matching</string>
+    <string name="matches_with">Matches with?</string>
+    <string name="skip">Skip</string>
+    <string name="match">Match</string>
+    <string name="manual_search">Manual Search</string>
+    <string name="no_matches_found">No matches found in the export file.</string>
+    <string name="matching_complete">Matching complete!</string>
+    <string name="confirmed_matches">Confirmed %d matches.</string>
+    <string name="swipe_to_match">Swipe right to match, left to skip</string>
+    <string name="select_match_for">Select match for %s</string>
+    <string name="pick_json_or_zip">Pick a JSON or ZIP export file</string>
+    <string name="import_social_contacts">Import social contacts</string>
     <!--
         Haven't found some strings? There's more at
         https://github.com/FossifyOrg/Commons/tree/master/commons/src/main/res
