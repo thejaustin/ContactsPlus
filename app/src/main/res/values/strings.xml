@@ -148,6 +148,9 @@
     <string name="select_match_for">Select match for %s</string>
     <string name="pick_json_or_zip">Pick a JSON or ZIP export file</string>
     <string name="import_social_contacts">Import social contacts</string>
+    <string name="chat">Chat</string>
+    <string name="connected_on">Connected on %s</string>
+    <string name="show_social_attribution">Show social attribution</string>
     <!--
         Haven't found some strings? There's more at
         https://github.com/FossifyOrg/Commons/tree/master/commons/src/main/res

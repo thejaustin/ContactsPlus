@@ -647,7 +647,7 @@ class ViewContactActivity : ContactActivity() {
                     val count = socialLinks.size
                     val isCompact = count >= 4
 
-                    socialLinks.forEach { socialLink ->
+                    socialLinks.forEach { socialLink: com.contactsplus.app.models.SocialLink ->
                         val view = if (isCompact) {
                             layoutInflater.inflate(R.layout.item_view_social_link_icon_only, binding.contactSocialLinksHolder, false)
                         } else {
