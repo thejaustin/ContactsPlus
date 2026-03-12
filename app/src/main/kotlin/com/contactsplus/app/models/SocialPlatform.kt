@@ -7,35 +7,45 @@ enum class SocialPlatform(
     val iconRes: Int,
     val deeplinkTemplate: String,
     val webUrlTemplate: String,
-    val packageName: String
+    val packageName: String,
+    val chatDeeplinkTemplate: String? = null,
+    val chatWebUrlTemplate: String? = null
 ) {
     INSTAGRAM(
         displayName = "Instagram",
         iconRes = R.drawable.ic_instagram,
         deeplinkTemplate = "instagram://user?username={username}",
         webUrlTemplate = "https://instagram.com/{username}",
-        packageName = "com.instagram.android"
+        packageName = "com.instagram.android",
+        chatDeeplinkTemplate = "instagram://direct_share?username={username}",
+        chatWebUrlTemplate = "https://instagram.com/direct/inbox/"
     ),
     SNAPCHAT(
         displayName = "Snapchat",
         iconRes = R.drawable.ic_snapchat,
         deeplinkTemplate = "snapchat://add/{username}",
         webUrlTemplate = "https://snapchat.com/add/{username}",
-        packageName = "com.snapchat.android"
+        packageName = "com.snapchat.android",
+        chatDeeplinkTemplate = "snapchat://chat/{username}",
+        chatWebUrlTemplate = "https://snapchat.com/add/{username}"
     ),
     WHATSAPP(
         displayName = "WhatsApp",
         iconRes = R.drawable.ic_whatsapp,
         deeplinkTemplate = "https://wa.me/{username}",
         webUrlTemplate = "https://wa.me/{username}",
-        packageName = "com.whatsapp"
+        packageName = "com.whatsapp",
+        chatDeeplinkTemplate = "https://wa.me/{username}",
+        chatWebUrlTemplate = "https://wa.me/{username}"
     ),
     TELEGRAM(
         displayName = "Telegram",
         iconRes = R.drawable.ic_telegram,
         deeplinkTemplate = "tg://resolve?domain={username}",
         webUrlTemplate = "https://t.me/{username}",
-        packageName = "org.telegram.messenger"
+        packageName = "org.telegram.messenger",
+        chatDeeplinkTemplate = "tg://resolve?domain={username}",
+        chatWebUrlTemplate = "https://t.me/{username}"
     ),
     DISCORD(
         displayName = "Discord",
@@ -77,7 +87,9 @@ enum class SocialPlatform(
         iconRes = R.drawable.ic_messenger,
         deeplinkTemplate = "fb-messenger://user/{username}",
         webUrlTemplate = "https://m.me/{username}",
-        packageName = "com.facebook.orca"
+        packageName = "com.facebook.orca",
+        chatDeeplinkTemplate = "fb-messenger://user/{username}",
+        chatWebUrlTemplate = "https://m.me/{username}"
     ),
     THREADS(
         displayName = "Threads",
@@ -96,6 +108,9 @@ enum class SocialPlatform(
 
     fun buildDeeplink(username: String): String = deeplinkTemplate.replace("{username}", username)
     fun buildWebUrl(username: String): String = webUrlTemplate.replace("{username}", username)
+
+    fun buildChatDeeplink(username: String): String? = chatDeeplinkTemplate?.replace("{username}", username)
+    fun buildChatWebUrl(username: String): String? = chatWebUrlTemplate?.replace("{username}", username)
 
     companion object {
         fun fromDisplayName(name: String): SocialPlatform? {

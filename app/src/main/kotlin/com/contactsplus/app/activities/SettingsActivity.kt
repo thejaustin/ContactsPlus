@@ -58,6 +58,7 @@ class SettingsActivity : SimpleActivity() {
         setupShowCallConfirmation()
         setupShowDialpadButton()
         setupShowPrivateContacts()
+        setupShowSocialAttribution()
         setupOnContactClick()
         setupDefaultTab()
         setupEnableAutomaticBackups()
@@ -211,6 +212,14 @@ class SettingsActivity : SimpleActivity() {
         binding.settingsShowPrivateContactsHolder.setOnClickListener {
             binding.settingsShowPrivateContacts.toggle()
             config.showPrivateContacts = binding.settingsShowPrivateContacts.isChecked
+        }
+    }
+
+    private fun setupShowSocialAttribution() {
+        binding.settingsShowSocialAttribution.isChecked = config.showSocialAttribution
+        binding.settingsShowSocialAttributionHolder.setOnClickListener {
+            binding.settingsShowSocialAttribution.toggle()
+            config.showSocialAttribution = binding.settingsShowSocialAttribution.isChecked
         }
     }
 

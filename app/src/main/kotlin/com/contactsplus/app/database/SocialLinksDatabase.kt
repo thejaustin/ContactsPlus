@@ -10,7 +10,7 @@ import com.contactsplus.app.models.SocialPlatformConverter
 
 @Database(
     entities = [SocialLink::class],
-    version = 1,
+    version = 3,
     exportSchema = true
 )
 @TypeConverters(SocialPlatformConverter::class)

@@ -44,6 +44,35 @@ class DeeplinkLauncher(private val context: Context) {
         launchWebUrl(webUrl)
     }
 
+    fun launchChat(platform: SocialPlatform, username: String) {
+        val deeplink = platform.buildChatDeeplink(username)
+        val webUrl = platform.buildChatWebUrl(username)
+
+        if (deeplink == null && webUrl == null) {
+            launch(platform, username)
+            return
+        }
+
+        if (isAppInstalled(platform.packageName) && deeplink != null) {
+            try {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(deeplink)).apply {
+                    setPackage(platform.packageName)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                context.startActivity(intent)
+                return
+            } catch (e: Exception) {
+                // Fall through
+            }
+        }
+
+        if (webUrl != null) {
+            launchWebUrl(webUrl)
+        } else {
+            launch(platform, username)
+        }
+    }
+
     fun launchInstagram(username: String) = launch(SocialPlatform.INSTAGRAM, username)
     fun launchSnapchat(username: String) = launch(SocialPlatform.SNAPCHAT, username)
     fun launchWhatsApp(phoneNumber: String) = launch(SocialPlatform.WHATSAPP, phoneNumber)

@@ -18,4 +18,8 @@ class Config(context: Context) : BaseConfig(context) {
         set(autoBackupContactSources) = prefs.edit().remove(AUTO_BACKUP_CONTACT_SOURCES).putStringSet(AUTO_BACKUP_CONTACT_SOURCES, autoBackupContactSources)
             .apply()
 
+    var showSocialAttribution: Boolean
+        get() = prefs.getBoolean(SHOW_SOCIAL_ATTRIBUTION, false)
+        set(showSocialAttribution) = prefs.edit().putBoolean(SHOW_SOCIAL_ATTRIBUTION, showSocialAttribution).apply()
+
 }
