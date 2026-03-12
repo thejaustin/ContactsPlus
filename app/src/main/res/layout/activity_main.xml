@@ -59,9 +59,7 @@
             app:tabSelectedTextColor="@color/md_theme_primary"
             app:tabTextColor="@color/md_theme_onSurfaceVariant"
             app:tabIconTint="@color/bottom_nav_item_color"
-            app:tabRippleColor="@color/md_theme_primary"
-            app:tabIconMinWidth="24dp"
-            app:tabIconMinHeight="24dp" />
+            app:tabRippleColor="@color/md_theme_primary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

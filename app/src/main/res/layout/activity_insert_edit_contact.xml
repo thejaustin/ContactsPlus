@@ -77,9 +77,7 @@
             android:layout_alignParentBottom="true"
             app:tabIndicator="@null"
             app:tabMinWidth="150dp"
-            app:tabRippleColor="@null"
-            app:tabIconMinWidth="24dp"
-            app:tabIconMinHeight="24dp" />
+            app:tabRippleColor="@null" />
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
