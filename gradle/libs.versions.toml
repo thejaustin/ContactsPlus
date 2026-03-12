@@ -1,8 +1,8 @@
 [versions]
 #jetbrains
-kotlin = "2.3.10"
+kotlin = "2.1.0"
 #KSP
-ksp = "2.3.6"
+ksp = "2.1.0-1.0.29"
 #Detekt
 detekt = "1.23.8"
 #Material
@@ -17,7 +17,7 @@ ezvcard = "0.12.1"
 #IndicatorFastScroll
 indicatorfastscroll = "4524cd0b61"
 #Room
-room = "2.8.4"
+room = "2.6.1"
 #Fossify
 commons = "6.1.0"
 #Gradle
