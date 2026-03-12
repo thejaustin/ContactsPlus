@@ -39,6 +39,7 @@ class SettingsActivity : SimpleActivity() {
         setupMaterialScrollListener(binding.settingsNestedScrollview, binding.settingsAppbar)
     }
 
+    @android.annotation.SuppressLint("NewApi")
     override fun onResume() {
         super.onResume()
         setupTopAppBar(binding.settingsAppbar, NavigationIcon.Arrow)
