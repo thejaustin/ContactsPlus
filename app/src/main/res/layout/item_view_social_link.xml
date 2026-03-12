@@ -66,7 +66,7 @@
                 android:layout_marginTop="@dimen/spacing_xs"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textAppearance="@style/TextAppearance.ContactsPlus.LabelSmall"
+                android:textAppearance="@style/TextAppearance.ContactsPlus.LabelMedium"
                 android:textColor="@color/md_theme_primary"
                 android:visibility="gone"
                 tools:text="Snapchat Export"
@@ -89,7 +89,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/send_sms_to_contacts"
                 android:padding="@dimen/spacing_sm"
-                android:src="@drawable/ic_messenger_vector"
+                android:src="@drawable/ic_messenger"
                 android:visibility="gone"
                 app:tint="@color/md_theme_primary"
                 tools:visibility="visible" />
