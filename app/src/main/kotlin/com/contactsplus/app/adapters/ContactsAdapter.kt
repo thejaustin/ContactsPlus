@@ -406,7 +406,7 @@ class ContactsAdapter(
             if (viewType != VIEW_TYPE_GRID) {
                 minimumHeight = resources.getDimensionPixelSize(R.dimen.list_item_height_two_line)
             }
-            setBackgroundResource(org.fossify.commons.R.drawable.selector_clickable_background)
+            setBackgroundResource(0)
 
             if (findViewById<TextView>(org.fossify.commons.R.id.item_contact_number) != null) {
                 val phoneNumberToUse = if (textToHighlight.isEmpty()) {

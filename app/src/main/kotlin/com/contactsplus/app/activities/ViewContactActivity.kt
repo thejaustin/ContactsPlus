@@ -11,6 +11,7 @@ import android.provider.ContactsContract
 import android.view.View
 import android.view.WindowManager
 import android.widget.RelativeLayout
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.FitCenter
@@ -46,6 +47,7 @@ class ViewContactActivity : ContactActivity() {
     private var showFields = 0
     private var fullContact: Contact? = null    // contact with all fields filled from duplicates
     private var duplicateInitialized = false
+    private var showSocialAttributionLocal = false
     private val mergeDuplicate: Boolean get() = config.mergeDuplicateContacts
     private val binding by viewBinding(ActivityViewContactBinding::inflate)
 
@@ -60,6 +62,7 @@ class ViewContactActivity : ContactActivity() {
         setupEdgeToEdge(padBottomSystem = listOf(binding.contactScrollview))
 
         showFields = config.showContactFields
+        showSocialAttributionLocal = config.showSocialAttribution
         setupMenu()
     }
 
@@ -132,6 +135,16 @@ class ViewContactActivity : ContactActivity() {
             findItem(R.id.manage_social_links).setOnMenuItemClickListener {
                 showManageSocialLinksDialog()
                 true
+            }
+
+            findItem(R.id.show_social_attribution).apply {
+                isChecked = showSocialAttributionLocal
+                setOnMenuItemClickListener {
+                    showSocialAttributionLocal = !showSocialAttributionLocal
+                    isChecked = showSocialAttributionLocal
+                    setupSocialLinks()
+                    true
+                }
             }
         }
 
@@ -621,9 +634,13 @@ class ViewContactActivity : ContactActivity() {
         val contactId = contact?.id?.toString() ?: return
 
         CoroutineScope(Dispatchers.IO).launch {
-            val socialLinks = SocialLinksDatabase.getInstance(this@ViewContactActivity)
+            val allSocialLinks = SocialLinksDatabase.getInstance(this@ViewContactActivity)
                 .socialLinkDao()
                 .getLinksForContact(contactId)
+
+            // Group by platform and username to avoid duplicates, prioritize the one with attribution
+            val socialLinks = allSocialLinks.groupBy { it.platform.name + it.username }
+                .map { (_, links) -> links.firstOrNull { it.attribution != null } ?: links.first() }
 
             withContext(Dispatchers.Main) {
                 if (socialLinks.isNotEmpty()) {
@@ -659,10 +676,34 @@ class ViewContactActivity : ContactActivity() {
                             val iconView = view.findViewById<ImageView>(R.id.social_link_icon)
                             val usernameView = view.findViewById<org.fossify.commons.views.MyTextView>(R.id.social_link_username)
                             val platformView = view.findViewById<org.fossify.commons.views.MyTextView>(R.id.social_link_platform)
+                            val attributionView = view.findViewById<org.fossify.commons.views.MyTextView>(R.id.social_link_attribution)
+                            val chatButton = view.findViewById<ImageView>(R.id.social_link_chat)
                             
                             iconView.setImageResource(socialLink.platform.iconRes)
                             usernameView.text = socialLink.username
                             platformView.text = socialLink.getDisplayLabel()
+
+                            if (socialLink.attribution?.isNotEmpty() == true && showSocialAttributionLocal) {
+                                attributionView.beVisible()
+                                var attrText = socialLink.attribution
+                                val date = socialLink.getFormattedConnectionDate()
+                                if (date != null) {
+                                    attrText += " • " + getString(R.string.connected_on, date)
+                                }
+                                attributionView.text = attrText
+                            } else {
+                                attributionView.beGone()
+                            }
+
+                            if (socialLink.platform.chatDeeplinkTemplate != null) {
+                                chatButton.beVisible()
+                                chatButton.setOnClickListener {
+                                    DeeplinkLauncher.getInstance(this@ViewContactActivity).launchChat(socialLink.platform, socialLink.username)
+                                }
+                                chatButton.contentDescription = getString(R.string.chat)
+                            } else {
+                                chatButton.beGone()
+                            }
                         }
 
                         view.setOnClickListener {

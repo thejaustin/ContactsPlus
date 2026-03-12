@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import android.widget.ImageView
+import org.fossify.commons.views.MyToolbar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.contactsplus.app.R
@@ -33,7 +35,8 @@ class SocialMatchingActivity : SimpleActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySocialMatchingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupToolbar(binding.socialMatchingToolbar, R.string.social_matching)
+        binding.socialMatchingToolbar.title = getString(R.string.social_matching)
+        binding.socialMatchingToolbar.setNavigationOnClickListener { finish() }
 
         matches = intent.getParcelableArrayListExtra<PotentialMatch>("matches") ?: arrayListOf()
         if (matches.isEmpty()) {
@@ -143,10 +146,19 @@ class SocialMatchingActivity : SimpleActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val dao = SocialLinksDatabase.getInstance(this@SocialMatchingActivity).socialLinkDao()
             confirmedMatches.forEach { match ->
+                val attribution = if (match.isCloseFriend) {
+                    "${match.platform.displayName} Close Friends"
+                } else {
+                    "${match.platform.displayName} Export"
+                }
+
                 val link = SocialLink(
                     contactLookupKey = match.suggestedContactLookupKey!!,
                     platform = match.platform,
-                    username = match.username
+                    username = match.username,
+                    attribution = attribution,
+                    connectedAt = match.connectionTimestamp,
+                    isCloseFriend = match.isCloseFriend
                 )
                 dao.insert(link)
 

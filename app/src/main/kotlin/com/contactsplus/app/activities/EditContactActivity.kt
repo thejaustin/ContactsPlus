@@ -343,7 +343,7 @@ class EditContactActivity : ContactActivity() {
         binding.contactWebsitesAddNew.setOnClickListener { addNewWebsiteField() }
         binding.contactGroupsAddNew.setOnClickListener { showSelectGroupsDialog() }
         binding.contactSource.setOnClickListener { showSelectContactSourceDialog() }
-        binding.contactManage_social_links.setOnClickListener { showManageSocialLinksDialog() }
+        binding.contactManageSocialLinks.setOnClickListener { showManageSocialLinksDialog() }
 
         binding.contactChangePhoto.setOnLongClickListener { toast(R.string.change_photo); true; }
 
