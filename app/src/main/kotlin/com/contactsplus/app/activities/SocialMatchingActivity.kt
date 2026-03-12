@@ -21,6 +21,8 @@ import kotlinx.coroutines.launch
 import org.fossify.commons.extensions.beGone
 import org.fossify.commons.extensions.beVisible
 import org.fossify.commons.extensions.toast
+import org.fossify.commons.helpers.ContactsHelper
+import org.fossify.commons.helpers.PHOTO_UNCHANGED
 
 class SocialMatchingActivity : SimpleActivity() {
     private lateinit var binding: ActivitySocialMatchingBinding
