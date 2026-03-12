@@ -6,9 +6,9 @@ import java.io.FileInputStream
 plugins {
     alias(libs.plugins.android)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinParcelize)
     alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
-    id("kotlin-parcelize")
 }
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
