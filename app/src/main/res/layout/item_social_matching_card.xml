@@ -73,7 +73,7 @@
                 android:layout_height="@dimen/avatar_size_lg"
                 android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
-                tools:src="@org.fossify.commons.R.drawable.ic_person_vector" />
+                tools:src="@drawable/ic_person_vector" />
 
             <TextView
                 android:id="@+id/card_contact_name"
