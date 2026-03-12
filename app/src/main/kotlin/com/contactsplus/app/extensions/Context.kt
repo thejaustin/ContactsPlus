@@ -149,6 +149,7 @@ fun Context.backupContacts() {
     }
 }
 
+@android.annotation.SuppressLint("Recycle")
 fun Context.copyUriToTempFile(uri: Uri, name: String): File? {
     val tempFile = getTempFile(name)
     contentResolver.openInputStream(uri)?.use { input ->
