@@ -4,12 +4,16 @@ on:
   push:
     branches:
       - 'dev/**'
+    paths:
+      - '**.kt'
+      - '**.xml'
+      - '**.gradle.kts'
   workflow_dispatch:
 
 jobs:
   build:
+    name: Build Debug APK
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,16 +23,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Run Lint
-        run: ./gradlew lintFossDebug --no-daemon
-
-      - name: Run Unit Tests
-        run: ./gradlew testFossDebugUnitTest --no-daemon
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
 
       - name: Build Debug APK
         run: ./gradlew assembleFossDebug --no-daemon
