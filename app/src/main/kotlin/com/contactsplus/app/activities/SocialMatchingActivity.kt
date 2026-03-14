@@ -165,8 +165,9 @@ class SocialMatchingActivity : SimpleActivity() {
                 if (match.birthday != null) {
                     val contact = ContactsHelper(this@SocialMatchingActivity).getContactWithId(match.suggestedContactLookupKey!!.toInt(), false)
                     if (contact != null) {
-                        val birthdayEvent = org.fossify.commons.models.contacts.Event(match.birthday!!, android.provider.ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY)
-                        if (contact.events.none { it.type == android.provider.ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY }) {
+                        val birthdayType = android.provider.ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY.toString()
+                        val birthdayEvent = org.fossify.commons.models.contacts.Event(match.birthday!!, birthdayType)
+                        if (contact.events.none { it.type == birthdayType }) {
                             contact.events.add(birthdayEvent)
                             ContactsHelper(this@SocialMatchingActivity).updateContact(contact, org.fossify.commons.helpers.PHOTO_UNCHANGED)
                         }
