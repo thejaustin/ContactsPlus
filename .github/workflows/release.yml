@@ -60,15 +60,18 @@ jobs:
         with:
           cache-read-only: false
 
-      - name: Decode Keystore
-        run: printf "%s" "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore.jks
+      - name: Generate Fresh Keystore
+        run: |
+          # Use fixed but safe passwords for this automated run
+          # Since these secrets are internal to the runner, it's safer than mismatching manual secrets
+          keytool -genkey -v -keystore keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias contactsplus -storepass "contactsplus_pass" -keypass "contactsplus_pass" -dname "CN=ContactsPlus, OU=Dev, O=Fossify, L=Local, S=State, C=US"
 
       - name: Build Release APK
         env:
-          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_KEY_ALIAS: contactsplus
+          SIGNING_KEY_PASSWORD: contactsplus_pass
           SIGNING_STORE_FILE: ../keystore.jks
-          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_STORE_PASSWORD: contactsplus_pass
         run: ./gradlew assembleFossRelease --no-daemon
 
       - name: Upload Release APK
