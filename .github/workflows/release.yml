@@ -45,9 +45,6 @@ jobs:
   build:
     name: Build & Release
     runs-on: ubuntu-latest
-    # Wait for validation to pass before creating a release, 
-    # but they run in parallel if you remove this 'needs'
-    # needs: validation 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -64,14 +61,13 @@ jobs:
           cache-read-only: false
 
       - name: Decode Keystore
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | tr -d '\n ' | base64 -d > ${{ github.workspace }}/keystore.jks
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore.jks
 
       - name: Build Release APK
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-          SIGNING_STORE_FILE: ${{ github.workspace }}/keystore.jks
+          SIGNING_STORE_FILE: ../keystore.jks
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         run: ./gradlew assembleFossRelease --no-daemon
 
