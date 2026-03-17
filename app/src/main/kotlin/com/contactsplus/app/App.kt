@@ -139,12 +139,12 @@ class App : FossifyApp() {
         try {
             val writer = StringWriter()
             throwable.printStackTrace(PrintWriter(writer))
-            
+
             Sentry.captureException(throwable) { scope ->
-                scope.setLevel(SentryLevel.FATAL)
+                scope.level = SentryLevel.FATAL
                 scope.setTag("thread_name", thread.name)
                 scope.setTag("thread_id", thread.id.toString())
-                scope.setContext("stack_trace", writer.toString())
+                scope.setContexts("stack_trace", writer.toString())
             }
             
             // Give Sentry time to send the event
@@ -181,7 +181,7 @@ class App : FossifyApp() {
      */
     fun captureError(throwable: Throwable, context: String? = null) {
         Sentry.captureException(throwable) { scope ->
-            scope.setLevel(SentryLevel.ERROR)
+            scope.level = SentryLevel.ERROR
             if (context != null) {
                 scope.setTag("error_context", context)
             }
@@ -193,10 +193,10 @@ class App : FossifyApp() {
      */
     fun trackUiGlitch(glitchType: String, details: String) {
         Sentry.captureMessage("UI Glitch: $glitchType") { scope ->
-            scope.setLevel(SentryLevel.WARNING)
+            scope.level = SentryLevel.WARNING
             scope.setTag("glitch_type", glitchType)
             scope.setTag("glitch_details", details)
-            scope.setContext("ui_state", getCurrentUiState())
+            scope.setContexts("ui_state", getCurrentUiState())
         }
     }
 
@@ -206,7 +206,7 @@ class App : FossifyApp() {
     fun trackSlowOperation(operation: String, durationMs: Long, thresholdMs: Long = 1000) {
         if (durationMs > thresholdMs) {
             Sentry.captureMessage("Slow Operation: $operation") { scope ->
-                scope.setLevel(SentryLevel.WARNING)
+                scope.level = SentryLevel.WARNING
                 scope.setTag("operation", operation)
                 scope.setData("duration_ms", durationMs)
                 scope.setData("threshold_ms", thresholdMs)
