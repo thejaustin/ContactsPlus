@@ -1,16 +1,16 @@
 [versions]
 #jetbrains
-kotlin = "2.3.0"
-#KSP
-ksp = "2.3.6"
-#Sentry
+kotlin = "1.9.22"
+# KSP
+ksp = "1.9.22-1.0.17"
+# Sentry
 sentry = "6.0.0"
 sentry-android = "7.20.1"
-#Detekt
+# Detekt
 detekt = "1.23.8"
-#Material
+# Material
 material = "1.12.0"
-#AndroidX
+# AndroidX
 androidx-swiperefreshlayout = "1.2.0"
 androidx-dynamicanimation = "1.0.0-alpha03"
 #AutoFitTextView
