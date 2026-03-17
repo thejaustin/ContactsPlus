@@ -35,6 +35,7 @@ import com.contactsplus.app.activities.ViewContactActivity
 import com.contactsplus.app.dialogs.ImportContactsDialog
 import com.contactsplus.app.helpers.DEFAULT_FILE_NAME
 import com.contactsplus.app.helpers.VcfExporter
+import com.contactsplus.app.extensions.config
 
 import android.view.View
 import org.fossify.commons.databinding.BottomTablayoutItemBinding
