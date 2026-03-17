@@ -6,6 +6,7 @@ package com.contactsplus.app
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import io.sentry.Sentry
 import io.sentry.SentryLevel
 import org.fossify.commons.FossifyApp
@@ -15,14 +16,19 @@ class App : FossifyApp() {
         super.onCreate()
         instance = this
 
-        // Minimal Sentry initialization for testing
-        Sentry.init { options ->
-            options.dsn = "https://1d0e5d7cd0f38cf3bca2cf7fd76aa98c@o4510887187841024.ingest.us.sentry.io/4511058249318400"
-            options.environment = BuildConfig.BUILD_TYPE
-            options.tracesSampleRate = 0.5
+        // Minimal Sentry initialization for testing - wrapped in try-catch to prevent startup crashes
+        try {
+            Sentry.init { options ->
+                options.dsn = "https://1d0e5d7cd0f38cf3bca2cf7fd76aa98c@o4510887187841024.ingest.us.sentry.io/4511058249318400"
+                options.environment = BuildConfig.BUILD_TYPE
+                options.tracesSampleRate = 0.5
+                // Disable async processing during init to avoid blocking startup
+                options.isEnableAutoSessionTracking = false
+            }
+            setupCrashTracking()
+        } catch (e: Exception) {
+            Log.e("App", "Sentry initialization failed", e)
         }
-
-        setupCrashTracking()
     }
 
     private fun setupCrashTracking() {
@@ -45,6 +51,7 @@ class App : FossifyApp() {
     }
 
     companion object {
+        private const val TAG = "App"
         lateinit var instance: App
             private set
     }
