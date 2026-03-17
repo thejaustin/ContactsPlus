@@ -14,10 +14,13 @@ plugins {
 
 sentry {
     includeProguardMapping.set(true)
-    autoUploadProguardMapping.set(true)
+    autoUploadProguardMapping.set(false)
     uploadNativeSymbols.set(false)
     includeNativeSources.set(false)
     ignoredBuildTypes.set(setOf("debug"))
+    autoInstallation {
+        enabled.set(false)
+    }
 }
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
