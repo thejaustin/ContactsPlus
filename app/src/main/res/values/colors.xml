@@ -114,4 +114,9 @@
     <color name="social_messenger">#0084FF</color>
     <color name="social_threads">#000000</color>
     <color name="social_signal">#3A76F0</color>
+
+    <!-- Legacy/Upstream Color Mappings -->
+    <color name="color_primary">@color/md_theme_primary</color>
+    <color name="divider_grey">#55808080</color>
+    <color name="theme_dark_background_color">#161616</color>
 </resources>
