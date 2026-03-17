@@ -1,0 +1,204 @@
+build	UNKNOWN STEP	﻿2026-03-12T16:05:05.0504997Z Current runner version: '2.332.0'
+build	UNKNOWN STEP	2026-03-12T16:05:05.0539805Z ##[group]Runner Image Provisioner
+build	UNKNOWN STEP	2026-03-12T16:05:05.0541051Z Hosted Compute Agent
+build	UNKNOWN STEP	2026-03-12T16:05:05.0542070Z Version: 20260213.493
+build	UNKNOWN STEP	2026-03-12T16:05:05.0543037Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+build	UNKNOWN STEP	2026-03-12T16:05:05.0544436Z Build Date: 2026-02-13T00:28:41Z
+build	UNKNOWN STEP	2026-03-12T16:05:05.0545612Z Worker ID: {3687c665-21cc-467c-a450-5f470085b329}
+build	UNKNOWN STEP	2026-03-12T16:05:05.0546773Z Azure Region: eastus2
+build	UNKNOWN STEP	2026-03-12T16:05:05.0547650Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:05.0549660Z ##[group]Operating System
+build	UNKNOWN STEP	2026-03-12T16:05:05.0550700Z Ubuntu
+build	UNKNOWN STEP	2026-03-12T16:05:05.0551427Z 24.04.3
+build	UNKNOWN STEP	2026-03-12T16:05:05.0552307Z LTS
+build	UNKNOWN STEP	2026-03-12T16:05:05.0553102Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:05.0554122Z ##[group]Runner Image
+build	UNKNOWN STEP	2026-03-12T16:05:05.0555740Z Image: ubuntu-24.04
+build	UNKNOWN STEP	2026-03-12T16:05:05.0556595Z Version: 20260309.50.1
+build	UNKNOWN STEP	2026-03-12T16:05:05.0558567Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260309.50/images/ubuntu/Ubuntu2404-Readme.md
+build	UNKNOWN STEP	2026-03-12T16:05:05.0561110Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260309.50
+build	UNKNOWN STEP	2026-03-12T16:05:05.0562795Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:05.0564636Z ##[group]GITHUB_TOKEN Permissions
+build	UNKNOWN STEP	2026-03-12T16:05:05.0567530Z Contents: write
+build	UNKNOWN STEP	2026-03-12T16:05:05.0568485Z Metadata: read
+build	UNKNOWN STEP	2026-03-12T16:05:05.0569340Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:05.0572381Z Secret source: Actions
+build	UNKNOWN STEP	2026-03-12T16:05:05.0574013Z Prepare workflow directory
+build	UNKNOWN STEP	2026-03-12T16:05:05.1018797Z Prepare all required actions
+build	UNKNOWN STEP	2026-03-12T16:05:05.1073455Z Getting action download info
+build	UNKNOWN STEP	2026-03-12T16:05:05.5012473Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+build	UNKNOWN STEP	2026-03-12T16:05:05.6694581Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+build	UNKNOWN STEP	2026-03-12T16:05:06.0796520Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build	UNKNOWN STEP	2026-03-12T16:05:06.2036309Z Download action repository 'softprops/action-gh-release@v1' (SHA:de2c0eb89ae2a093876385947365aca7b0e5f844)
+build	UNKNOWN STEP	2026-03-12T16:05:06.6031650Z Complete job name: build
+build	UNKNOWN STEP	2026-03-12T16:05:06.6904333Z ##[group]Run actions/checkout@v4
+build	UNKNOWN STEP	2026-03-12T16:05:06.6905635Z with:
+build	UNKNOWN STEP	2026-03-12T16:05:06.6906438Z   repository: thejaustin/ContactsPlus
+build	UNKNOWN STEP	2026-03-12T16:05:06.6907758Z   token: ***
+build	UNKNOWN STEP	2026-03-12T16:05:06.6908513Z   ssh-strict: true
+build	UNKNOWN STEP	2026-03-12T16:05:06.6909372Z   ssh-user: git
+build	UNKNOWN STEP	2026-03-12T16:05:06.6910203Z   persist-credentials: true
+build	UNKNOWN STEP	2026-03-12T16:05:06.6911111Z   clean: true
+build	UNKNOWN STEP	2026-03-12T16:05:06.6911935Z   sparse-checkout-cone-mode: true
+build	UNKNOWN STEP	2026-03-12T16:05:06.6912930Z   fetch-depth: 1
+build	UNKNOWN STEP	2026-03-12T16:05:06.6913889Z   fetch-tags: false
+build	UNKNOWN STEP	2026-03-12T16:05:06.6914699Z   show-progress: true
+build	UNKNOWN STEP	2026-03-12T16:05:06.6915518Z   lfs: false
+build	UNKNOWN STEP	2026-03-12T16:05:06.6916267Z   submodules: false
+build	UNKNOWN STEP	2026-03-12T16:05:06.6917105Z   set-safe-directory: true
+build	UNKNOWN STEP	2026-03-12T16:05:06.6918197Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:06.8057684Z Syncing repository: thejaustin/ContactsPlus
+build	UNKNOWN STEP	2026-03-12T16:05:06.8061092Z ##[group]Getting Git version info
+build	UNKNOWN STEP	2026-03-12T16:05:06.8062977Z Working directory is '/home/runner/work/ContactsPlus/ContactsPlus'
+build	UNKNOWN STEP	2026-03-12T16:05:06.8065442Z [command]/usr/bin/git version
+build	UNKNOWN STEP	2026-03-12T16:05:06.8108176Z git version 2.53.0
+build	UNKNOWN STEP	2026-03-12T16:05:06.8134716Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:06.8148408Z Temporarily overriding HOME='/home/runner/work/_temp/a5b0ac56-f674-4a83-8593-4a9359be45a8' before making global git config changes
+build	UNKNOWN STEP	2026-03-12T16:05:06.8151170Z Adding repository directory to the temporary git global config as a safe directory
+build	UNKNOWN STEP	2026-03-12T16:05:06.8162192Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ContactsPlus/ContactsPlus
+build	UNKNOWN STEP	2026-03-12T16:05:06.8204702Z Deleting the contents of '/home/runner/work/ContactsPlus/ContactsPlus'
+build	UNKNOWN STEP	2026-03-12T16:05:06.8208448Z ##[group]Initializing the repository
+build	UNKNOWN STEP	2026-03-12T16:05:06.8212389Z [command]/usr/bin/git init /home/runner/work/ContactsPlus/ContactsPlus
+build	UNKNOWN STEP	2026-03-12T16:05:06.8301276Z hint: Using 'master' as the name for the initial branch. This default branch name
+build	UNKNOWN STEP	2026-03-12T16:05:06.8305044Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+build	UNKNOWN STEP	2026-03-12T16:05:06.8307646Z hint: to use in all of your new repositories, which will suppress this warning,
+build	UNKNOWN STEP	2026-03-12T16:05:06.8309262Z hint: call:
+build	UNKNOWN STEP	2026-03-12T16:05:06.8310142Z hint:
+build	UNKNOWN STEP	2026-03-12T16:05:06.8311617Z hint: 	git config --global init.defaultBranch <name>
+build	UNKNOWN STEP	2026-03-12T16:05:06.8313762Z hint:
+build	UNKNOWN STEP	2026-03-12T16:05:06.8315166Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build	UNKNOWN STEP	2026-03-12T16:05:06.8317489Z hint: 'development'. The just-created branch can be renamed via this command:
+build	UNKNOWN STEP	2026-03-12T16:05:06.8319141Z hint:
+build	UNKNOWN STEP	2026-03-12T16:05:06.8320043Z hint: 	git branch -m <name>
+build	UNKNOWN STEP	2026-03-12T16:05:06.8321028Z hint:
+build	UNKNOWN STEP	2026-03-12T16:05:06.8322639Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build	UNKNOWN STEP	2026-03-12T16:05:06.8325016Z Initialized empty Git repository in /home/runner/work/ContactsPlus/ContactsPlus/.git/
+build	UNKNOWN STEP	2026-03-12T16:05:06.8328560Z [command]/usr/bin/git remote add origin https://github.com/thejaustin/ContactsPlus
+build	UNKNOWN STEP	2026-03-12T16:05:06.8356961Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:06.8358523Z ##[group]Disabling automatic garbage collection
+build	UNKNOWN STEP	2026-03-12T16:05:06.8360322Z [command]/usr/bin/git config --local gc.auto 0
+build	UNKNOWN STEP	2026-03-12T16:05:06.8392109Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:06.8393845Z ##[group]Setting up auth
+build	UNKNOWN STEP	2026-03-12T16:05:06.8397956Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	UNKNOWN STEP	2026-03-12T16:05:06.8431763Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	UNKNOWN STEP	2026-03-12T16:05:06.8793080Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	UNKNOWN STEP	2026-03-12T16:05:06.8828311Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	UNKNOWN STEP	2026-03-12T16:05:06.9091051Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	UNKNOWN STEP	2026-03-12T16:05:06.9135275Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	UNKNOWN STEP	2026-03-12T16:05:06.9410224Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	UNKNOWN STEP	2026-03-12T16:05:06.9453152Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:06.9456031Z ##[group]Fetching the repository
+build	UNKNOWN STEP	2026-03-12T16:05:06.9465520Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +296ef497d073718e6a8f48171c6afad9ffcaca7b:refs/remotes/origin/main
+build	UNKNOWN STEP	2026-03-12T16:05:07.2607948Z From https://github.com/thejaustin/ContactsPlus
+build	UNKNOWN STEP	2026-03-12T16:05:07.2609789Z  * [new ref]         296ef497d073718e6a8f48171c6afad9ffcaca7b -> origin/main
+build	UNKNOWN STEP	2026-03-12T16:05:07.2645172Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:07.2647337Z ##[group]Determining the checkout info
+build	UNKNOWN STEP	2026-03-12T16:05:07.2649314Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:07.2652412Z [command]/usr/bin/git sparse-checkout disable
+build	UNKNOWN STEP	2026-03-12T16:05:07.2700000Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+build	UNKNOWN STEP	2026-03-12T16:05:07.2731873Z ##[group]Checking out the ref
+build	UNKNOWN STEP	2026-03-12T16:05:07.2735971Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+build	UNKNOWN STEP	2026-03-12T16:05:07.3214889Z Switched to a new branch 'main'
+build	UNKNOWN STEP	2026-03-12T16:05:07.3216825Z branch 'main' set up to track 'origin/main'.
+build	UNKNOWN STEP	2026-03-12T16:05:07.3226968Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:07.3267280Z [command]/usr/bin/git log -1 --format=%H
+build	UNKNOWN STEP	2026-03-12T16:05:07.3294552Z 296ef497d073718e6a8f48171c6afad9ffcaca7b
+build	UNKNOWN STEP	2026-03-12T16:05:07.3717062Z ##[group]Run actions/setup-java@v4
+build	UNKNOWN STEP	2026-03-12T16:05:07.3718031Z with:
+build	UNKNOWN STEP	2026-03-12T16:05:07.3718746Z   java-version: 17
+build	UNKNOWN STEP	2026-03-12T16:05:07.3719523Z   distribution: temurin
+build	UNKNOWN STEP	2026-03-12T16:05:07.3720323Z   cache: gradle
+build	UNKNOWN STEP	2026-03-12T16:05:07.3721062Z   java-package: jdk
+build	UNKNOWN STEP	2026-03-12T16:05:07.3722077Z   check-latest: false
+build	UNKNOWN STEP	2026-03-12T16:05:07.3722876Z   server-id: github
+build	UNKNOWN STEP	2026-03-12T16:05:07.3723940Z   server-username: GITHUB_ACTOR
+build	UNKNOWN STEP	2026-03-12T16:05:07.3724896Z   server-password: GITHUB_TOKEN
+build	UNKNOWN STEP	2026-03-12T16:05:07.3725818Z   overwrite-settings: true
+build	UNKNOWN STEP	2026-03-12T16:05:07.3726676Z   job-status: success
+build	UNKNOWN STEP	2026-03-12T16:05:07.3727706Z   token: ***
+build	UNKNOWN STEP	2026-03-12T16:05:07.3728431Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:07.5817320Z ##[group]Installed distributions
+build	UNKNOWN STEP	2026-03-12T16:05:07.6367139Z Resolved Java 17.0.18+8 from tool-cache
+build	UNKNOWN STEP	2026-03-12T16:05:07.6368901Z Setting Java 17.0.18+8 as the default
+build	UNKNOWN STEP	2026-03-12T16:05:07.6382015Z Creating toolchains.xml for JDK version 17 from temurin
+build	UNKNOWN STEP	2026-03-12T16:05:07.6455370Z Writing to /home/runner/.m2/toolchains.xml
+build	UNKNOWN STEP	2026-03-12T16:05:07.6456502Z 
+build	UNKNOWN STEP	2026-03-12T16:05:07.6456990Z Java configuration:
+build	UNKNOWN STEP	2026-03-12T16:05:07.6458205Z   Distribution: temurin
+build	UNKNOWN STEP	2026-03-12T16:05:07.6459420Z   Version: 17.0.18+8
+build	UNKNOWN STEP	2026-03-12T16:05:07.6461031Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+build	UNKNOWN STEP	2026-03-12T16:05:07.6462486Z 
+build	UNKNOWN STEP	2026-03-12T16:05:07.6464596Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:07.6481496Z Creating settings.xml with server-id: github
+build	UNKNOWN STEP	2026-03-12T16:05:07.6483424Z Writing to /home/runner/.m2/settings.xml
+build	UNKNOWN STEP	2026-03-12T16:05:07.8521754Z gradle cache is not found
+build	UNKNOWN STEP	2026-03-12T16:05:07.8720520Z ##[group]Run chmod +x gradlew
+build	UNKNOWN STEP	2026-03-12T16:05:07.8721599Z [36;1mchmod +x gradlew[0m
+build	UNKNOWN STEP	2026-03-12T16:05:07.8785845Z shell: /usr/bin/bash -e {0}
+build	UNKNOWN STEP	2026-03-12T16:05:07.8786779Z env:
+build	UNKNOWN STEP	2026-03-12T16:05:07.8787854Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+build	UNKNOWN STEP	2026-03-12T16:05:07.8789572Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+build	UNKNOWN STEP	2026-03-12T16:05:07.8790939Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:07.8979866Z ##[group]Run ./gradlew clean lintFossRelease --no-daemon
+build	UNKNOWN STEP	2026-03-12T16:05:07.8981222Z [36;1m./gradlew clean lintFossRelease --no-daemon[0m
+build	UNKNOWN STEP	2026-03-12T16:05:07.9035233Z shell: /usr/bin/bash -e {0}
+build	UNKNOWN STEP	2026-03-12T16:05:07.9036142Z env:
+build	UNKNOWN STEP	2026-03-12T16:05:07.9037193Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+build	UNKNOWN STEP	2026-03-12T16:05:07.9038896Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+build	UNKNOWN STEP	2026-03-12T16:05:07.9040265Z ##[endgroup]
+build	UNKNOWN STEP	2026-03-12T16:05:10.2787872Z Downloading https://services.gradle.org/distributions/gradle-8.13-bin.zip
+build	UNKNOWN STEP	2026-03-12T16:05:13.2824859Z .............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%.............100%
+build	UNKNOWN STEP	2026-03-12T16:05:14.9804874Z 
+build	UNKNOWN STEP	2026-03-12T16:05:14.9806297Z Welcome to Gradle 8.13!
+build	UNKNOWN STEP	2026-03-12T16:05:14.9807133Z 
+build	UNKNOWN STEP	2026-03-12T16:05:14.9809418Z Here are the highlights of this release:
+build	UNKNOWN STEP	2026-03-12T16:05:14.9827112Z  - Daemon JVM auto-provisioning
+build	UNKNOWN STEP	2026-03-12T16:05:14.9830557Z  - Enhancements for Scala plugin and JUnit testing
+build	UNKNOWN STEP	2026-03-12T16:05:14.9831193Z  - Improvements for build authors and plugin developers
+build	UNKNOWN STEP	2026-03-12T16:05:14.9831572Z 
+build	UNKNOWN STEP	2026-03-12T16:05:14.9831933Z For more details see https://docs.gradle.org/8.13/release-notes.html
+build	UNKNOWN STEP	2026-03-12T16:05:15.0801571Z 
+build	UNKNOWN STEP	2026-03-12T16:05:15.0803339Z To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.13/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+build	UNKNOWN STEP	2026-03-12T16:05:16.6799168Z Daemon will be stopped at the end of the build 
+build	UNKNOWN STEP	2026-03-12T16:05:41.1805726Z 
+build	UNKNOWN STEP	2026-03-12T16:05:41.1810770Z FAILURE: Build failed with an exception.
+build	UNKNOWN STEP	2026-03-12T16:05:41.1811716Z 
+build	UNKNOWN STEP	2026-03-12T16:05:41.1812017Z * Where:
+build	UNKNOWN STEP	2026-03-12T16:05:41.1816524Z Build file '/home/runner/work/ContactsPlus/ContactsPlus/build.gradle.kts' line: 1
+build	UNKNOWN STEP	2026-03-12T16:05:41.1817085Z 
+build	UNKNOWN STEP	2026-03-12T16:05:41.1817276Z * What went wrong:
+build	UNKNOWN STEP	2026-03-12T16:05:41.1818172Z Plugin [id: 'com.google.devtools.ksp', version: '2.3.0-1.0.29', apply: false] was not found in any of the following sources:
+build	UNKNOWN STEP	2026-03-12T16:05:41.1818836Z 
+build	UNKNOWN STEP	2026-03-12T16:05:41.1819122Z - Gradle Core Plugins (plugin is not in 'org.gradle' namespace)
+build	UNKNOWN STEP	2026-03-12T16:05:41.1820271Z - Included Builds (No included builds contain this plugin)
+build	UNKNOWN STEP	2026-03-12T16:05:41.1821317Z - Plugin Repositories (could not resolve plugin artifact 'com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.3.0-1.0.29')
+build	UNKNOWN STEP	2026-03-12T16:05:41.1828592Z   Searched in the following repositories:
+build	UNKNOWN STEP	2026-03-12T16:05:41.1829098Z     Gradle Central Plugin Repository
+build	UNKNOWN STEP	2026-03-12T16:05:41.1829518Z     Google
+build	UNKNOWN STEP	2026-03-12T16:05:41.1829866Z     MavenRepo
+build	UNKNOWN STEP	2026-03-12T16:05:41.1830064Z 
+build	UNKNOWN STEP	2026-03-12T16:05:41.1840044Z * Try:
+build	UNKNOWN STEP	2026-03-12T16:05:41.1846329Z > Run with --stacktrace option to get the stack trace.
+build	UNKNOWN STEP	2026-03-12T16:05:41.1852931Z > Run with --info or --debug option to get more log output.
+build	UNKNOWN STEP	2026-03-12T16:05:41.1853807Z > Run with --scan to get full insights.
+build	UNKNOWN STEP	2026-03-12T16:05:41.1854353Z > Get more help at https://help.gradle.org.
+build	UNKNOWN STEP	2026-03-12T16:05:41.1854728Z 
+build	UNKNOWN STEP	2026-03-12T16:05:41.1854870Z BUILD FAILED in 31s
+build	UNKNOWN STEP	2026-03-12T16:05:41.3341843Z ##[error]Process completed with exit code 1.
+build	UNKNOWN STEP	2026-03-12T16:05:41.3497227Z Post job cleanup.
+build	UNKNOWN STEP	2026-03-12T16:05:41.5305635Z Post job cleanup.
+build	UNKNOWN STEP	2026-03-12T16:05:41.6282923Z [command]/usr/bin/git version
+build	UNKNOWN STEP	2026-03-12T16:05:41.6321169Z git version 2.53.0
+build	UNKNOWN STEP	2026-03-12T16:05:41.6365336Z Temporarily overriding HOME='/home/runner/work/_temp/06a094e6-0b4f-4a77-b3b8-acb56e3227cd' before making global git config changes
+build	UNKNOWN STEP	2026-03-12T16:05:41.6367655Z Adding repository directory to the temporary git global config as a safe directory
+build	UNKNOWN STEP	2026-03-12T16:05:41.6371754Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ContactsPlus/ContactsPlus
+build	UNKNOWN STEP	2026-03-12T16:05:41.6415727Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	UNKNOWN STEP	2026-03-12T16:05:41.6451452Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	UNKNOWN STEP	2026-03-12T16:05:41.6714183Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	UNKNOWN STEP	2026-03-12T16:05:41.6738604Z http.https://github.com/.extraheader
+build	UNKNOWN STEP	2026-03-12T16:05:41.6752121Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+build	UNKNOWN STEP	2026-03-12T16:05:41.6785631Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	UNKNOWN STEP	2026-03-12T16:05:41.7043190Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	UNKNOWN STEP	2026-03-12T16:05:41.7077358Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	UNKNOWN STEP	2026-03-12T16:05:41.7450293Z Cleaning up orphan processes
+build	UNKNOWN STEP	2026-03-12T16:05:41.7797720Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup-java@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

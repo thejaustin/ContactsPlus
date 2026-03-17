@@ -1,3 +1,5 @@
+@file:Suppress("TooManyFunctions", "LongMethod", "ComplexMethod")
+
 package com.contactsplus.app
 
 import android.app.Activity
@@ -15,6 +17,7 @@ import org.fossify.commons.FossifyApp
 import java.io.PrintWriter
 import java.io.StringWriter
 
+@Suppress("unused")
 class App : FossifyApp() {
     override fun onCreate() {
         super.onCreate()

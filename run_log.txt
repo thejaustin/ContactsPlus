@@ -1,0 +1,33 @@
+build	Set up job	﻿2026-03-12T15:32:21.2980407Z Current runner version: '2.332.0'
+build	Set up job	2026-03-12T15:32:21.3008993Z ##[group]Runner Image Provisioner
+build	Set up job	2026-03-12T15:32:21.3010047Z Hosted Compute Agent
+build	Set up job	2026-03-12T15:32:21.3010629Z Version: 20260213.493
+build	Set up job	2026-03-12T15:32:21.3011301Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+build	Set up job	2026-03-12T15:32:21.3012495Z Build Date: 2026-02-13T00:28:41Z
+build	Set up job	2026-03-12T15:32:21.3013206Z Worker ID: {627fe47a-4eeb-4bef-8b65-289dbf95cd7f}
+build	Set up job	2026-03-12T15:32:21.3014053Z Azure Region: northcentralus
+build	Set up job	2026-03-12T15:32:21.3014708Z ##[endgroup]
+build	Set up job	2026-03-12T15:32:21.3016280Z ##[group]Operating System
+build	Set up job	2026-03-12T15:32:21.3017012Z Ubuntu
+build	Set up job	2026-03-12T15:32:21.3017583Z 24.04.3
+build	Set up job	2026-03-12T15:32:21.3018156Z LTS
+build	Set up job	2026-03-12T15:32:21.3018746Z ##[endgroup]
+build	Set up job	2026-03-12T15:32:21.3019326Z ##[group]Runner Image
+build	Set up job	2026-03-12T15:32:21.3019904Z Image: ubuntu-24.04
+build	Set up job	2026-03-12T15:32:21.3020976Z Version: 20260302.42.1
+build	Set up job	2026-03-12T15:32:21.3022474Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260302.42/images/ubuntu/Ubuntu2404-Readme.md
+build	Set up job	2026-03-12T15:32:21.3024402Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260302.42
+build	Set up job	2026-03-12T15:32:21.3025383Z ##[endgroup]
+build	Set up job	2026-03-12T15:32:21.3026577Z ##[group]GITHUB_TOKEN Permissions
+build	Set up job	2026-03-12T15:32:21.3028885Z Contents: write
+build	Set up job	2026-03-12T15:32:21.3029583Z Metadata: read
+build	Set up job	2026-03-12T15:32:21.3030198Z ##[endgroup]
+build	Set up job	2026-03-12T15:32:21.3033957Z Secret source: Actions
+build	Set up job	2026-03-12T15:32:21.3035160Z Prepare workflow directory
+build	Set up job	2026-03-12T15:32:21.3384880Z Prepare all required actions
+build	Set up job	2026-03-12T15:32:21.3425831Z Getting action download info
+build	Set up job	2026-03-12T15:32:21.8711328Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+build	Set up job	2026-03-12T15:32:22.0318932Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+build	Set up job	2026-03-12T15:32:22.5706385Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build	Set up job	2026-03-12T15:32:22.6936234Z Download action repository 'softprops/action-gh-release@v1' (SHA:de2c0eb89ae2a093876385947365aca7b0e5f844)
+build	Set up job	2026-03-12T15:32:23.3342158Z Complete job name: build

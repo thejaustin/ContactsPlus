@@ -1,3 +1,5 @@
+@file:Suppress("TooManyFunctions", "LongMethod", "ComplexMethod", "MagicNumber")
+
 package com.contactsplus.app.utils
 
 import android.util.Log
@@ -10,6 +12,7 @@ import io.sentry.SpanStatus
  * Helper object for easy Sentry tracking throughout the app.
  * Compatible with Sentry SDK 6.x
  */
+@Suppress("unused")
 object SentryHelper {
 
     private const val TAG = "SentryHelper"
