@@ -21,6 +21,8 @@ import com.contactsplus.app.databinding.ActivityInsertEditContactBinding
 import com.contactsplus.app.dialogs.ChangeSortingDialog
 import com.contactsplus.app.dialogs.FilterContactSourcesDialog
 import com.contactsplus.app.extensions.config
+import com.contactsplus.app.extensions.updateBottomTabItemColors
+import com.contactsplus.app.extensions.getBottomNavigationBackgroundColor
 import com.contactsplus.app.fragments.MyViewPagerFragment
 import com.contactsplus.app.helpers.ADD_NEW_CONTACT_NUMBER
 import com.contactsplus.app.helpers.KEY_EMAIL

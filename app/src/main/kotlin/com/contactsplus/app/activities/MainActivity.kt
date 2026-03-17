@@ -32,6 +32,8 @@ import com.contactsplus.app.dialogs.FilterContactSourcesDialog
 import com.contactsplus.app.extensions.config
 import com.contactsplus.app.extensions.handleGenericContactClick
 import com.contactsplus.app.extensions.tryImportContactsFromFile
+import com.contactsplus.app.extensions.updateBottomTabItemColors
+import com.contactsplus.app.extensions.getBottomNavigationBackgroundColor
 import com.contactsplus.app.fragments.FavoritesFragment
 import com.contactsplus.app.fragments.MyViewPagerFragment
 import com.contactsplus.app.helpers.ALL_TABS_MASK
