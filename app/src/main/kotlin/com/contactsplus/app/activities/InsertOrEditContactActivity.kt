@@ -8,9 +8,11 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.provider.ContactsContract.CommonDataKinds.Email
 import android.provider.ContactsContract.CommonDataKinds.Phone
+import android.view.View
 import androidx.viewpager.widget.ViewPager
 import org.fossify.commons.databinding.BottomTablayoutItemBinding
 import org.fossify.commons.extensions.*
+import org.fossify.commons.extensions.getContactPublicUri
 import org.fossify.commons.helpers.*
 import org.fossify.commons.models.contacts.Contact
 import com.contactsplus.app.R
@@ -222,12 +224,12 @@ class InsertOrEditContactActivity : SimpleActivity(), RefreshContactsListener {
 
     private fun getInactiveTabIndexes(activeIndex: Int) = (0 until binding.insertEditTabsHolder.tabCount).filter { it != activeIndex }
 
-    private fun getSelectedTabDrawableIds() = arrayOf(
+    private fun getSelectedTabDrawableIds() = arrayListOf(
         org.fossify.commons.R.drawable.ic_person_vector,
         org.fossify.commons.R.drawable.ic_star_vector
     )
 
-    private fun getDeselectedTabDrawableIds() = arrayOf(
+    private fun getDeselectedTabDrawableIds() = arrayListOf(
         org.fossify.commons.R.drawable.ic_person_outline_vector,
         org.fossify.commons.R.drawable.ic_star_outline_vector
     )

@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.view.View
 import androidx.viewpager.widget.ViewPager
 import me.grantland.widget.AutofitHelper
 import org.fossify.commons.databases.ContactsDatabase
@@ -16,6 +17,7 @@ import org.fossify.commons.databinding.BottomTablayoutItemBinding
 import org.fossify.commons.dialogs.ChangeViewTypeDialog
 import org.fossify.commons.dialogs.RadioGroupDialog
 import org.fossify.commons.extensions.*
+import org.fossify.commons.extensions.getContactUriRawId
 import org.fossify.commons.helpers.*
 import org.fossify.commons.models.FAQItem
 import org.fossify.commons.models.RadioItem
