@@ -1,8 +1,8 @@
 [versions]
 #jetbrains
-kotlin = "1.9.22"
+kotlin = "2.3.0"
 # KSP
-ksp = "1.9.22-1.0.17"
+ksp = "2.3.6"
 # Sentry
 sentry = "6.0.0"
 sentry-android = "7.20.1"
