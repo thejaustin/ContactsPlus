@@ -4,7 +4,7 @@ kotlin = "2.3.0"
 #KSP
 ksp = "2.3.6"
 #Sentry
-sentry = "8.17.0"
+sentry = "6.1.0"
 #Detekt
 detekt = "1.23.8"
 #Material
