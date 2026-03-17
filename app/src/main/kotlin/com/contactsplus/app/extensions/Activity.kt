@@ -36,6 +36,31 @@ import com.contactsplus.app.dialogs.ImportContactsDialog
 import com.contactsplus.app.helpers.DEFAULT_FILE_NAME
 import com.contactsplus.app.helpers.VcfExporter
 
+import android.view.View
+import org.fossify.commons.databinding.BottomTablayoutItemBinding
+import org.fossify.commons.extensions.getColoredDrawableWithColor
+import org.fossify.commons.extensions.getProperBackgroundColor
+import org.fossify.commons.extensions.getProperPrimaryColor
+import org.fossify.commons.extensions.getProperTextColor
+
+fun Activity.updateBottomTabItemColors(view: View?, isActive: Boolean, iconId: Int) {
+    val color = if (isActive) getProperPrimaryColor() else getProperTextColor()
+    view?.let {
+        BottomTablayoutItemBinding.bind(it).apply {
+            tabItemIcon.setImageDrawable(resources.getColoredDrawableWithColor(iconId, color))
+            tabItemLabel.setTextColor(color)
+        }
+    }
+}
+
+fun Activity.getBottomNavigationBackgroundColor(): Int {
+    return if (config.isCustomTheme) {
+        config.backgroundColor
+    } else {
+        getProperBackgroundColor()
+    }
+}
+
 fun SimpleActivity.startCallIntent(recipient: String) {
     handlePermission(PERMISSION_CALL_PHONE) {
         val action = if (it) Intent.ACTION_CALL else Intent.ACTION_DIAL
