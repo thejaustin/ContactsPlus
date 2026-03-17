@@ -9,6 +9,15 @@ plugins {
     alias(libs.plugins.kotlinParcelize)
     alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.sentry)
+}
+
+sentry {
+    includeProguardMapping.set(true)
+    autoUploadProguardMapping.set(true)
+    uploadNativeSymbols.set(false)
+    includeNativeSources.set(false)
+    ignoredBuildTypes.set(setOf("debug"))
 }
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
@@ -147,6 +156,7 @@ dependencies {
     implementation(libs.indicatorfastscroll)
     implementation(libs.bundles.room)
     implementation(libs.flexbox)
+    implementation(libs.sentry.android)
     ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)

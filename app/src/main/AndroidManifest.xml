@@ -57,6 +57,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- Sentry DSN Configuration -->
+        <meta-data
+            android:name="io.sentry.dsn"
+            android:value="https://1d0e5d7cd0f38cf3bca2cf7fd76aa98c@o4510887187841024.ingest.us.sentry.io/4511058249318400" />
+
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"

@@ -3,6 +3,8 @@
 kotlin = "2.3.0"
 #KSP
 ksp = "2.3.6"
+#Sentry
+sentry = "8.17.0"
 #Detekt
 detekt = "1.23.8"
 #Material
@@ -62,6 +64,8 @@ androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espres
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 #Flexbox
 flexbox = { module = "com.google.android.flexbox:flexbox", version = "3.0.0" }
+#Sentry
+sentry-android = { module = "io.sentry:sentry-android", version.ref = "sentry" }
 [bundles]
 room = [
     "androidx-room-ktx",
@@ -73,3 +77,4 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+sentry = { id = "io.sentry.android.gradle", version.ref = "sentry" }
