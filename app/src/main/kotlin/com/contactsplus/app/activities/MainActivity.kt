@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.ShortcutInfo
+import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
@@ -154,7 +155,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
             resources.getColoredDrawableWithColor(org.fossify.commons.R.drawable.ic_dialpad_vector, properPrimaryColor.getContrastColor())
         binding.mainDialpadButton.apply {
             setImageDrawable(dialpadIcon)
-            background.applyColorFilter(properPrimaryColor)
+            backgroundTintList = ColorStateList.valueOf(properPrimaryColor)
             beVisibleIf(config.showDialpadButton)
         }
 
@@ -287,8 +288,9 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
     private fun getCreateNewContactShortcut(appIconColor: Int): ShortcutInfo {
         val newEvent = getString(org.fossify.commons.R.string.create_new_contact)
         val drawable = resources.getDrawable(org.fossify.commons.R.drawable.shortcut_plus)
-        (drawable as LayerDrawable).findDrawableByLayerId(org.fossify.commons.R.id.shortcut_plus_background).applyColorFilter(appIconColor)
+        (drawable as? LayerDrawable)?.findDrawableByLayerId(org.fossify.commons.R.id.shortcut_plus_background)?.applyColorFilter(appIconColor)
         val bmp = drawable.convertToBitmap()
+
 
         val intent = Intent(this, EditContactActivity::class.java)
         intent.action = Intent.ACTION_VIEW

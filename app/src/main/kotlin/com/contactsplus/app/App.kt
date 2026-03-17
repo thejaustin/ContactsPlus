@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import io.sentry.Sentry
 import io.sentry.SentryLevel
+import io.sentry.android.core.SentryAndroid
 import org.fossify.commons.FossifyApp
 
 class App : FossifyApp() {
@@ -16,14 +17,14 @@ class App : FossifyApp() {
         super.onCreate()
         instance = this
 
-        // Minimal Sentry initialization for testing - wrapped in try-catch to prevent startup crashes
+        // Use SentryAndroid.init for proper Android integration
         try {
-            Sentry.init { options ->
+            SentryAndroid.init(this) { options ->
                 options.dsn = "https://1d0e5d7cd0f38cf3bca2cf7fd76aa98c@o4510887187841024.ingest.us.sentry.io/4511058249318400"
                 options.environment = BuildConfig.BUILD_TYPE
-                options.tracesSampleRate = 0.5
-                // Disable async processing during init to avoid blocking startup
-                options.isEnableAutoSessionTracking = false
+                options.tracesSampleRate = 1.0 // Increased for better debugging during launch
+                // Enable debug mode to see initialization logs in Logcat
+                options.isDebug = BuildConfig.DEBUG
             }
             setupCrashTracking()
         } catch (e: Exception) {
