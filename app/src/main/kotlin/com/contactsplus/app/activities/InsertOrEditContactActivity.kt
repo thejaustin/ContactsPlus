@@ -373,4 +373,22 @@ class InsertOrEditContactActivity : SimpleActivity(), RefreshContactsListener {
         }
         return mask
     }
+
+    private fun updateBottomTabItemColors(view: View?, isActive: Boolean, iconId: Int) {
+        val color = if (isActive) getProperPrimaryColor() else getProperTextColor()
+        view?.let {
+            BottomTablayoutItemBinding.bind(it).apply {
+                tabItemIcon.setImageDrawable(resources.getColoredDrawableWithColor(iconId, color))
+                tabItemLabel.setTextColor(color)
+            }
+        }
+    }
+
+    private fun getBottomNavigationBackgroundColor(): Int {
+        return if (config.isCustomTheme) {
+            config.backgroundColor
+        } else {
+            getProperBackgroundColor()
+        }
+    }
 }

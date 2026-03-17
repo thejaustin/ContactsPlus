@@ -84,6 +84,13 @@
     <dimen name="app_bar_expanded_height">152dp</dimen>
 
     <dimen name="activity_margin">16dp</dimen>
+    <dimen name="big_margin">12dp</dimen>
+    <dimen name="medium_margin">8dp</dimen>
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="tiny_margin">2dp</dimen>
+    <dimen name="secondary_fab_bottom_margin">76dp</dimen>
+    <dimen name="bigger_text_size">18sp</dimen>
+    <dimen name="fab_size">56dp</dimen>
 
     <!-- Bottom navigation -->
     <dimen name="bottom_nav_height">80dp</dimen>

@@ -14,7 +14,13 @@ import com.contactsplus.app.helpers.LOCATION_CONTACTS_TAB
 import com.contactsplus.app.helpers.LOCATION_FAVORITES_TAB
 
 open class SimpleActivity : BaseSimpleActivity() {
-    fun checkAppSideloading() = false
+    override fun checkAppSideloading() = false
+
+    override fun onResume() {
+        super.onResume()
+        // Ensure any dynamic theme changes from Fossify commons are applied but don't interfere with our Material 3 setup
+    }
+
 
     override fun getAppIconIDs() = arrayListOf(
         R.mipmap.ic_launcher_red,
