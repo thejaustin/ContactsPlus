@@ -2,19 +2,13 @@ package com.contactsplus.app.utils
 
 import android.util.Log
 import io.sentry.Breadcrumb
-import io.sentry.Hint
 import io.sentry.Sentry
 import io.sentry.SentryLevel
 import io.sentry.SpanStatus
 
 /**
  * Helper object for easy Sentry tracking throughout the app.
- * Use this to track errors, UI glitches, performance issues, and user flows.
- *
- * Usage:
- *   SentryHelper.trackError(exception, "ContactLoad")
- *   SentryHelper.trackUiGlitch("RecyclerViewJank", "Frame drop during scroll")
- *   SentryHelper.startSpan("Database", "loadContacts") { ... }
+ * Compatible with Sentry SDK 6.x
  */
 object SentryHelper {
 
@@ -30,7 +24,7 @@ object SentryHelper {
     ) {
         try {
             Sentry.captureException(throwable) { scope ->
-                scope.setLevel(SentryLevel.ERROR)
+                scope.level = SentryLevel.ERROR
                 scope.setTag("error_context", context)
                 scope.setTag("error_type", throwable.javaClass.simpleName)
                 data.forEach { (key, value) ->
@@ -44,7 +38,7 @@ object SentryHelper {
     }
 
     /**
-     * Track a fatal error that would normally crash the app
+     * Track a fatal error
      */
     fun trackFatalError(
         throwable: Throwable,
@@ -52,7 +46,7 @@ object SentryHelper {
     ) {
         try {
             Sentry.captureException(throwable) { scope ->
-                scope.setLevel(SentryLevel.FATAL)
+                scope.level = SentryLevel.FATAL
                 scope.setTag("error_context", context)
                 scope.setTag("is_fatal", "true")
             }
@@ -71,7 +65,7 @@ object SentryHelper {
     ) {
         try {
             Sentry.captureMessage("UI Glitch: $glitchType") { scope ->
-                scope.setLevel(severity)
+                scope.level = severity
                 scope.setTag("glitch_type", glitchType)
                 scope.setTag("glitch_details", details)
                 scope.setTag("category", "ui")
@@ -83,7 +77,7 @@ object SentryHelper {
     }
 
     /**
-     * Track layout issues (missing views, wrong dimensions, etc.)
+     * Track layout issues
      */
     fun trackLayoutIssue(
         viewName: String,
@@ -91,15 +85,14 @@ object SentryHelper {
         expectedValue: String? = null,
         actualValue: String? = null
     ) {
-        trackUiGlitch("LayoutIssue", "$viewName: $issue", SentryLevel.WARNING).also {
-            Sentry.configureScope { scope ->
-                scope.setContext("layout_debug", mapOf(
-                    "view" to viewName,
-                    "issue" to issue,
-                    "expected" to (expectedValue ?: "N/A"),
-                    "actual" to (actualValue ?: "N/A")
-                ))
-            }
+        trackUiGlitch("LayoutIssue", "$viewName: $issue", SentryLevel.WARNING)
+        Sentry.configureScope { scope ->
+            scope.setContext("layout_debug", mapOf(
+                "view" to viewName,
+                "issue" to issue,
+                "expected" to (expectedValue ?: "N/A"),
+                "actual" to (actualValue ?: "N/A")
+            ))
         }
     }
 
@@ -112,7 +105,7 @@ object SentryHelper {
         duration: Long? = null
     ) {
         Sentry.captureMessage("Rendering Issue: $screenName") { scope ->
-            scope.setLevel(SentryLevel.ERROR)
+            scope.level = SentryLevel.ERROR
             scope.setTag("screen", screenName)
             scope.setTag("issue_type", issueType)
             scope.setTag("category", "rendering")
@@ -123,7 +116,7 @@ object SentryHelper {
     }
 
     /**
-     * Track performance issues (slow operations, jank, etc.)
+     * Track performance issues
      */
     fun trackPerformanceIssue(
         operation: String,
@@ -132,13 +125,13 @@ object SentryHelper {
     ) {
         if (durationMs > thresholdMs) {
             Sentry.captureMessage("Slow Operation: $operation") { scope ->
-                scope.setLevel(SentryLevel.WARNING)
+                scope.level = SentryLevel.WARNING
                 scope.setTag("operation", operation)
                 scope.setData("duration_ms", durationMs)
                 scope.setData("threshold_ms", thresholdMs)
                 scope.setData("slowdown_factor", (durationMs.toDouble() / thresholdMs).toString())
             }
-            Log.w(TAG, "Performance issue: $operation took ${durationMs}ms (threshold: ${thresholdMs}ms)")
+            Log.w(TAG, "Performance issue: $operation took ${durationMs}ms")
         }
     }
 
@@ -152,7 +145,7 @@ object SentryHelper {
         statusCode: Int? = null
     ) {
         Sentry.captureMessage("Network Error: $url") { scope ->
-            scope.setLevel(SentryLevel.ERROR)
+            scope.level = SentryLevel.ERROR
             scope.setTag("url", url)
             scope.setTag("method", method)
             scope.setTag("error", error)
@@ -172,7 +165,7 @@ object SentryHelper {
         error: Throwable
     ) {
         Sentry.captureException(error) { scope ->
-            scope.setLevel(SentryLevel.ERROR)
+            scope.level = SentryLevel.ERROR
             scope.setTag("db_operation", operation)
             scope.setTag("db_table", table ?: "unknown")
             scope.setTag("category", "database")
@@ -180,7 +173,7 @@ object SentryHelper {
     }
 
     /**
-     * Track user flow for debugging
+     * Track user flow
      */
     fun trackUserFlow(
         flowName: String,
@@ -200,7 +193,7 @@ object SentryHelper {
     }
 
     /**
-     * Track screen navigation
+     * Track navigation
      */
     fun trackNavigation(
         from: String?,
@@ -218,7 +211,7 @@ object SentryHelper {
     }
 
     /**
-     * Track contact-related operations
+     * Track contact operations
      */
     fun trackContactOperation(
         operation: String,
@@ -228,7 +221,7 @@ object SentryHelper {
     ) {
         if (error != null || !success) {
             Sentry.captureMessage("Contact Operation Failed: $operation") { scope ->
-                scope.setLevel(SentryLevel.ERROR)
+                scope.level = SentryLevel.ERROR
                 scope.setTag("operation", operation)
                 scope.setTag("success", success.toString())
                 scope.setTag("category", "contact")
@@ -266,7 +259,7 @@ object SentryHelper {
     }
 
     /**
-     * Start a performance span for tracing
+     * Start a performance span
      */
     inline fun <T> startSpan(
         operation: String,
@@ -277,32 +270,6 @@ object SentryHelper {
         return try {
             val result = block()
             transaction.status = SpanStatus.OK
-            result
-        } catch (e: Exception) {
-            transaction.status = SpanStatus.INTERNAL_ERROR
-            transaction.throwable = e
-            throw e
-        } finally {
-            transaction.finish()
-        }
-    }
-
-    /**
-     * Start a performance span with result
-     */
-    inline fun <T> startSpanWithData(
-        operation: String,
-        description: String,
-        block: (MutableMap<String, String>) -> T
-    ): T {
-        val transaction = Sentry.startTransaction(operation, description)
-        val data = mutableMapOf<String, String>()
-        return try {
-            val result = block(data)
-            transaction.status = SpanStatus.OK
-            data.forEach { (key, value) ->
-                transaction.setData(key, value)
-            }
             result
         } catch (e: Exception) {
             transaction.status = SpanStatus.INTERNAL_ERROR
@@ -333,21 +300,21 @@ object SentryHelper {
     }
 
     /**
-     * Clear all breadcrumbs (use sparingly)
+     * Clear breadcrumbs
      */
     fun clearBreadcrumbs() {
         Sentry.clearBreadcrumbs()
     }
 
     /**
-     * Set a user context (anonymous ID, not PII)
+     * Set user context
      */
     fun setUserContext(userId: String?) {
         Sentry.setUser(userId)
     }
 
     /**
-     * Set a tag for all subsequent events
+     * Set a tag
      */
     fun setTag(key: String, value: String) {
         Sentry.configureScope { scope ->

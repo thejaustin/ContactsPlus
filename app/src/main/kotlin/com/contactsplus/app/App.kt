@@ -1,19 +1,16 @@
 package com.contactsplus.app
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import io.sentry.Breadcrumb
-import io.sentry.Hint
 import io.sentry.Sentry
 import io.sentry.SentryEvent
 import io.sentry.SentryLevel
 import io.sentry.SentryOptions
 import io.sentry.android.core.SentryAndroid
-import io.sentry.android.core.performance.AppStartMetrics
 import org.fossify.commons.FossifyApp
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -33,16 +30,11 @@ class App : FossifyApp() {
             options.environment = BuildConfig.BUILD_TYPE
             options.release = "contacts-plus@${BuildConfig.VERSION_NAME}"
 
-            // Performance monitoring - increased sample rate for debugging
+            // Performance monitoring
             options.tracesSampleRate = 0.5
-            options.profilesSampleRate = 0.3
-            options.isEnableAppStartProfiling = true
-            
-            // App start tracking
             options.isEnableAutoPerformanceTracing = true
-            options.isEnablePerformanceV2 = true
 
-            // ANR detection - more aggressive
+            // ANR detection
             options.isAnrEnabled = true
             options.anrTimeoutIntervalMillis = 3000
 
@@ -50,57 +42,37 @@ class App : FossifyApp() {
             options.isEnableAutoSessionTracking = true
             options.sessionTrackingIntervalMillis = 30000L
 
-            // Comprehensive breadcrumbs
+            // Breadcrumbs
             options.isEnableUserInteractionBreadcrumbs = true
             options.isEnableAppLifecycleBreadcrumbs = true
             options.isEnableSystemEventBreadcrumbs = true
             options.isEnableNetworkEventBreadcrumbs = true
-            options.isEnableWebViewBreadcrumbs = true
-            options.isEnableScreenshotBreadcrumbs = true
-
-            // Memory & CPU monitoring
-            options.isEnableMemoryMonitoring = true
-            options.isEnableCpuMonitoring = true
-            options.memoryMonitoringIntervalMillis = 5000L
-            options.cpuMonitoringIntervalMillis = 5000L
 
             // Network monitoring
             options.isEnableNetworkBreadcrumbs = true
-            options.isEnableNetworkEventMonitoring = true
 
-            // Attach more context
+            // Attach context
             options.isAttachThreads = true
             options.isAttachStacktrace = true
             options.isSendDefaultPii = false
-            options.isAttachScreenshot = false
             
             // Capture more exceptions
             options.isReportHistoricalAnrs = true
-            options.isEnableBeforeSend = true
 
             // Filter sensitive data but keep useful context
             options.beforeSend = SentryOptions.BeforeSendCallback { event, hint ->
-                filterEvent(event, hint)
-            }
-
-            // Custom breadcrumb for app-specific events
-            options.beforeBreadcrumb = SentryOptions.BeforeBreadcrumbCallback { breadcrumb, hint ->
-                addDeviceContext(breadcrumb)
+                filterEvent(event)
             }
 
             // Capture OOM
             options.isEnableOutOfMemoryTracking = true
             
-            // Slow & frozen frames
-            options.isEnableTimeToFullDisplayTracing = true
-            options.setBeforeSendTransaction { transaction, hint ->
-                trackFrameMetrics(transaction)
-            }
+            // Device context
+            options.isCollectAdditionalContext = true
         }
     }
 
-    private fun filterEvent(event: SentryEvent, hint: Hint?): SentryEvent? {
-        // Filter out noise but keep crashes
+    private fun filterEvent(event: SentryEvent): SentryEvent? {
         val throwable = event.throwable
         
         // Skip known non-critical errors
@@ -124,25 +96,6 @@ class App : FossifyApp() {
             is IllegalArgumentException -> SentryLevel.WARNING
             else -> SentryLevel.ERROR
         }
-    }
-
-    private fun addDeviceContext(breadcrumb: Breadcrumb): Breadcrumb? {
-        breadcrumb.setData("device_model", Build.MODEL)
-        breadcrumb.setData("android_version", Build.VERSION.RELEASE)
-        breadcrumb.setData("api_level", Build.VERSION.SDK_INT.toString())
-        return breadcrumb
-    }
-
-    private fun trackFrameMetrics(transaction: io.sentry.ITransaction): io.sentry.ITransaction? {
-        try {
-            val metrics = AppStartMetrics.getInstance()
-            transaction.setTag("app_start_type", metrics.appStartType.toString())
-            transaction.setData("time_to_initial_display", metrics.timeToInitialDisplayMs)
-            transaction.setData("time_to_full_display", metrics.timeToFullDisplayMs)
-        } catch (e: Exception) {
-            Log.w("Sentry", "Failed to track frame metrics", e)
-        }
-        return transaction
     }
 
     private fun setupCrashTracking() {
