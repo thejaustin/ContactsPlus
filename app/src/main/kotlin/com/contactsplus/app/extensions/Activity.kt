@@ -55,11 +55,7 @@ fun Activity.updateBottomTabItemColors(view: View?, isActive: Boolean, iconId: I
 }
 
 fun Activity.getBottomNavigationBackgroundColor(): Int {
-    return if (config.isCustomTheme) {
-        config.backgroundColor
-    } else {
-        getProperBackgroundColor()
-    }
+    return getProperBackgroundColor()
 }
 
 fun SimpleActivity.startCallIntent(recipient: String) {

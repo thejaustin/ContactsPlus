@@ -14,7 +14,7 @@ import com.contactsplus.app.helpers.LOCATION_CONTACTS_TAB
 import com.contactsplus.app.helpers.LOCATION_FAVORITES_TAB
 
 open class SimpleActivity : BaseSimpleActivity() {
-    override fun checkAppSideloading() = false
+    fun checkAppSideloading() = false
 
     override fun onResume() {
         super.onResume()
