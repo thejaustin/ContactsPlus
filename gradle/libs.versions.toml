@@ -29,7 +29,7 @@ gradlePlugins-agp = "8.9.1"
 #Tests
 junit = "4.13.2"
 ext-junit = "1.2.1"
-espresso-core = "3.6.1"
+espresso-core = "3.7.0"
 runner = "1.6.1"
 #build
 app-build-id = "com.contactsplus.app"
