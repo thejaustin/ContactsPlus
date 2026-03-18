@@ -46,6 +46,7 @@ import com.contactsplus.app.dialogs.ManageSocialLinksDialog
 import com.contactsplus.app.database.SocialLinksDatabase
 import com.contactsplus.app.models.SocialLink
 import com.contactsplus.app.dialogs.SocialImportDialog
+import com.contactsplus.app.utils.SentryHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -581,43 +582,48 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
     }
 
     override fun refreshContacts(refreshTabsMask: Int) {
-        if (isDestroyed || isFinishing || isGettingContacts) {
-            return
-        }
-
-        isGettingContacts = true
-
-        if (binding.viewPager.adapter == null) {
-            binding.viewPager.adapter = ViewPagerAdapter(this, tabsList, config.showTabs)
-            binding.viewPager.currentItem = getDefaultTab()
-        }
-
-        ContactsHelper(this).getContacts { contacts ->
-            isGettingContacts = false
-            if (isDestroyed || isFinishing) {
-                return@getContacts
+        try {
+            if (isDestroyed || isFinishing || isGettingContacts) {
+                return
             }
 
-            val fragmentsToUpdate = listOf(
-                Triple(TAB_CONTACTS, R.id.contacts_fragment, true),
-                Triple(TAB_FAVORITES, R.id.favorites_fragment, true),
-                Triple(TAB_GROUPS, R.id.groups_fragment, refreshTabsMask == TAB_GROUPS)
-            )
+            isGettingContacts = true
 
-            fragmentsToUpdate.forEach { (mask, fragmentId, shouldSkipHash) ->
-                if (refreshTabsMask and mask != 0) {
-                    findViewById<MyViewPagerFragment<*>>(fragmentId)?.apply {
-                        if (shouldSkipHash) {
-                            skipHashComparing = true
+            if (binding.viewPager.adapter == null) {
+                binding.viewPager.adapter = ViewPagerAdapter(this, tabsList, config.showTabs)
+                binding.viewPager.currentItem = getDefaultTab()
+            }
+
+            ContactsHelper(this).getContacts { contacts ->
+                isGettingContacts = false
+                if (isDestroyed || isFinishing) {
+                    return@getContacts
+                }
+
+                val fragmentsToUpdate = listOf(
+                    Triple(TAB_CONTACTS, R.id.contacts_fragment, true),
+                    Triple(TAB_FAVORITES, R.id.favorites_fragment, true),
+                    Triple(TAB_GROUPS, R.id.groups_fragment, refreshTabsMask == TAB_GROUPS)
+                )
+
+                fragmentsToUpdate.forEach { (mask, fragmentId, shouldSkipHash) ->
+                    if (refreshTabsMask and mask != 0) {
+                        findViewById<MyViewPagerFragment<*>>(fragmentId)?.apply {
+                            if (shouldSkipHash) {
+                                skipHashComparing = true
+                            }
+                            refreshContacts(contacts)
                         }
-                        refreshContacts(contacts)
                     }
                 }
-            }
 
-            if (binding.mainMenu.isSearchOpen) {
-                getCurrentFragment()?.onSearchQueryChanged(binding.mainMenu.getCurrentQuery())
+                if (binding.mainMenu.isSearchOpen) {
+                    getCurrentFragment()?.onSearchQueryChanged(binding.mainMenu.getCurrentQuery())
+                }
             }
+        } catch (e: Exception) {
+            SentryHelper.trackError(e, "MainActivity.refreshContacts")
+            isGettingContacts = false
         }
     }
 

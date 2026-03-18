@@ -29,7 +29,23 @@ jobs:
         with:
           cache-read-only: false
 
-      - name: Build Debug APK
+      - name: Create Keystore from Secret (optional)
+        if: env.KEYSTORE_BASE64 != ''
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > keystore.jks
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+
+      - name: Build Debug APK (Signed if keystore available)
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          SIGNING_STORE_FILE: keystore.jks
+          SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: ./gradlew assembleFossDebug --no-daemon
+
+      - name: Build Debug APK (Unsigned fallback)
+        if: failure()
         run: ./gradlew assembleFossDebug --no-daemon
 
       - name: Upload Debug APK

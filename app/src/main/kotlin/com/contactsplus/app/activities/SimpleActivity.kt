@@ -4,23 +4,19 @@ import android.content.ContentValues
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import org.fossify.commons.activities.BaseSimpleActivity
-import org.fossify.commons.extensions.getColoredDrawableWithColor
-import org.fossify.commons.extensions.getProperTextColor
-import org.fossify.commons.helpers.KEY_PHONE
 import com.contactsplus.app.R
 import com.contactsplus.app.helpers.KEY_MAILTO
 import com.contactsplus.app.helpers.LOCATION_CONTACTS_TAB
 import com.contactsplus.app.helpers.LOCATION_FAVORITES_TAB
+import org.fossify.commons.extensions.getColoredDrawableWithColor
+import org.fossify.commons.extensions.getProperTextColor
+import org.fossify.commons.helpers.KEY_PHONE
 
-open class SimpleActivity : BaseSimpleActivity() {
-    fun checkAppSideloading() = false
-
+open class SimpleActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         // Ensure any dynamic theme changes from Fossify commons are applied but don't interfere with our Material 3 setup
     }
-
 
     override fun getAppIconIDs() = arrayListOf(
         R.mipmap.ic_launcher_red,

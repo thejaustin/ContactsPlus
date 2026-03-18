@@ -60,18 +60,35 @@ jobs:
         with:
           cache-read-only: false
 
-      - name: Generate Fresh Keystore
+      - name: Create Keystore from Secret
+        if: env.KEYSTORE_BASE64 != ''
         run: |
-          # Use fixed but safe passwords for this automated run
-          # Since these secrets are internal to the runner, it's safer than mismatching manual secrets
-          keytool -genkey -v -keystore keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias contactsplus -storepass "contactsplus_pass" -keypass "contactsplus_pass" -dname "CN=ContactsPlus, OU=Dev, O=Fossify, L=Local, S=State, C=US"
+          echo "$KEYSTORE_BASE64" | base64 -d > keystore.jks
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+
+      - name: Generate Keystore (if no secret provided)
+        if: env.KEYSTORE_BASE64 == ''
+        run: |
+          keytool -genkey -v \
+            -keystore keystore.jks \
+            -alias contactsplus \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
+            -keypass ${{ secrets.KEY_PASSWORD }} \
+            -dname "CN=ContactsPlus, OU=Development, O=ContactsPlus, L=Local, S=State, C=US"
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
       - name: Build Release APK
         env:
           SIGNING_KEY_ALIAS: contactsplus
-          SIGNING_KEY_PASSWORD: contactsplus_pass
-          SIGNING_STORE_FILE: ../keystore.jks
-          SIGNING_STORE_PASSWORD: contactsplus_pass
+          SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          SIGNING_STORE_FILE: keystore.jks
+          SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         run: ./gradlew assembleFossRelease --no-daemon
 
       - name: Upload Release APK
