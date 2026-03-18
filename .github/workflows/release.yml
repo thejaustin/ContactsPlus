@@ -62,7 +62,7 @@ jobs:
 
       - name: Create Keystore from Secret
         run: |
-          echo "$KEYSTORE_BASE64" | base64 -d > keystore.jks
+          echo "$KEYSTORE_BASE64" | base64 -d > app/keystore.jks
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
 
@@ -70,7 +70,7 @@ jobs:
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          SIGNING_STORE_FILE: keystore.jks
+          SIGNING_STORE_FILE: ../keystore.jks
           SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         run: ./gradlew assembleFossRelease --no-daemon
 
