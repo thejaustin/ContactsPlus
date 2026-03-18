@@ -3,7 +3,7 @@
 package com.contactsplus.app
 
 // Sentry crash reporting enabled - see proguard-rules.pro for Sentry rules
-
+// Build trigger comment
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
