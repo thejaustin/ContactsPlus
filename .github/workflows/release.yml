@@ -62,7 +62,7 @@ jobs:
 
       - name: Create Keystore from Secret
         run: |
-          echo "$KEYSTORE_BASE64" | base64 -d > keystore.jks
+          mkdir -p app && echo "$KEYSTORE_BASE64" | base64 -d > app/keystore.jks
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
 
