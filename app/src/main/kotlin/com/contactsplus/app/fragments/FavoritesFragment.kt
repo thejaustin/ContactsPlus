@@ -49,7 +49,7 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
 
     private fun showAddFavoritesDialog() {
         SelectContactsDialog(activity!!, allContacts, true, false) { addedContacts, removedContacts ->
-            ContactsHelper(activity as SimpleActivity).apply {
+            ContactsHelper(activity as BaseActivity).apply {
                 addFavorites(addedContacts)
                 removeFavorites(removedContacts)
             }
@@ -72,7 +72,7 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
             val location = LOCATION_FAVORITES_TAB
 
             ContactsAdapter(
-                activity = activity as SimpleActivity,
+                activity = activity as BaseActivity,
                 contactItems = favouriteContacts.toMutableList(),
                 refreshListener = activity as RefreshContactsListener,
                 location = location,

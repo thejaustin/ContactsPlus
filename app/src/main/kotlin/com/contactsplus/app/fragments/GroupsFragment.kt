@@ -29,7 +29,7 @@ class GroupsFragment(context: Context, attributeSet: AttributeSet) : MyViewPager
     }
 
     private fun showNewGroupsDialog() {
-        CreateNewGroupDialog(activity as SimpleActivity) {
+        CreateNewGroupDialog(activity as BaseActivity) {
             (activity as? MainActivity)?.refreshContacts(TAB_GROUPS)
         }
     }

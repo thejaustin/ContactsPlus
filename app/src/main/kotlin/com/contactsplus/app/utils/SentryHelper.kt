@@ -113,7 +113,7 @@ object SentryHelper {
     fun trackNetworkOperation(operation: String, success: Boolean, errorMessage: String? = null) {
         Sentry.addBreadcrumb(Breadcrumb().apply {
             category = "network"
-            message = "$operation: ${if (success) "success" : "failed"}"
+            message = "$operation: ${if (success) "success" else "failed"}"
             level = if (success) SentryLevel.INFO else SentryLevel.WARNING
             setData("operation", operation)
             setData("success", success.toString())

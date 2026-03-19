@@ -52,7 +52,7 @@ class ContactsFragment(context: Context, attributeSet: AttributeSet) : MyViewPag
             val location = LOCATION_CONTACTS_TAB
 
             ContactsAdapter(
-                activity = activity as SimpleActivity,
+                activity = activity as BaseActivity,
                 contactItems = contacts.toMutableList(),
                 refreshListener = activity as RefreshContactsListener,
                 location = location,
