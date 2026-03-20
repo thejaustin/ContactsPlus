@@ -15,6 +15,7 @@ import com.contactsplus.app.databinding.ActivitySocialMatchingBinding
 import com.contactsplus.app.databinding.ItemSocialMatchingCardBinding
 import com.contactsplus.app.dialogs.SelectContactsDialog
 import com.contactsplus.app.helpers.PotentialMatch
+import com.contactsplus.app.helpers.SuggestedContact
 import com.contactsplus.app.models.SocialLink
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -94,7 +95,7 @@ class SocialMatchingActivity : SimpleActivity() {
         binding.socialMatchingConfirm.setOnClickListener {
             val currentPos = binding.socialMatchingViewPager.currentItem
             val match = matches[currentPos]
-            if (match.suggestedContactLookupKey != null) {
+            if (match.suggestedContacts.isNotEmpty()) {
                 confirmedMatches.add(match)
                 moveToNext()
             } else {
@@ -122,11 +123,20 @@ class SocialMatchingActivity : SimpleActivity() {
         
         ContactsHelper(this).getContacts { contacts ->
             runOnUiThread {
-                SelectContactsDialog(this, ArrayList(contacts), false, false) { selected, _ ->
-                    val contact = selected.firstOrNull() ?: return@SelectContactsDialog
-                    match.suggestedContactLookupKey = contact.id.toString()
-                    match.suggestedContactName = contact.getNameToDisplay()
-                    match.suggestedContactPhotoUri = contact.thumbnailUri
+                SelectContactsDialog(this, ArrayList(contacts), true, false) { selected, _ ->
+                    if (selected.isEmpty()) return@SelectContactsDialog
+                    
+                    match.suggestedContacts.clear()
+                    selected.forEach { contact ->
+                        match.suggestedContacts.add(
+                            SuggestedContact(
+                                lookupKey = contact.id.toString(),
+                                name = contact.getNameToDisplay(),
+                                photoUri = contact.thumbnailUri
+                            )
+                        )
+                    }
+                    
                     runOnUiThread {
                         binding.socialMatchingViewPager.adapter?.notifyItemChanged(currentPos)
                         toast(getString(R.string.social_link_added))
@@ -151,25 +161,28 @@ class SocialMatchingActivity : SimpleActivity() {
                     "${match.platform.displayName} Export"
                 }
 
-                val link = SocialLink(
-                    contactLookupKey = match.suggestedContactLookupKey!!,
-                    platform = match.platform,
-                    username = match.username,
-                    attribution = attribution,
-                    connectedAt = match.connectionTimestamp,
-                    isCloseFriend = match.isCloseFriend
-                )
-                dao.insert(link)
+                // Link to all selected contacts
+                match.suggestedContacts.forEach { suggested ->
+                    val link = SocialLink(
+                        contactLookupKey = suggested.lookupKey,
+                        platform = match.platform,
+                        username = match.username,
+                        attribution = attribution,
+                        connectedAt = match.connectionTimestamp,
+                        isCloseFriend = match.isCloseFriend
+                    )
+                    dao.insert(link)
 
-                // If birthday is available, update the contact
-                if (match.birthday != null) {
-                    val contact = ContactsHelper(this@SocialMatchingActivity).getContactWithId(match.suggestedContactLookupKey!!.toInt(), false)
-                    if (contact != null) {
-                        val birthdayType = android.provider.ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY
-                        val birthdayEvent = org.fossify.commons.models.contacts.Event(match.birthday!!, birthdayType)
-                        if (contact.events.none { it.type == birthdayType }) {
-                            contact.events.add(birthdayEvent)
-                            ContactsHelper(this@SocialMatchingActivity).updateContact(contact, org.fossify.commons.helpers.PHOTO_UNCHANGED)
+                    // If birthday is available, update the contact
+                    if (match.birthday != null) {
+                        val contact = ContactsHelper(this@SocialMatchingActivity).getContactWithId(suggested.lookupKey.toInt(), false)
+                        if (contact != null) {
+                            val birthdayType = android.provider.ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY
+                            val birthdayEvent = org.fossify.commons.models.contacts.Event(match.birthday!!, birthdayType)
+                            if (contact.events.none { it.type == birthdayType }) {
+                                contact.events.add(birthdayEvent)
+                                ContactsHelper(this@SocialMatchingActivity).updateContact(contact, org.fossify.commons.helpers.PHOTO_UNCHANGED)
+                            }
                         }
                     }
                 }
@@ -203,14 +216,20 @@ class SocialMatchingActivity : SimpleActivity() {
                 }
                 cardSocialHandle.text = handleText
 
-                if (match.suggestedContactLookupKey != null) {
+                if (match.suggestedContacts.isNotEmpty()) {
+                    val primary = match.suggestedContacts.first()
                     cardSuggestedContactHolder.beVisible()
                     cardNoSuggestion.beGone()
-                    cardContactName.text = match.suggestedContactName
                     
-                    if (match.suggestedContactPhotoUri?.isNotEmpty() == true) {
+                    var displayName = primary.name
+                    if (match.suggestedContacts.size > 1) {
+                        displayName += " (+${match.suggestedContacts.size - 1} others)"
+                    }
+                    cardContactName.text = displayName
+                    
+                    if (primary.photoUri?.isNotEmpty() == true) {
                         Glide.with(this@SocialMatchingActivity)
-                            .load(match.suggestedContactPhotoUri)
+                            .load(primary.photoUri)
                             .placeholder(org.fossify.commons.R.drawable.ic_person_vector)
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .circleCrop()

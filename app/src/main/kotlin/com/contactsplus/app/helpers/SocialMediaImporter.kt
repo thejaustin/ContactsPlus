@@ -12,13 +12,18 @@ import java.io.InputStreamReader
 import java.util.zip.ZipInputStream
 
 @Parcelize
+data class SuggestedContact(
+    val lookupKey: String,
+    val name: String,
+    val photoUri: String? = null
+) : Parcelable
+
+@Parcelize
 data class PotentialMatch(
     val name: String,
     val platform: SocialPlatform,
     val username: String,
-    var suggestedContactLookupKey: String? = null,
-    var suggestedContactName: String? = null,
-    var suggestedContactPhotoUri: String? = null,
+    var suggestedContacts: ArrayList<SuggestedContact> = arrayListOf(),
     var birthday: String? = null,
     var connectionTimestamp: Long? = null,
     var isCloseFriend: Boolean = false,
@@ -68,9 +73,13 @@ class SocialMediaImporter(private val context: Context) {
                         (match.phoneNumber?.isNotEmpty() == true && it.phoneNumbers.any { p -> p.normalizedNumber == match.phoneNumber || p.value == match.phoneNumber })
                     }
                     if (contact != null) {
-                        match.suggestedContactLookupKey = contact.id.toString()
-                        match.suggestedContactName = contact.getNameToDisplay()
-                        match.suggestedContactPhotoUri = contact.thumbnailUri
+                        match.suggestedContacts.add(
+                            SuggestedContact(
+                                lookupKey = contact.id.toString(),
+                                name = contact.getNameToDisplay(),
+                                photoUri = contact.thumbnailUri
+                            )
+                        )
                     }
                 }
                 onResult(matches)
