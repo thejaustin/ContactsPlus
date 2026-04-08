@@ -151,6 +151,10 @@
     <string name="chat">Chat</string>
     <string name="connected_on">Connected on %s</string>
     <string name="show_social_attribution">Show social attribution</string>
+    <string name="updates">Updates</string>
+    <string name="auto_update_enabled">Enable automatic update checks</string>
+    <string name="update_channel_dev">Use dev channel (may be unstable)</string>
+    <string name="check_for_updates">Check for updates now</string>
     <!--
         Haven't found some strings? There's more at
         https://github.com/FossifyOrg/Commons/tree/master/commons/src/main/res

@@ -3,8 +3,14 @@ package com.contactsplus.app.activities
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.fossify.commons.dialogs.FilePickerDialog
 import org.fossify.commons.dialogs.RadioGroupDialog
 import org.fossify.commons.extensions.*
@@ -12,6 +18,7 @@ import org.fossify.commons.helpers.*
 import org.fossify.commons.models.RadioItem
 import com.contactsplus.app.R
 import com.contactsplus.app.databinding.ActivitySettingsBinding
+import com.contactsplus.app.helpers.UpdateChecker
 import com.contactsplus.app.dialogs.ExportContactsDialog
 import com.contactsplus.app.dialogs.ManageAutoBackupsDialog
 import com.contactsplus.app.dialogs.ManageVisibleFieldsDialog
@@ -66,6 +73,8 @@ class SettingsActivity : SimpleActivity() {
         setupManageAutomaticBackups()
         setupExportContacts()
         setupImportContacts()
+        setupAutoUpdate()
+        setupUpdateChannel()
         updateTextColors(binding.settingsHolder)
 
         arrayOf(
@@ -74,7 +83,8 @@ class SettingsActivity : SimpleActivity() {
             binding.settingsMainScreenLabel,
             binding.settingsListViewLabel,
             binding.settingsBackupsLabel,
-            binding.settingsMigratingLabel
+            binding.settingsMigratingLabel,
+            binding.settingsUpdatesLabel
         ).forEach {
             it.setTextColor(getProperPrimaryColor())
         }
@@ -301,6 +311,60 @@ class SettingsActivity : SimpleActivity() {
         config.autoBackup = enable
         binding.settingsEnableAutomaticBackups.isChecked = enable
         binding.settingsManageAutomaticBackupsHolder.beVisibleIf(enable)
+    }
+
+    private fun setupAutoUpdate() {
+        binding.settingsAutoUpdateSwitch.isChecked = config.autoUpdateEnabled
+        binding.settingsAutoUpdateHolder.setOnClickListener {
+            binding.settingsAutoUpdateSwitch.toggle()
+            config.autoUpdateEnabled = binding.settingsAutoUpdateSwitch.isChecked
+        }
+
+        binding.settingsCheckUpdateNowHolder.setOnClickListener {
+            toast("Checking for updates…")
+            CoroutineScope(Dispatchers.IO).launch {
+                val update = UpdateChecker.checkForUpdate()
+                config.lastUpdateCheckTime = System.currentTimeMillis()
+                withContext(Dispatchers.Main) {
+                    if (update != null) {
+                        MaterialAlertDialogBuilder(this@SettingsActivity)
+                            .setTitle("Update available")
+                            .setMessage("${update.versionName} is available.\n\n${update.releaseNotes.take(400).trimEnd()}")
+                            .setPositiveButton("Download") { _, _ ->
+                                startActivity(
+                                    Intent(Intent.ACTION_VIEW, Uri.parse(update.downloadUrl))
+                                )
+                            }
+                            .setNegativeButton(org.fossify.commons.R.string.cancel, null)
+                            .show()
+                    } else {
+                        toast("You're up to date!")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupUpdateChannel() {
+        binding.settingsDevChannelSwitch.isChecked = config.updateChannelDev
+        binding.settingsDevChannelHolder.setOnClickListener {
+            val currentlyEnabled = config.updateChannelDev
+            if (!currentlyEnabled) {
+                // Show warning before enabling dev channel
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("Enable dev channel?")
+                    .setMessage("Dev releases may contain bugs or breaking changes. Are you sure you want to enable dev updates?")
+                    .setPositiveButton("Enable") { _, _ ->
+                        config.updateChannelDev = true
+                        binding.settingsDevChannelSwitch.isChecked = true
+                    }
+                    .setNegativeButton(org.fossify.commons.R.string.cancel, null)
+                    .show()
+            } else {
+                config.updateChannelDev = false
+                binding.settingsDevChannelSwitch.isChecked = false
+            }
+        }
     }
 
     private fun setupExportContacts() {
