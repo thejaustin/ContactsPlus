@@ -8,11 +8,14 @@ import com.contactsplus.app.R
 import com.contactsplus.app.helpers.KEY_MAILTO
 import com.contactsplus.app.helpers.LOCATION_CONTACTS_TAB
 import com.contactsplus.app.helpers.LOCATION_FAVORITES_TAB
+import org.fossify.commons.activities.BaseSimpleActivity
 import org.fossify.commons.extensions.getColoredDrawableWithColor
 import org.fossify.commons.extensions.getProperTextColor
 import org.fossify.commons.helpers.KEY_PHONE
 
-open class SimpleActivity : BaseActivity() {
+open class SimpleActivity : BaseSimpleActivity() {
+    fun checkAppSideloading() = false
+
     override fun onResume() {
         super.onResume()
         // Ensure any dynamic theme changes from Fossify commons are applied but don't interfere with our Material 3 setup

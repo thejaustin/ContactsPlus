@@ -225,7 +225,7 @@ abstract class MyViewPagerFragment<Binding : MyViewPagerFragment.InnerBinding>(c
 
             val currAdapter = innerBinding.fragmentList.adapter
             if (currAdapter == null) {
-                GroupsAdapter(activity as BaseActivity, storedGroups, activity as RefreshContactsListener, innerBinding.fragmentList) {
+                GroupsAdapter(activity as SimpleActivity, storedGroups, activity as RefreshContactsListener, innerBinding.fragmentList) {
                     activity?.hideKeyboard()
                     Intent(activity, GroupContactsActivity::class.java).apply {
                         putExtra(GROUP, it as Group)
