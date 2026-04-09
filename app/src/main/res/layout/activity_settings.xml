@@ -495,7 +495,8 @@
                 android:id="@+id/settings_dev_channel_holder"
                 style="@style/ContactsPlus_Settings_ItemHolder_Switch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <org.fossify.commons.views.MyMaterialSwitch
                     android:id="@+id/settings_dev_channel_switch"
