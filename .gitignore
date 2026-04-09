@@ -12,3 +12,6 @@ fastlane/fastlane.json
 fastlane/report.xml
 .kotlin/
 sentry.properties
+CLAUDE.md
+GEMINI.md
+QWEN.md
