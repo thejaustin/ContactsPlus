@@ -25,7 +25,7 @@ room = "2.8.4"
 #Fossify
 commons = "6.1.0"
 #Gradle
-gradlePlugins-agp = "8.9.1"
+gradlePlugins-agp = "9.1.1"
 #Tests
 junit = "4.13.2"
 ext-junit = "1.2.1"
