@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Sync Sentry issues to GitHub
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG || 'af-developments' }}
