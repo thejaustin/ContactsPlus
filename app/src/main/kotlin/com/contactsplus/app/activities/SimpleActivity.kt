@@ -14,7 +14,6 @@ import org.fossify.commons.extensions.getProperTextColor
 import org.fossify.commons.helpers.KEY_PHONE
 
 open class SimpleActivity : BaseSimpleActivity() {
-    fun checkAppSideloading() = false
 
     override fun onResume() {
         super.onResume()

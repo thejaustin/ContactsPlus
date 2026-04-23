@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Parcelable
 import com.contactsplus.app.models.SocialPlatform
+import com.contactsplus.app.utils.SentryHelper
 import kotlinx.parcelize.Parcelize
 import org.json.JSONObject
 import org.fossify.commons.helpers.ContactsHelper
@@ -86,7 +87,7 @@ class SocialMediaImporter(private val context: Context) {
             }
 
         } catch (e: Exception) {
-            e.printStackTrace()
+            SentryHelper.trackError(e, "SocialMediaImporter.parseBackup")
             onResult(emptyList())
         }
     }

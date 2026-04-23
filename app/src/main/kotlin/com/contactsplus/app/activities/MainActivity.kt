@@ -86,7 +86,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         storeStateVariables()
         setupTabs()
         checkContactPermissions()
-        checkWhatsNewDialog()
+        // checkWhatsNewDialog()
     }
 
     private fun checkContactPermissions() {

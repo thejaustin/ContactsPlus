@@ -18,6 +18,7 @@ import org.fossify.commons.extensions.showErrorToast
 import org.fossify.commons.extensions.toast
 import org.fossify.commons.models.contacts.Contact
 import com.contactsplus.app.helpers.VcfExporter.ExportResult.EXPORT_FAIL
+import com.contactsplus.app.utils.SentryHelper
 import java.io.OutputStream
 import java.time.LocalDate
 
@@ -188,7 +189,7 @@ class VcfExporter {
                         inputStream.close()
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    SentryHelper.trackError(e, "VcfExporter.exportPhoto")
                 }
 
                 if (contact.groups.isNotEmpty()) {
