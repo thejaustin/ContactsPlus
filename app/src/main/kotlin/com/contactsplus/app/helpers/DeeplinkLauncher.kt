@@ -20,17 +20,16 @@ class DeeplinkLauncher(private val context: Context) {
         val deeplink = platform.buildDeeplink(username)
         val webUrl = platform.buildWebUrl(username)
 
-        // For custom links, just try to open directly
         if (platform == SocialPlatform.CUSTOM) {
             launchUrl(username)
             return
         }
 
-        // Try deeplink first if app is installed
-        if (isAppInstalled(platform.packageName)) {
+        val installedPkg = getInstalledPackage(platform)
+        if (installedPkg != null) {
             try {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(deeplink)).apply {
-                    setPackage(platform.packageName)
+                    setPackage(installedPkg)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
                 context.startActivity(intent)
@@ -40,7 +39,6 @@ class DeeplinkLauncher(private val context: Context) {
             }
         }
 
-        // Fallback to web URL
         launchWebUrl(webUrl)
     }
 
@@ -53,10 +51,11 @@ class DeeplinkLauncher(private val context: Context) {
             return
         }
 
-        if (isAppInstalled(platform.packageName) && deeplink != null) {
+        val installedPkg = getInstalledPackage(platform)
+        if (installedPkg != null && deeplink != null) {
             try {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(deeplink)).apply {
-                    setPackage(platform.packageName)
+                    setPackage(installedPkg)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
                 context.startActivity(intent)
@@ -85,10 +84,16 @@ class DeeplinkLauncher(private val context: Context) {
     fun launchMessenger(username: String) = launch(SocialPlatform.MESSENGER, username)
     fun launchThreads(username: String) = launch(SocialPlatform.THREADS, username)
 
+    private fun getInstalledPackage(platform: SocialPlatform): String? {
+        if (platform.packageName.isEmpty()) return null
+        if (isAppInstalled(platform.packageName)) return platform.packageName
+        return platform.alternatePackageNames.firstOrNull { isAppInstalled(it) }
+    }
+
     private fun isAppInstalled(packageName: String): Boolean {
         if (packageName.isEmpty()) return false
         return try {
-            context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            context.packageManager.getPackageInfo(packageName, 0)
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false

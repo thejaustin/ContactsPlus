@@ -8,6 +8,7 @@ enum class SocialPlatform(
     val deeplinkTemplate: String,
     val webUrlTemplate: String,
     val packageName: String,
+    val alternatePackageNames: List<String> = emptyList(),
     val chatDeeplinkTemplate: String? = null,
     val chatWebUrlTemplate: String? = null
 ) {
@@ -15,27 +16,28 @@ enum class SocialPlatform(
         displayName = "Instagram",
         iconRes = R.drawable.ic_instagram,
         deeplinkTemplate = "instagram://user?username={username}",
-        webUrlTemplate = "https://instagram.com/{username}",
+        webUrlTemplate = "https://www.instagram.com/{username}/",
         packageName = "com.instagram.android",
         chatDeeplinkTemplate = "instagram://direct_share?username={username}",
-        chatWebUrlTemplate = "https://instagram.com/direct/inbox/"
+        chatWebUrlTemplate = "https://www.instagram.com/direct/inbox/"
     ),
     SNAPCHAT(
         displayName = "Snapchat",
         iconRes = R.drawable.ic_snapchat,
         deeplinkTemplate = "snapchat://add/{username}",
-        webUrlTemplate = "https://snapchat.com/add/{username}",
-        packageName = "com.snapchat.android",
-        chatDeeplinkTemplate = "snapchat://chat/{username}",
-        chatWebUrlTemplate = "https://snapchat.com/add/{username}"
+        webUrlTemplate = "https://www.snapchat.com/add/{username}",
+        packageName = "com.snapchat.android"
+        // No reliable chat-by-username deeplink on Snapchat
     ),
     WHATSAPP(
         displayName = "WhatsApp",
         iconRes = R.drawable.ic_whatsapp,
-        deeplinkTemplate = "https://wa.me/{username}",
+        // Use native whatsapp:// scheme — more reliable than https://wa.me/ as an in-app deeplink
+        deeplinkTemplate = "whatsapp://send?phone={username}",
         webUrlTemplate = "https://wa.me/{username}",
         packageName = "com.whatsapp",
-        chatDeeplinkTemplate = "https://wa.me/{username}",
+        alternatePackageNames = listOf("com.whatsapp.w4b"),
+        chatDeeplinkTemplate = "whatsapp://send?phone={username}",
         chatWebUrlTemplate = "https://wa.me/{username}"
     ),
     TELEGRAM(
@@ -50,16 +52,20 @@ enum class SocialPlatform(
     DISCORD(
         displayName = "Discord",
         iconRes = R.drawable.ic_discord,
-        deeplinkTemplate = "discord://users/{username}",
+        // Discord user profile deep links require a numeric user ID, not a username.
+        // Use HTTPS App Link with setPackage so Discord handles its own domain.
+        deeplinkTemplate = "https://discord.com/users/{username}",
         webUrlTemplate = "https://discord.com/users/{username}",
         packageName = "com.discord"
     ),
     TIKTOK(
         displayName = "TikTok",
         iconRes = R.drawable.ic_tiktok,
-        deeplinkTemplate = "snssdk1128://user/profile/{username}",
-        webUrlTemplate = "https://tiktok.com/@{username}",
-        packageName = "com.ss.android.ugc.tiktok"
+        // Use HTTPS App Link with setPackage — more reliable than the fragile snssdk1128:// internal scheme
+        deeplinkTemplate = "https://www.tiktok.com/@{username}",
+        webUrlTemplate = "https://www.tiktok.com/@{username}",
+        packageName = "com.ss.android.ugc.tiktok",
+        alternatePackageNames = listOf("com.zhiliaoapp.musically")
     ),
     TWITTER(
         displayName = "X (Twitter)",
@@ -71,8 +77,9 @@ enum class SocialPlatform(
     LINKEDIN(
         displayName = "LinkedIn",
         iconRes = R.drawable.ic_linkedin,
-        deeplinkTemplate = "linkedin://profile/{username}",
-        webUrlTemplate = "https://linkedin.com/in/{username}",
+        // Use HTTPS App Link with setPackage — LinkedIn registers linkedin.com as App Link
+        deeplinkTemplate = "https://www.linkedin.com/in/{username}",
+        webUrlTemplate = "https://www.linkedin.com/in/{username}",
         packageName = "com.linkedin.android"
     ),
     SIGNAL(
@@ -80,7 +87,9 @@ enum class SocialPlatform(
         iconRes = R.drawable.ic_signal,
         deeplinkTemplate = "sgnl://signal.me/#p/{username}",
         webUrlTemplate = "https://signal.me/#p/{username}",
-        packageName = "org.thoughtcrime.securesms"
+        packageName = "org.thoughtcrime.securesms",
+        chatDeeplinkTemplate = "sgnl://signal.me/#p/{username}",
+        chatWebUrlTemplate = "https://signal.me/#p/{username}"
     ),
     MESSENGER(
         displayName = "Messenger",
@@ -95,7 +104,7 @@ enum class SocialPlatform(
         displayName = "Threads",
         iconRes = R.drawable.ic_threads,
         deeplinkTemplate = "barcelona://user?username={username}",
-        webUrlTemplate = "https://threads.net/@{username}",
+        webUrlTemplate = "https://www.threads.net/@{username}",
         packageName = "com.instagram.barcelona"
     ),
     CUSTOM(
