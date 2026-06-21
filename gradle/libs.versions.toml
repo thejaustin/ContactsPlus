@@ -16,7 +16,7 @@ androidx-dynamicanimation = "1.0.0-alpha03"
 #AutoFitTextView
 autofittextview = "0.2.1"
 #EzVCard
-ezvcard = "0.12.1"
+ezvcard = "0.12.2"
 #IndicatorFastScroll
 indicatorfastscroll = "4524cd0b61"
 #Room
