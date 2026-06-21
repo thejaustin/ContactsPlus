@@ -5,7 +5,7 @@ kotlin = "2.3.0"
 ksp = "2.3.6"
 # Sentry
 sentry = "6.0.0"
-sentry-android = "7.20.1"
+sentry-android = "8.38.0"
 # Detekt
 detekt = "1.23.8"
 # Material
